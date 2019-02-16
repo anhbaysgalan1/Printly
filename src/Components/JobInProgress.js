@@ -18,10 +18,13 @@ export default class JobInProgress extends Component {
 	}
 
 	render() {
-		console.log(this.props.printer_data);
 		return (
 			<div>
 				JobInProgress
+				<br/>
+				{this.props.printer_data["name"]}
+				<br/>
+				{this.props.printer_data["address"]}
 				<br/>
 				{this.props.printer_img}
 				<br/>
