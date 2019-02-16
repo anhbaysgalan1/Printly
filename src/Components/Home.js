@@ -8,7 +8,7 @@ const PageEnum = {
 	JOBINPROGRESS : 3,
 }
 
-export default class JobInProgress extends Component {
+export default class Home extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -18,15 +18,12 @@ export default class JobInProgress extends Component {
 	}
 
 	render() {
-		console.log(this.props.printer_data);
 		return (
 			<div>
-				JobInProgress
+				Home (upload and select documents for jobs)
 				<br/>
-				{this.props.printer_img}
-				<br/>
-				<button onClick={() => this.changePage(PageEnum.HOME)}>
-					Job Done
+				<button onClick={() => this.changePage(PageEnum.MATCHEDPRINTERS)}>
+					Matched Printers
 				</button>
 			</div>
 		);
