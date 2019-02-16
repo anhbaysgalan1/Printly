@@ -23,6 +23,33 @@
   color: #61dafb;
 }
 
+.printer_info{
+  display: inline-block;
+  width: 90%;
+}
+
+.printer_image{
+  float: left;
+  width: 25%;
+}
+
+.printer_data{
+  float: left;
+  display: block;
+  text-align: left;
+}
+
+.fa.fa-star{
+  color: white;
+  border-color: black;
+  border-width: 1px;
+}
+
+.fa.fa-star.checked{
+  color: purple;
+  border-color: white;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
