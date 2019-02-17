@@ -3,12 +3,14 @@ import './App.css';
 import Home from './Components/Home.js';
 import MatchedPrinters from './Components/MatchedPrinters.js';
 import JobInProgress from './Components/JobInProgress.js';
+import SettingsPopups from './Components/SettingsPopups.js';
 
 
 const PageEnum = {
 	HOME : 1,
 	MATCHEDPRINTERS : 2,
 	JOBINPROGRESS : 3,
+	SETTINGSPOPUPS: 4,
 }
 
 class App extends Component {
@@ -54,6 +56,12 @@ class App extends Component {
 								/>
 				break;
 
+			case PageEnum.SETTINGSPOPUPS:
+				current_page = <SettingsPopups
+									changePage={this.changePage}
+								/>
+				break;
+
 			case PageEnum.JOBINPROGRESS:
 				current_page = <JobInProgress
 									changePage={this.changePage}
@@ -70,6 +78,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				{current_page}
+				
 			</div>
 		);
 	}
