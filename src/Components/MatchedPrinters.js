@@ -20,6 +20,7 @@ class MatchedPrinters extends Component {
   }
 
   componentWillMount = () => {
+      console.log("component will mount");
     firebase.database().ref('active_printers').on('value', (snapshot) => {
         let printer_buff = [];
         snapshot.forEach((child) => {
@@ -39,7 +40,7 @@ class MatchedPrinters extends Component {
         });
 
         return (
-        <div>
+        <div >
             {printer_data}
         </div>
         );
