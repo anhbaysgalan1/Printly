@@ -1,3 +1,43 @@
+.popup {
+  z-index: 5;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0,0,0, 0.5);
+}
+
+.popup_inner {
+  width: 225px;
+  height: 350px;
+  margin: 35% auto;
+  background: white;
+}
+
+.popup_button.left {
+  float:left;
+  margin-left: 10%;
+  height: 25px;
+}
+
+.popup_button.right {
+  float: right;
+  margin-right: 10%;
+  height: 25px;
+}
+
+.popup_button {
+  width: 32%;
+  background-color: whitesmoke;
+  border-radius: 20px;
+  border: 1px solid #FF9F1C;
+}
+
+
 .App {
   text-align: center;
 }
