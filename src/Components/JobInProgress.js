@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-
+import Trackbar from './Trackbar';
 
 const PageEnum = {
 	HOME : 1,
@@ -9,10 +9,6 @@ const PageEnum = {
 }
 
 export default class JobInProgress extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	changePage = (newPage) => {
 		this.props.changePage(newPage);
 	}
@@ -20,7 +16,7 @@ export default class JobInProgress extends Component {
 	render() {
 		return (
 			<div>
-				JobInProgress
+				<Trackbar/>
 				<br/>
 				{this.props.printer_data["name"]}
 				<br/>

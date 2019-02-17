@@ -9,10 +9,6 @@ const PageEnum = {
 }
 
 export default class Home extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	changePage = (newPage) => {
 		this.props.changePage(newPage);
 	}
