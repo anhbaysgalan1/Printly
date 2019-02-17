@@ -39,8 +39,7 @@ class MatchedPrinters extends Component {
         });
 
         return (
-        <div >
-            HELLO
+        <div>
             {printer_data}
         </div>
         );
