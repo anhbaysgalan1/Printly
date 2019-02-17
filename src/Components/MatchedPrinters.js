@@ -20,7 +20,6 @@ class MatchedPrinters extends Component {
   }
 
   componentWillMount = () => {
-      console.log("component will mount");
     firebase.database().ref('active_printers').on('value', (snapshot) => {
         let printer_buff = [];
         snapshot.forEach((child) => {
@@ -48,6 +47,14 @@ class MatchedPrinters extends Component {
 }
 
 class PrinterInfo extends Component {
+    constructor(){
+        super(); 
+
+        this.state = {
+            images : []
+        };
+    }
+
     render(){
         let stars = [];
         
@@ -57,7 +64,7 @@ class PrinterInfo extends Component {
         return (
         <div className="printer_info">
             <div className="printer_image">
-                <img src='../logo.svg' className="App_logo" alt="logo" />
+                <img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fdefault-profile-picture.png?alt=media&token=324bbe06-2b57-46cc-a9e8-8f5778ec34f6' className="id_image" alt="logo" />
             </div>
             <div className="printer_data">
                 Name: {this.props.data["name"]} 

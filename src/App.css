@@ -33,6 +33,13 @@
   width: 25%;
 }
 
+.id_image{
+  padding: 5px;
+  align-content: left;
+  width: 75%;
+  height: 75%;
+}
+
 .printer_data{
   float: left;
   display: block;
