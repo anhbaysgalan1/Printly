@@ -122,21 +122,11 @@ html, body {
   }
 }
 
-@-webkit-keyframes stepLabelPulse {
-  0% {
-    -webkit-box-shadow: 0 0 0 0 skyblue;
-  }
-  90% {
-      -webkit-box-shadow: 0 0 0 3px skyblue;
-  }
-}
 @keyframes stepLabelPulse {
   0% {
-    -moz-box-shadow: 0 0 0 0 skyblue;
     box-shadow: 0 0 0 0 skyblue;
   }
   90% {
-      -moz-box-shadow: 0 0 0 3px skyblue;
       box-shadow: 0 0 0 3px skyblue;
   }
 }
