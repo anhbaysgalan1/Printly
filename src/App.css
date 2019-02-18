@@ -37,6 +37,11 @@
   border: 1px solid #FF9F1C;
 }
 
+html, body {
+  margin: 0px;
+  height: 100%;
+  background-color: rebeccapurple;
+}
 
 .App {
   text-align: center;
@@ -63,9 +68,20 @@
   color: #61dafb;
 }
 
+.printer_header{
+  color: white;
+  text-emphasis-style: bold;
+  text-size-adjust: 24px;
+  padding: 10px;
+  margin: 10px;
+}
+
 .printer_info{
   display: inline-block;
+  background-color: white;
   width: 90%;
+  margin-bottom: 10px;
+  vertical-align: middle;
 }
 
 .printer_image{
@@ -81,9 +97,9 @@
 }
 
 .printer_data{
-  float: left;
-  display: block;
+  padding-top: 10px;
   text-align: left;
+  width: 75%;
 }
 
 .fa.fa-star{
@@ -93,7 +109,7 @@
 }
 
 .fa.fa-star.checked{
-  color: purple;
+  color: rebeccapurple;
   border-color: white;
 }
 

@@ -46,7 +46,10 @@ class MatchedPrinters extends Component {
         });
 
         return (
-        <div >
+        <div>
+            <div className="printer_header">
+                The Following Printers Have Matched Your Criteria
+            </div>
             {printer_data}
         </div>
         );
