@@ -10,19 +10,21 @@ import '../App.css';
 
 const styles = theme => ({
   stepBar: {
-    width: '70%',
+    width: '80%',
   },
   stepIcon: {
     transform: 'scale(1.5)',
   },
   stepLabel: {
-    paddingRight: '4px',
-    height: '20px',
+    height: '30px',
+    width: '170px',
+    marginRight: '-5px',
     borderRadius: '7px',
   },
   stepLabelPulse: {
-    paddingRight: '4px',
-    height: '20px',
+    height: '30px',
+    width: '170px',
+    marginRight: '-5px',
     borderRadius: '7px',
     animation: 'stepLabelPulse 1s infinite',
   },
@@ -31,7 +33,14 @@ const styles = theme => ({
   },
 });
 
-const STEPS = [
+const STEPS_BEFORE = [
+  'Uploading Document',
+  'Accepting Job',
+  'Printing Document',
+  'Preparing for Pickup'
+];
+
+const STEPS_AFTER = [
   'Document Uploaded', 
   'Job Accepted', 
   'Document Printed', 
@@ -49,7 +58,8 @@ class Trackbar extends Component {
       let newStep = this.state.activeStep + 1;
       this.setState({ activeStep: newStep });
 
-      if (newStep === STEPS.length) {
+      if (newStep === STEPS_AFTER
+      .length) {
         clearInterval(this.state.intervalID);
       }
     }, 3000);
@@ -65,7 +75,12 @@ class Trackbar extends Component {
         <Stepper className={classes.stepBar} 
                   activeStep={this.state.activeStep} 
                   connector={<StepConnector className={classes.stepConnector}></StepConnector>}>
-          {STEPS.map((label, index) => {
+          {STEPS_BEFORE
+        .map((label, index) => {
+            if (index < this.state.activeStep) {
+              label = STEPS_AFTER[index];
+            }
+
             let labelProp =
               index === this.state.activeStep ? classes.stepLabelPulse : classes.stepLabel;
 
