@@ -9,16 +9,13 @@ const PageEnum = {
 }
 
 export default class Home extends Component {
-	changePage = (newPage) => {
-		this.props.changePage(newPage);
-	}
 
 	render() {
 		return (
 			<div>
 				Home (upload and select documents for jobs)
 				<br/>
-				<button onClick={() => this.changePage(PageEnum.MATCHEDPRINTERS)}>
+				<button onClick={() => this.props.changePage(PageEnum.MATCHEDPRINTERS)}>
 					Matched Printers
 				</button>
 			</div>

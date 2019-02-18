@@ -65,10 +65,6 @@ class PrinterInfo extends Component {
         };
     }
 
-    changePage = (newPage, new_printer_data, new_printer_img) => {
-        this.props.changePage(newPage, new_printer_data, new_printer_img);
-    }
-
     render(){
         let stars = [];
         
@@ -82,7 +78,7 @@ class PrinterInfo extends Component {
                 {image}
             </div>
             <div className="printer_data">
-                Name: {this.props.data["name"]} 
+                {this.props.data["name"]} 
                 <br/>
                 Address: {this.props.data["address"]}
                 <br/>
