@@ -21,6 +21,7 @@ class App extends Component {
 			page : PageEnum.HOME,
 			printer_data: null,
 			printer_img: null,
+			selected_file: null,
 		};
 	}
 
@@ -38,6 +39,15 @@ class App extends Component {
 		}
 	}
 
+	//for uploading files to print
+	chooseFile = (event) => {
+		this.setState({ selected_file: event.target.files[0],})
+	}
+	uploadDoc = () => {
+		alert(this.state.selected_file.name)
+		//need to upload file into firebase
+	}
+
 
 
 	render() {
@@ -47,6 +57,8 @@ class App extends Component {
 			case PageEnum.HOME:
 				current_page = <Home
 									changePage={this.changePage}
+									chooseFile={this.chooseFile}
+									uploadDoc={this.uploadDoc}
 								/>
 				break;
 
