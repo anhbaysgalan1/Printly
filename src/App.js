@@ -4,7 +4,7 @@ import Home from './Components/Home.js';
 import MatchedPrinters from './Components/MatchedPrinters.js';
 import JobInProgress from './Components/JobInProgress.js';
 import SettingsPopups from './Components/SettingsPopups.js';
-
+import firebase from 'firebase';
 
 const PageEnum = {
 	HOME : 1,
@@ -12,6 +12,14 @@ const PageEnum = {
 	JOBINPROGRESS : 3,
 	SETTINGSPOPUPS: 4,
 }
+
+var config = {
+    apiKey: "AIzaSyD0ZMlZ0JCrCqsCxDx1MK1HO0taGmXZkXY",
+    authDomain: "printly.firebaseapp.com",
+    databaseURL: "https://printly.firebaseio.com",
+    storageBucket: "printly.appspot.com",
+};
+firebase.initializeApp(config);
 
 class App extends Component {
 	constructor() {
@@ -22,6 +30,7 @@ class App extends Component {
 			printer_data: null,
 			printer_img: null,
 			selected_file: null,
+			selected_file_data: null,
 		};
 	}
 
@@ -41,11 +50,35 @@ class App extends Component {
 
 	//for uploading files to print
 	chooseFile = (event) => {
-		this.setState({ selected_file: event.target.files[0],})
+		// event.preventDefault();
+		let reader = new FileReader();
+		let file = event.target.files[0]
+		if(file) {
+			reader.onloadend =() => {
+				this.setState({ 
+					selected_file: file,
+					selected_file_data: reader.result
+				})
+			}
+			reader.readAsDataURL(file)
+			console.log("new file selected")
+		}
+		else {
+			this.setState({
+				selected_file: null,
+				selected_file_data: null
+			})
+			console.log("no file selected")
+		}
+
+		
+
 	}
 	uploadDoc = () => {
 		alert(this.state.selected_file.name)
 		//need to upload file into firebase
+		console.log(this.state.selected_file_data)
+		console.log(this.state.selected_file.name)
 	}
 
 
@@ -59,6 +92,8 @@ class App extends Component {
 									changePage={this.changePage}
 									chooseFile={this.chooseFile}
 									uploadDoc={this.uploadDoc}
+									selected_file={this.state.selected_file}
+									selected_file_data={this.state.selected_file_data}
 								/>
 				break;
 
