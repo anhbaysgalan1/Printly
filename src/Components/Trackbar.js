@@ -4,8 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Typography from '@material-ui/core/Typography';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import { StepConnector } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import '../App.css';
 
@@ -27,6 +26,9 @@ const styles = theme => ({
     borderRadius: '7px',
     animation: 'stepLabelPulse 1s infinite',
   },
+  stepConnector: {
+    marginRight: '10px',
+  },
 });
 
 const STEPS = [
@@ -35,21 +37,6 @@ const STEPS = [
   'Document Printed', 
   'Ready for Pickup'
 ];
-
-function getStatusMsg(step) {
-  switch (step) {
-    case 1:
-      return 'Waiting for printer to accept job...';
-    case 2:
-      return 'Waiting for documents to print...';
-    case 3:
-      return 'Almost there...';
-    case 4:
-      return 'Job finished!'
-    default:
-      return 'Oh no, something broke :(';
-  }
-}
 
 class Trackbar extends Component {
   state = {
@@ -65,7 +52,7 @@ class Trackbar extends Component {
       if (newStep === STEPS.length) {
         clearInterval(this.state.intervalID);
       }
-    }, 2000);
+    }, 3000);
 
     this.setState({ intervalID : id});
   }
@@ -74,20 +61,10 @@ class Trackbar extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid container justify="center" spacing={24}>
-        <Grid item sm={12}>
-          <Typography>
-            {getStatusMsg(this.state.activeStep)}
-          </Typography>
-        </Grid>
-        <Grid item sm={8}>
-          {
-            this.state.activeStep >= STEPS.length ?
-            <LinearProgress style={{visibility : 'hidden'}}/>:
-            <LinearProgress/>
-          }
-        </Grid>
-        <Stepper className={classes.stepBar} activeStep={this.state.activeStep}>
+      <Grid container justify="center">
+        <Stepper className={classes.stepBar} 
+                  activeStep={this.state.activeStep} 
+                  connector={<StepConnector className={classes.stepConnector}></StepConnector>}>
           {STEPS.map((label, index) => {
             let labelProp =
               index === this.state.activeStep ? classes.stepLabelPulse : classes.stepLabel;
