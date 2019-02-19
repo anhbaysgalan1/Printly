@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../App.css';
 import Trackbar from './Trackbar';
+import '../App.css';
 
 const PageEnum = {
 	HOME : 1,
@@ -9,16 +9,16 @@ const PageEnum = {
 }
 
 export default class JobInProgress extends Component {
-
 	render() {
 		let stars = [];
-
 		for (let i = 0; i < this.props.printer_data["rating"]; i++)
 		{
             stars.push(<span className="fa fa-star checked" key={i}></span>)
-        }
+		}
+		
 		return (
 			<div>
+				<div className="title_JobInProgress">Job Status</div>
 				<Trackbar/>
 				<div className="job_info">
 	            	<div>
