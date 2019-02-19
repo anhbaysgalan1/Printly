@@ -13,7 +13,7 @@
 
 .popup_inner {
   width: 300px;
-  height: 350px;
+  height: 400px;
   margin: 35% auto;
   background: white;
 }
@@ -36,6 +36,12 @@
   border-radius: 20px;
   border: 1px solid #FF9F1C;
 }
+
+.settingsheading {
+  font-size: 12px;
+  margin-bottom: -10px;
+}
+
 
 html, body {
   margin: 0px;
