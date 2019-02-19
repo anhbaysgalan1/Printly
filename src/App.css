@@ -12,9 +12,11 @@
 }
 
 .popup_inner {
-  width: 300px;
-  height: 400px;
-  margin: 35% auto;
+  width: fit-content;
+  height: auto;
+  margin: 5% auto;
+  padding: 2em;
+  padding-bottom: 4em;
   background: white;
 }
 
