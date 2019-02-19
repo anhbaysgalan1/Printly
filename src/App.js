@@ -24,7 +24,7 @@ class App extends Component {
 		super();
 
 		this.state = {
-			page : PageEnum.HOME,
+			page : PageEnum.MATCHEDPRINTERS,
 			printer_data: null,
 			printer_img: null,
 			selected_file: null,
@@ -68,15 +68,6 @@ class App extends Component {
 			})
 			console.log("no file selected")
 		}
-
-		
-
-	}
-	uploadDoc = () => {
-		alert(this.state.selected_file.name)
-		//need to upload file into firebase
-		console.log(this.state.selected_file_data)
-		console.log(this.state.selected_file.name)
 	}
 
 

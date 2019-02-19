@@ -18,7 +18,6 @@ export default class Home extends Component {
 				<div>
 					<input type="file" onChange={this.props.chooseFile}>
 					</input>
-					<button onClick={this.props.uploadDoc}>Upload File</button>
 				</div>
 				<br/>
 				<button onClick={() => this.props.changePage(PageEnum.MATCHEDPRINTERS)}>

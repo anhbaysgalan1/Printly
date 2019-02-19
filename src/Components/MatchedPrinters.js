@@ -10,6 +10,13 @@ const PageEnum = {
     JOBINPROGRESS : 3,
 }
 
+const printOptions = {
+      transfer: ['pickup', 'delivery'],
+      sided: ['single', 'double'],
+      orientation: ['portrait', 'landscape'],
+      quality: ['poor', 'medium', 'high'],
+      color: ['greyscale', 'color']
+}
 
 
 class MatchedPrinters extends Component {
@@ -23,6 +30,14 @@ class MatchedPrinters extends Component {
             double_sided: false,
             max_distance: 5,
             min_rating: 1
+        },
+        printOptions: {
+            transfer: null,
+            sided: null,
+            orientation: null,
+            quality: null,
+            color: null,
+            copies: 1
         }
       };
   }
@@ -37,8 +52,19 @@ class MatchedPrinters extends Component {
         this.setState({
             active_printers: printer_buff
         });
-        console.log(printer_buff);
+        // console.log(printer_buff);
     });
+  };
+
+  handleChange = (name, event) => {
+    this.setState({ [name]: event.target.value });
+    console.log('name : ' , name , ' value: ' , event.target.value)
+    if(!event.target.value || event.target.value < 1) {
+      this.setState({ [name]: null });
+      console.log("setting ", name , 'to null')
+    }
+    console.log(this.state)
+
   };
   
     render() {
@@ -52,7 +78,12 @@ class MatchedPrinters extends Component {
                 The Following Printers Have Matched Your Criteria
             </div>
             <div className="settings">
-                <Settings></Settings>
+                <Settings
+                        printOptions={printOptions}
+                        handleChange={this.handleChange}
+                        print_options={this.state.printOptions}>
+                    
+                </Settings>
             </div>
             <div className="printer_container">
             {printer_data}

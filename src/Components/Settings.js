@@ -48,45 +48,17 @@ const styles = ({
   },
 });
 
-const printOptions = {
-      transfer: ['pickup', 'delivery'],
-      sided: ['single', 'double'],
-      orientation: ['portrait', 'landscape'],
-      quality: ['poor', 'medium', 'high'],
-      color: ['greyscale', 'color']
-    }
+
 
 class Settings extends React.Component{
-  state = {
-    transfer: null,
-    sided: null,
-    orientation: null,
-    quality: null,
-    color: null,
-    copies: 1
-  }
+  
 
-  handleChange = (name, event) => {
-    this.setState({ [name]: event.target.value });
-    console.log('name : ' , name , ' value: ' , event.target.value)
-    if(!event.target.value || event.target.value < 1) {
-      this.setState({ [name]: null });
-      console.log("setting ", name , 'to null')
-    }
-    console.log(this.state)
-
-  };
-
-  saveAndClose = () => {
-
-  }
 
 
   render() {
     const { classes } = this.props;
-    
 
-    const optionButtons = Object.entries(printOptions).map((options) => {
+    const optionButtons = Object.entries(this.props.printOptions).map((options) => {
       let name = options[0]
       let opts = Object.entries(options[1]).map((val) => {
         return (
@@ -104,8 +76,8 @@ class Settings extends React.Component{
               <RadioGroup row
                 name={options[0]}
                 className={classes.group}
-                value={this.state.name}
-                onChange={(e) => this.handleChange(name, e)}
+                value={this.props.print_options.name}
+                onChange={(e) => this.props.handleChange(name, e)}
               >
                 {opts}
               </RadioGroup>
@@ -125,8 +97,8 @@ class Settings extends React.Component{
           <TextField
             id="outlined-number"
             label="Number of Copies"
-            value={this.state.copies}
-            onChange={(e) => this.handleChange('copies', e)}
+            value={this.props.print_options.copies}
+            onChange={(e) => this.props.handleChange('copies', e)}
             type="number"
             InputLabelProps={{
               minValue: 1,
@@ -136,7 +108,6 @@ class Settings extends React.Component{
         />
 
           <div>Cost of Delivery: $4.00</div>
-          <button onClick={this.saveAndClose}>Save and Close</button>
           </div>
     );
   }
