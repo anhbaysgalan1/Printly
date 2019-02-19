@@ -18,7 +18,7 @@ export default class JobInProgress extends Component {
 		
 		return (
 			<div>
-				<div className="title_JobInProgress">Job Status</div>
+				<div className="title">Job Status</div>
 				<Trackbar/>
 				<div className="job_info">
 	            	<div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import firebase from "firebase";
+import Settings from './Settings.js';
 
 
 const PageEnum = {
@@ -16,7 +17,13 @@ class MatchedPrinters extends Component {
       super();
 
       this.state = {
-        active_printers : []
+        active_printers : [],
+        settings: {
+            color: true,
+            double_sided: false,
+            max_distance: 5,
+            min_rating: 1
+        }
       };
   }
 
@@ -41,8 +48,11 @@ class MatchedPrinters extends Component {
 
         return (
         <div>
-            <div className="printer_header">
+            <div className="title">
                 The Following Printers Have Matched Your Criteria
+            </div>
+            <div className="settings">
+                <Settings></Settings>
             </div>
             <div className="printer_container">
             {printer_data}
@@ -51,6 +61,7 @@ class MatchedPrinters extends Component {
         );
   }
 }
+
 
 class PrinterInfo extends Component {
     constructor(){

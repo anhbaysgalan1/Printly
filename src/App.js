@@ -3,14 +3,12 @@ import './App.css';
 import Home from './Components/Home.js';
 import MatchedPrinters from './Components/MatchedPrinters.js';
 import JobInProgress from './Components/JobInProgress.js';
-import SettingsPopups from './Components/SettingsPopups.js';
 import firebase from 'firebase';
 
 const PageEnum = {
 	HOME : 1,
 	MATCHEDPRINTERS : 2,
 	JOBINPROGRESS : 3,
-	SETTINGSPOPUPS: 4,
 }
 
 var config = {
@@ -99,12 +97,6 @@ class App extends Component {
 
 			case PageEnum.MATCHEDPRINTERS:
 				current_page = <MatchedPrinters
-									changePage={this.changePage}
-								/>
-				break;
-
-			case PageEnum.SETTINGSPOPUPS:
-				current_page = <SettingsPopups
 									changePage={this.changePage}
 								/>
 				break;

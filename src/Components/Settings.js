@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   root: {
-    display: 'block',
+    display: 'inline-block',
     margin: '0.5em'
   },
   formControl: {
@@ -27,11 +27,11 @@ const printOptions = {
       transfer: ['pickup', 'delivery'],
       sided: ['single', 'double'],
       orientation: ['portrait', 'landscape'],
-      quality: ['medium', 'high'],
+      quality: ['poor', 'medium', 'high'],
       color: ['greyscale', 'color']
     }
 
-class SettingsPopups extends React.Component{
+class Settings extends React.Component{
   state = {
     transfer: null,
     sided: null,
@@ -63,6 +63,10 @@ class SettingsPopups extends React.Component{
 
     const optionButtons = Object.entries(printOptions).map((options) => {
       let name = options[0]
+      let opts = Object.entries(options[1]).map((val) => {
+        return (<FormControlLabel value={val[1]} control={<Radio />} label={val[1]} />);
+      });
+
       let option1 = options[1][0]
       let option2 = options[1][1]
       return (
@@ -75,19 +79,16 @@ class SettingsPopups extends React.Component{
             value={this.state.name}
             onChange={(e) => this.handleChange(name, e)}
           >
-            <FormControlLabel value={option1} control={<Radio />} label={option1} />
-            <FormControlLabel value={option2} control={<Radio />} label={option2} />
+            {opts}
           </RadioGroup>
         </FormControl>
         </div>
       )}
     );
 
-
     return (
-      <div className="popup">
-        <div className="popup_inner">
-          <div className="title">Print Job Details</div>
+      <div className="specific_setting">
+          <div>Print Job Details</div>
           <div className={classes.root}>
             {optionButtons}
           </div>
@@ -107,10 +108,9 @@ class SettingsPopups extends React.Component{
 
           <div>Cost of Delivery: $4.00</div>
           <button onClick={this.saveAndClose}>Save and Close</button>
-        </div>
-      </div>
-    )
+          </div>
+    );
   }
 }
 
-export default withStyles(styles)(SettingsPopups);
+export default withStyles(styles)(Settings);
