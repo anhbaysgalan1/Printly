@@ -44,7 +44,9 @@ class MatchedPrinters extends Component {
             <div className="printer_header">
                 The Following Printers Have Matched Your Criteria
             </div>
+            <div className="printer_container">
             {printer_data}
+            </div>
         </div>
         );
   }
@@ -76,7 +78,13 @@ class PrinterInfo extends Component {
                 <br/>
                 Address: {this.props.data["address"]}
                 <br/>
+                Distance: {this.props.data["distance"]}
+                <br/>
                 Rating: {stars}
+                <br/>
+                Quality: {this.props.data["quality"]}
+                <br/>
+                Cost: $4.00
             </div>
         </div>
         );

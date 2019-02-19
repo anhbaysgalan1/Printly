@@ -79,27 +79,34 @@ html, body {
 .printer_info{
   display: inline-block;
   background-color: white;
-  width: 80%;
-  margin-bottom: 10px;
-  vertical-align: middle;
+  width: 260px;
+  height: 260px;
+  margin: 10px;
+  text-align: center;
 }
 
 .printer_image{
-  float: left;
-  width: 25%;
+  display: inline-block;
+  width: 50%;
+  margin: 7px;
 }
 
 .id_image{
   padding: 5px;
-  align-content: left;
   width: 75%;
   height: 75%;
 }
 
+.printer_container{
+  width: 100%;
+  text-align: center;
+  padding: auto;
+  margin: auto;
+}
+
 .printer_data{
-  padding-top: 10px;
   text-align: left;
-  width: 75%;
+  display: inline-block;
 }
 
 .fa.fa-star{
