@@ -33,6 +33,10 @@ class App extends Component {
 	}
 
 	changePage = (newPage, new_printer_data, new_printer_img) => {
+		if (newPage === PageEnum.MATCHEDPRINTERS && this.state.selected_file != null) {
+			this.uploadFile();
+		}
+
 		this.setState({
 			page: newPage,
 		});
@@ -70,7 +74,13 @@ class App extends Component {
 		}
 	}
 
-
+	uploadFile() {
+		let storageRef = firebase.storage().ref();
+		let fileRef = storageRef.child('printQueue/' + this.state.selected_file.name);
+		fileRef.put(this.state.selected_file).then(function(snapshot) {
+			console.log('successful upload');
+		});
+	}
 
 	render() {
 		let current_page = null;
