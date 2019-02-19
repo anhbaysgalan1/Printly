@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import FilePreview from './FilePreview.js'
 
 
 const PageEnum = {
@@ -23,6 +24,11 @@ export default class Home extends Component {
 				<button onClick={() => this.props.changePage(PageEnum.MATCHEDPRINTERS)}>
 					Matched Printers
 				</button>
+				<div id="file_preview">
+					Preview
+					<FilePreview file_data={this.props.selected_file_data}
+								file_name={this.props.selected_file}/>
+				</div>
 			</div>
 		);
 	}
