@@ -5,16 +5,41 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import TextField from '@material-ui/core/TextField';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
-const styles = theme => ({
+const theme = createMuiTheme({
+  overrides: {
+    MuiFormLabel: {
+      root: {
+        '&$focused': {
+          color: 'grey',
+        },
+      },
+    },
+    MuiRadio: {
+      colorSecondary: {
+        '&$checked': {
+          color: 'rebeccapurple',
+        }
+      },
+    },
+  },
+});
+
+const styles = ({
   root: {
-    display: 'inline-block',
+    backgroundColor: 'white',
+    border: '1px solid black',
+    borderRadius: '10px',
+    display: 'inline-flex',
+    flexDirection: 'rows',
+    paddingTop: '1em',
     margin: '0.5em'
   },
   formControl: {
-    marginBottom: theme.spacing.unit * 0.1,
+    borderRight: '1px solid gray',
+    paddingLeft: '15px',
+    marginBottom: '5px',
   },
   group: {
     //margin: `${theme.spacing.unit}px 0`,
@@ -64,24 +89,28 @@ class Settings extends React.Component{
     const optionButtons = Object.entries(printOptions).map((options) => {
       let name = options[0]
       let opts = Object.entries(options[1]).map((val) => {
-        return (<FormControlLabel value={val[1]} control={<Radio />} label={val[1]} />);
-      });
+        return (
+            <FormControlLabel value={val[1]} control={<Radio/>} label={val[1]}/>
+          );
+        });
 
       let option1 = options[1][0]
       let option2 = options[1][1]
       return (
         <div>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">{options[0]}</FormLabel>
-          <RadioGroup row
-            name={options[0]}
-            className={classes.group}
-            value={this.state.name}
-            onChange={(e) => this.handleChange(name, e)}
-          >
-            {opts}
-          </RadioGroup>
-        </FormControl>
+          <MuiThemeProvider theme={theme}>
+            <FormControl component="fieldset" className={classes.formControl}>
+              <FormLabel component="legend">{options[0]}</FormLabel>
+              <RadioGroup row
+                name={options[0]}
+                className={classes.group}
+                value={this.state.name}
+                onChange={(e) => this.handleChange(name, e)}
+              >
+                {opts}
+              </RadioGroup>
+            </FormControl>
+          </MuiThemeProvider>
         </div>
       )}
     );

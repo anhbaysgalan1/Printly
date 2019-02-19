@@ -1,3 +1,42 @@
+/*
+  General App Styling
+*/
+
+html, body {
+  margin: 0px;
+  height: 100%;
+  background-color: rebeccapurple;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/*
+  Popup Styling
+*/
+
 .popup {
   z-index: 5;
   position: fixed;
@@ -39,41 +78,13 @@
   border: 1px solid #FF9F1C;
 }
 
+/*
+  MatchedPrinters
+*/
+
 .settingsheading {
   font-size: 12px;
   margin-bottom: -10px;
-}
-
-
-html, body {
-  margin: 0px;
-  height: 100%;
-  background-color: rebeccapurple;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 .printer_header{
@@ -117,6 +128,10 @@ html, body {
   display: inline-block;
 }
 
+/*
+  JobInProgress styling
+*/
+
 .fa.fa-star{
   color: white;
   border-color: black;
@@ -127,7 +142,6 @@ html, body {
   color: rebeccapurple;
   border-color: white;
 }
-
 
 .title {
   font-size: 20px;
@@ -155,15 +169,6 @@ html, body {
   margin-top: 5%;
   overflow-y: scroll;
   height: 30em;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 @keyframes stepLabelPulse {
