@@ -17,6 +17,8 @@ export default class SettingsPopups extends React.Component{
           <FormControlLabel value="" control={<Radio />} label="Color" />
           <FormControlLabel value="" control={<Radio />} label="Delivery" />
           <FormControlLabel value="" control={<Radio />} label="Pickup" />
+          <FormControlLabel value="" control={<Radio />} label="Double Sided" />
+          <FormControlLabel value="" control={<Radio />} label="Single Sided" />
           <div>Number of copies: <input type="text" defaultValue={this.props.inputValue} id="food_name"/></div>
           
           <div>Cost of Delivery: $1.00</div>

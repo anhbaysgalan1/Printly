@@ -126,6 +126,7 @@ class App extends Component {
 			<div className="App">
 				{current_page}
 				
+				
 			</div>
 		);
 	}
