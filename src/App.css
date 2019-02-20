@@ -129,10 +129,6 @@ html, body {
   display: inline-block;
 }
 
-/*
-  JobInProgress styling
-*/
-
 .fa.fa-star{
   color: white;
   border-color: black;
@@ -151,6 +147,10 @@ html, body {
   padding: 10px 0 10px 0;
   border-bottom: 1px solid black;
 }
+
+/*
+  JobInProgress styling
+*/
 
 .job_info{
   background-color: white;

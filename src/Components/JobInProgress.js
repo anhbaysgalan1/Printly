@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
-import Trackbar from './Trackbar';
+import Trackbar from './Trackbar.js';
+import FilePreview from './FilePreview.js';
 import '../App.css';
 
 const PageEnum = {
 	HOME : 1,
 	MATCHEDPRINTERS : 2,
 	JOBINPROGRESS : 3,
+}
+
+const pricesPerPage = {
+		transfer: [0.00, 0.50],
+		sided: [0.10, 0.07],
+		orientation: [0.00, 0.00],
+		quality: [0.03, 0.05, 0.10],
+		color: [0.05, 0.15]
 }
 
 export default class JobInProgress extends Component {
@@ -33,12 +42,21 @@ export default class JobInProgress extends Component {
 	                	<br/>
 	                	<br/>
 	                	<div className="job_data">
-		                	Options:
-		                	<br/>
-		                	Total Cost:
+		                	Total Cost: ${
+									(this.props.transfer === 'delivery') ?
+										this.props.job_cost + pricesPerPage.transfer[1] * parseFloat(this.props.printer_data["distance"])
+									:
+										this.props.job_cost
+							}
 		                </div>
 	            	</div>
 	        	</div>
+	        	<br/>
+	        	<div id="file_preview">
+					Preview
+					<FilePreview file_data={this.props.selected_file_data}
+								 file_name={this.props.selected_file}/>
+				</div>
 	        	<br/>
 	        	<button onClick={() => this.props.changePage(PageEnum.HOME)}>
 					Job Done

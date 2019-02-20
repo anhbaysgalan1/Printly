@@ -76,7 +76,7 @@ class Settings extends React.Component{
               <RadioGroup row
                 name={options[0]}
                 className={classes.group}
-                value={this.props.selected_print_options.name}
+                value={this.props.print_options_state.name}
                 onChange={(e) => this.props.handleChange(name, e)}
               >
                 {opts}
@@ -90,25 +90,21 @@ class Settings extends React.Component{
     return (
       <div className="specific_setting">
           <div>Print Job Details</div>
-          <div className={classes.root}>
-            {optionButtons}
-            <TextField
-            id="outlined-number"
-            label="Number of Copies"
-            value={this.props.selected_print_options.copies}
-            onChange={(e) => this.props.handleChange('copies', e)}
-            type="number"
-            InputLabelProps={{
-              minvalue: 1,
-            }}
-            margin="normal"
-            variant="outlined"
-          />
-          </div>
-
-          
-
-          <div>Cost of Delivery: $4.00</div>
+            <div className={classes.root}>
+              {optionButtons}
+              <TextField
+              id="outlined-number"
+              label="Number of Copies"
+              value={this.props.print_options_state.copies}
+              onChange={(e) => this.props.handleChange('copies', e)}
+              type="number"
+              InputLabelProps={{
+                minValue: 1,
+              }}
+              margin="normal"
+              variant="outlined"
+            />
+            </div>
           </div>
     );
   }

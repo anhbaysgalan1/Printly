@@ -29,6 +29,8 @@ class App extends Component {
 			printer_img: null,
 			selected_file: null,
 			selected_file_data: null,
+			job_cost: 0,
+			transfer: null,
 		};
 	}
 
@@ -48,6 +50,13 @@ class App extends Component {
 				printer_img: new_printer_img
 			})
 		}
+	}
+
+	updateCost = (new_cost, new_transfer) => {
+		this.setState({
+			job_cost: new_cost,
+			transfer: new_transfer
+		});
 	}
 
 	//for uploading files to print
@@ -99,6 +108,8 @@ class App extends Component {
 			case PageEnum.MATCHEDPRINTERS:
 				current_page = <MatchedPrinters
 									changePage={this.changePage}
+									job_cost={this.state.job_cost}
+									updateCost={this.updateCost}
 								/>
 				break;
 
@@ -107,6 +118,10 @@ class App extends Component {
 									changePage={this.changePage}
 									printer_data={this.state.printer_data}
 									printer_img={this.state.printer_img}
+									selected_file={this.state.selected_file}
+									selected_file_data={this.state.selected_file_data}
+									job_cost={this.state.job_cost}
+									transfer={this.state.transfer}
 								/>
 				break;
 			
