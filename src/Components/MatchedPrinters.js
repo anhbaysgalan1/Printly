@@ -19,11 +19,11 @@ const printOptions = {
 }
 
 const pricesPerPage = {
-		transfer: [0.00, 1.50],
-		sided: [0.10, 0.07],
+		transfer: [0.00, 2.0],
+		sided: [0.20, 0.10],
 		orientation: [0.00, 0.00],
-		quality: [0.03, 0.05, 0.10],
-		color: [0.05, 0.15]
+		quality: [0.05, 0.10, 0.15],
+		color: [0.10, 0.20]
 }
 
 
@@ -34,7 +34,7 @@ class MatchedPrinters extends Component {
 			this.state = {
 				matching_printers : [], //printers that match the preferences i have listed 
 				active_printers : [],
-				print_options: {
+				selected_print_options: {
 						transfer: null,
 						sided: null,
 						orientation: null,
@@ -44,7 +44,7 @@ class MatchedPrinters extends Component {
 						max_distance: 5,
 						min_rating: 1
 				},
-				price: 0,
+				price: '0.00',
 			};
 	}
 
@@ -59,27 +59,46 @@ class MatchedPrinters extends Component {
 						active_printers: printer_buff,
 						matching_printers: printer_buff,
 				});
-				console.log(printer_buff);
+				// console.log(printer_buff);
 				
 		});
 	};
 
 
 	handleChange = (name, event) => {
-		let newState = this.state.print_options;
+		let newState = this.state.selected_print_options;
 		newState[name] = event.target.value
-		this.setState({ print_options: newState });
+		this.setState({ selected_print_options: newState });
 		
 		if(!event.target.value || event.target.value < 1) {
 			this.setState({ [name]: null });
 		}
 		this.filterPrinters();
-		// console.log('changing ' , name , 'to ', event.target.value);
-		// console.log(this.state.print_options)
+		this.updatePrice();
+
 	};
 
 
+	updatePrice = () => {
+		let new_price = 0.00;
+		var priceOptions = ['transfer', 'quality', 'color' ,'sided'];
+		priceOptions.map(option => {
+			let option_selection = this.state.selected_print_options[option]; //this is what we picked for each option. ex: i picked delivery for the transfer option
+			if(option_selection === null)
+				new_price += 0.00;
 
+			else {
+				let selection_index = printOptions[option].indexOf(option_selection)
+				let option_price = pricesPerPage[option][selection_index];
+				new_price += option_price;
+			}
+		})
+		new_price = new_price.toFixed(2)
+		this.setState({
+			price: new_price,
+		})
+		console.log("new price: " , new_price);
+	};
 
 
 	filterPrinters = () => {
@@ -89,15 +108,15 @@ class MatchedPrinters extends Component {
 
 		//for each option that we're filtering by, do this:
 		filterOptions.map(option => {
-			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the transfer option
+			let option_selection = this.state.selected_print_options[option]; //this is what we picked for each option. ex: i picked delivery for the transfer option
 
 			for(var i = 0; i < new_matches.length; i++) { //for each printer, if the option offered doesn't match my option selection, remove it from the list
 				let cur_printer = new_matches[i]
-				console.log("printer : ", cur_printer, " has: " , cur_printer[option] , "i want: ",  option_selection)
+				// console.log("printer : ", cur_printer, " has: " , cur_printer[option] , "i want: ",  option_selection)
 				if(option_selection !== null && cur_printer[option] !== option_selection) { 
 					//ex: this printer only has greyscale, but i picked color
 					//null means i didn't make a selection for the option yet, so i should only check if i made a selection
-					console.log("this one failed")
+					// console.log("this one failed")
 					new_matches.splice(i, 1);
 					i--;
 				}
@@ -105,7 +124,7 @@ class MatchedPrinters extends Component {
 
 		});
 
-		console.log("new_matches: ", new_matches);
+		// console.log("new_matches: ", new_matches);
 
 		//set matching_printers state to new matches, so that only the new matches are rendered
 		this.setState({
@@ -121,7 +140,7 @@ class MatchedPrinters extends Component {
 	
 		render() {
 				let printer_data = Object.entries(this.state.matching_printers).map(([id, data]) => {
-						return (<PrinterInfo data={data} key={id} changePage={this.props.changePage}></PrinterInfo>);
+						return (<PrinterInfo data={data} key={id} price={this.state.price} changePage={this.props.changePage}></PrinterInfo>);
 				});
 
 				return (
@@ -133,7 +152,7 @@ class MatchedPrinters extends Component {
 								<Settings
 												printOptions={printOptions}
 												handleChange={this.handleChange}
-												print_options_state={this.state.print_options}>
+												selected_print_options={this.state.selected_print_options}>
 										
 								</Settings>
 						</div>
@@ -179,7 +198,7 @@ class PrinterInfo extends Component {
 								Quality: {this.props.data["quality"]}
 								<br/>
 								
-								Cost: $4.00
+								Cost: {this.props.price}
 						</div>
 				</div>
 				);
