@@ -24,7 +24,7 @@ class App extends Component {
 		super();
 
 		this.state = {
-			page : PageEnum.MATCHEDPRINTERS,
+			page : PageEnum.HOME,
 			printer_data: null,
 			printer_img: null,
 			selected_file: null,

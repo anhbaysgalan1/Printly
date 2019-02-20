@@ -92,9 +92,7 @@ class Settings extends React.Component{
           <div>Print Job Details</div>
           <div className={classes.root}>
             {optionButtons}
-          </div>
-
-          <TextField
+            <TextField
             id="outlined-number"
             label="Number of Copies"
             value={this.props.print_options_state.copies}
@@ -105,7 +103,10 @@ class Settings extends React.Component{
             }}
             margin="normal"
             variant="outlined"
-        />
+          />
+          </div>
+
+          
 
           <div>Cost of Delivery: $4.00</div>
           </div>
