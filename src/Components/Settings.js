@@ -76,7 +76,7 @@ class Settings extends React.Component{
               <RadioGroup row
                 name={options[0]}
                 className={classes.group}
-                value={this.props.print_options.name}
+                value={this.props.print_options_state.name}
                 onChange={(e) => this.props.handleChange(name, e)}
               >
                 {opts}
@@ -97,7 +97,7 @@ class Settings extends React.Component{
           <TextField
             id="outlined-number"
             label="Number of Copies"
-            value={this.props.print_options.copies}
+            value={this.props.print_options_state.copies}
             onChange={(e) => this.props.handleChange('copies', e)}
             type="number"
             InputLabelProps={{
