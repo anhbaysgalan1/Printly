@@ -218,9 +218,9 @@ class PrinterInfo extends Component {
 								<br/>
 								Cost: ${
 									(this.props.transfer === 'delivery') ?
-										this.props.job_cost + pricesPerPage.transfer[1] * parseFloat(this.props.data["distance"])
+										(this.props.job_cost + pricesPerPage.transfer[1] * parseFloat(this.props.data["distance"])).toFixed(2)
 									:
-										this.props.job_cost
+										this.props.job_cost.toFixed(2)
 								}
 						</div>
 				</div>
