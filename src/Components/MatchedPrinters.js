@@ -242,7 +242,7 @@ class PrinterInfo extends Component {
 				for (let i = 0; i < this.props.data["rating"]; i++){
 						stars.push(<span className="fa fa-star checked" key={i}></span>)
 				}
-				let image = <img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fdefault-profile-picture.png?alt=media&token=324bbe06-2b57-46cc-a9e8-8f5778ec34f6' className="id_image" alt="logo" />
+				let image = <img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
 				return (
 				<div className="printer_info" onClick={() => this.props.changePage(PageEnum.JOBINPROGRESS, this.props.data, image)}>
 						<div className="printer_data printer_title">
