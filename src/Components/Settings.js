@@ -86,7 +86,6 @@ class Settings extends React.Component{
 
     return (
       <div className="specific_setting">
-          <div>Print Job Details</div>
             <div className={classes.root}>
               {optionButtons}
               <TextField
