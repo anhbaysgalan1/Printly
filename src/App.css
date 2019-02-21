@@ -37,6 +37,20 @@ html, body {
   Popup Styling
 */
 
+#matches_div {
+  display: inline-block;
+  width: 85%;
+  float: right;
+}
+
+#cart {
+  display: inline-block;
+  position: absolute;
+  width: 50%;
+  left: 0;
+  top: 0;
+}
+
 .popup {
   z-index: 5;
   position: fixed;

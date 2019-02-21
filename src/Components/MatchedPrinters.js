@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import firebase from "firebase";
 import Settings from './Settings.js';
+import Cart from './Cart.js'
 
 
 const PageEnum = {
@@ -44,6 +45,13 @@ class MatchedPrinters extends Component {
 						max_distance: 5,
 						min_rating: 1
 				},
+				selected_pricing: {
+					transfer: '0.00',
+					sided: '0.00',
+					orientation: '0.00',
+					quality: '0.00',
+					color: '0.00',
+				},
 				price: 0.20,
 			};
 	};
@@ -62,6 +70,7 @@ class MatchedPrinters extends Component {
 				console.log(printer_buff);
 				
 		});
+		this.calcIndivPrices();
 	};
 
 
@@ -77,6 +86,30 @@ class MatchedPrinters extends Component {
 
 		let new_cost = this.calcCost();
 		this.props.updateCost(new_cost, this.state.print_options.transfer);
+		this.calcIndivPrices();
+	};
+
+	calcIndivPrices = () => {
+		console.log('data : ' ,this.state.selected_pricing)
+		let new_prices = {}
+		Object.keys(this.state.selected_pricing).map(option => {
+			console.log("OPTION SELECTION " , this.state.print_options[option])
+			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the transfer option
+			if(option_selection === null) {
+				new_prices[option] = '0.00'
+			}
+
+			else {
+				let selection_index = printOptions[option].indexOf(option_selection)
+				let option_price = pricesPerPage[option][selection_index];
+				option_price = option_price.toFixed(2);
+				new_prices[option] = option_price
+			}
+		})
+		console.log('NEW PRICES : ' , new_prices)
+		this.setState({
+			selected_pricing: new_prices,
+		})
 	};
 
 	calcCost = () => {
@@ -164,17 +197,21 @@ class MatchedPrinters extends Component {
 					<div className="title">
 							The Following Printers Have Matched Your Criteria
 					</div>
-					<div className="settings">
-							<Settings
-								printOptions={printOptions}
-								handleChange={this.handleSettingsChange}
-								print_options_state={this.state.print_options}>
-									
-							</Settings>
+					
+					<div id="matches_div">
+						<div className="settings">
+								<Settings
+									printOptions={printOptions}
+									handleChange={this.handleSettingsChange}
+									print_options_state={this.state.print_options}>
+										
+								</Settings>
+						</div>
+						<div className="printer_container">
+							{printer_data}
+						</div>
 					</div>
-					<div className="printer_container">
-					{printer_data}
-					</div>
+				<Cart id="cart" data={this.state.selected_pricing}></Cart>
 			</div>
 			);
 	}
