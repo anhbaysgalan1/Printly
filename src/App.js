@@ -29,7 +29,7 @@ class App extends Component {
 			printer_img: null,
 			selected_file: null,
 			selected_file_data: null,
-			job_cost: 0,
+			job_cost: 0.20,
 			transfer: null,
 		};
 	}

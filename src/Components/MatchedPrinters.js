@@ -36,15 +36,15 @@ class MatchedPrinters extends Component {
 				active_printers : [],
 				print_options: {
 						transfer: null,
-						sided: null,
-						orientation: null,
-						quality: null,
-						color: null,
+						sided: "single",
+						orientation: "portrait",
+						quality: "medium",
+						color: "greyscale",
 						copies: 1,
 						max_distance: 5,
 						min_rating: 1
 				},
-				price: 0,
+				price: 0.20,
 			};
 	};
 
@@ -116,7 +116,7 @@ class MatchedPrinters extends Component {
 	filterPrinters = () => {
 		var filterOptions = ['transfer', 'quality', 'color']; //THESE ARE THE OPTIONS I AM USING TO FILTER
 		let new_matches = Array.from(this.state.active_printers); //deep copy so i don't affect the actual active_printers state 
-
+		
 
 		//for each option that we're filtering by, do this:
 		filterOptions.map(option => {
@@ -146,40 +146,37 @@ class MatchedPrinters extends Component {
 	};
 
 
-
-
-
-	
 		render() {
-				let printer_data = Object.entries(this.state.matching_printers).map(([id, data]) => {
-						return (<PrinterInfo 
-									data={data} 
-									key={id} 
-									changePage={this.props.changePage}
-									job_cost={this.props.job_cost}
-									transfer={this.state.print_options.transfer}
-								/>
-						);
-				});
+			let printer_data = Object.entries(this.state.matching_printers).map(([id, data]) => {
+					return (<PrinterInfo 
+								data={data} 
+								key={id} 
+								changePage={this.props.changePage}
+								job_cost={this.props.job_cost}
+								transfer={this.state.print_options.transfer}
+							/>
+					);
+			});
+			
 
-				return (
-				<div>
-						<div className="title">
-								The Following Printers Have Matched Your Criteria
-						</div>
-						<div className="settings">
-								<Settings
-												printOptions={printOptions}
-												handleChange={this.handleSettingsChange}
-												print_options_state={this.state.print_options}>
-										
-								</Settings>
-						</div>
-						<div className="printer_container">
-						{printer_data}
-						</div>
-				</div>
-				);
+			return (
+			<div>
+					<div className="title">
+							The Following Printers Have Matched Your Criteria
+					</div>
+					<div className="settings">
+							<Settings
+								printOptions={printOptions}
+								handleChange={this.handleSettingsChange}
+								print_options_state={this.state.print_options}>
+									
+							</Settings>
+					</div>
+					<div className="printer_container">
+					{printer_data}
+					</div>
+			</div>
+			);
 	}
 }
 
@@ -202,19 +199,15 @@ class PrinterInfo extends Component {
 				let image = <img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fdefault-profile-picture.png?alt=media&token=324bbe06-2b57-46cc-a9e8-8f5778ec34f6' className="id_image" alt="logo" />
 				return (
 				<div className="printer_info" onClick={() => this.props.changePage(PageEnum.JOBINPROGRESS, this.props.data, image)}>
+						<div className="printer_data printer_title">
+						{this.props.data["name"]} 
+						</div>
 						<div className="printer_image">
 								{image}
 						</div>
 						<div className="printer_data">
-								{this.props.data["name"]} 
-								<br/>
-								Address: {this.props.data["address"]}
-								<br/>
-								Distance: {this.props.data["distance"]}
 								<br/>
 								Rating: {stars}
-								<br/>
-								Print Quality: {this.props.data["quality"]}
 								<br/>
 								Cost: ${
 									(this.props.transfer === 'delivery') ?
@@ -222,6 +215,8 @@ class PrinterInfo extends Component {
 									:
 										this.props.job_cost.toFixed(2)
 								}
+								<br/>
+								Distance: {this.props.data["distance"]}
 						</div>
 				</div>
 				);

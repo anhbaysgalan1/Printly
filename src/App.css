@@ -127,6 +127,13 @@ html, body {
 .printer_data{
   text-align: left;
   display: inline-block;
+  width: 60%;
+}
+
+.printer_title{
+  text-align: center;
+  font-weight: bold;
+  padding-top: 5px;
 }
 
 .fa.fa-star{

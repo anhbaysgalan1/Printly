@@ -52,12 +52,9 @@ const styles = ({
 
 class Settings extends React.Component{
   
-
-
-
   render() {
     const { classes } = this.props;
-
+    console.log(this.props.print_options_state);
     const optionButtons = Object.entries(this.props.printOptions).map((options) => {
       let name = options[0]
       let opts = Object.entries(options[1]).map((val) => {
@@ -76,7 +73,7 @@ class Settings extends React.Component{
               <RadioGroup row
                 name={options[0]}
                 className={classes.group}
-                value={this.props.print_options_state.name}
+                value={this.props.print_options_state[name]}
                 onChange={(e) => this.props.handleChange(name, e)}
               >
                 {opts}
