@@ -21,11 +21,11 @@ const printOptions = {
 }
 
 const pricesPerPage = {
-		transfer: [0.00, 0.50],
-		sided: [0.10, 0.07],
+		transfer: [0.00, 1.50],
+		sided: [0.10, 0.05],
 		orientation: [0.00, 0.00],
-		quality: [0.03, 0.05, 0.10],
-		color: [0.05, 0.15]
+		quality: [0.05, 0.10, 0.15],
+		color: [0.05, 0.25]
 }
 
 
@@ -53,7 +53,8 @@ class MatchedPrinters extends Component {
 					quality: '0.00',
 					color: '0.00',
 				},
-				price: 0.20,
+				handling_fee: '4.00',
+				price: 4.25,
 			};
 	};
 
@@ -144,6 +145,8 @@ class MatchedPrinters extends Component {
 		else if (this.state.print_options.color === 'color')
 			total_cost += pricesPerPage.color[1] * copies;
 
+		total_cost += parseFloat(this.state.handling_fee);
+
 		return total_cost;
 	};
 
@@ -217,6 +220,7 @@ class MatchedPrinters extends Component {
 					<div id="cart">
 						<Cart 
 							//id="cart"
+							handling_fee={this.state.handling_fee}
 							data={this.state.selected_pricing}
 							price={this.state.price}
 							copies={this.state.print_options.copies}

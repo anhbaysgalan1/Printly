@@ -33,6 +33,16 @@ class Cart extends React.Component {
 					</div>
 					)
 		);
+
+		listItems.push(
+		<div>
+			<ListItem  key={"handling_fee"}>
+				<ListItemText primary={"Handling Fee"} 
+							  secondary={this.prettyText(parseFloat(this.props.handling_fee))}/>
+			</ListItem>
+			<Divider />
+		</div>
+		);
 		return (
 			<div className={classes.root}>
 
