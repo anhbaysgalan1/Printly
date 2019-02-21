@@ -17,7 +17,7 @@ const printOptions = {
 			sided: ['single', 'double'],
 			orientation: ['portrait', 'landscape'],
 			quality: ['low', 'medium', 'high'],
-			color: ['greyscale', 'black and white', 'color']
+			color: ['greyscale', 'color']
 }
 
 const pricesPerPage = {
