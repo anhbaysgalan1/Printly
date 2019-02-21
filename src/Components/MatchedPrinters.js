@@ -76,7 +76,7 @@ class MatchedPrinters extends Component {
 
 	handleSettingsChange = (name, event) => {
 		let newState = this.state.print_options;
-		newState[name] = event.target.value
+		newState[name] = event.target.value;
 		this.setState({ print_options: newState });
 		
 		if(!event.target.value || event.target.value < 1) {
@@ -86,6 +86,7 @@ class MatchedPrinters extends Component {
 
 		let new_cost = this.calcCost();
 		this.props.updateCost(new_cost, this.state.print_options.transfer);
+		this.setState({price: new_cost});
 		this.calcIndivPrices();
 	};
 
@@ -180,6 +181,7 @@ class MatchedPrinters extends Component {
 
 
 		render() {
+			this.calcCost();
 			let printer_data = Object.entries(this.state.matching_printers).map(([id, data]) => {
 					return (<PrinterInfo 
 								data={data} 
