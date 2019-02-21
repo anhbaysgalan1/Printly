@@ -54,7 +54,6 @@ class Settings extends React.Component{
   
   render() {
     const { classes } = this.props;
-    console.log(this.props.print_options_state);
     const optionButtons = Object.entries(this.props.printOptions).map((options) => {
       let name = options[0]
       let opts = Object.entries(options[1]).map((val) => {
@@ -62,9 +61,7 @@ class Settings extends React.Component{
             <FormControlLabel value={val[1]} control={<Radio/>} label={val[1]}/>
           );
         });
-
-      let option1 = options[1][0]
-      let option2 = options[1][1]
+        
       return (
         <div>
           <MuiThemeProvider theme={theme}>
@@ -95,7 +92,7 @@ class Settings extends React.Component{
               onChange={(e) => this.props.handleChange('copies', e)}
               type="number"
               InputLabelProps={{
-                minValue: 1,
+                minvalue: 1,
               }}
               margin="normal"
               variant="outlined"

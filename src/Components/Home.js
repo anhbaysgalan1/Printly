@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import Trackbar from './Trackbar';
+import FilePreview from './FilePreview.js';
 import '../App.css';
-import FilePreview from './FilePreview.js'
-
 
 const PageEnum = {
 	HOME : 1,
@@ -14,7 +14,8 @@ export default class Home extends Component {
 	render() {
 		return (
 			<div>
-				Home (upload and select documents for jobs)
+				<div className="title">Home</div>
+				<Trackbar activeStep={0} />
 				<div>
 					<input type="file" onChange={this.props.chooseFile}>
 					</input>

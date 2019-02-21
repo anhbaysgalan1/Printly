@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import '../App.css';
 import firebase from "firebase";
 import Settings from './Settings.js';
 import Cart from './Cart.js'
+import Trackbar from './Trackbar';
+import '../App.css';
 
 
 const PageEnum = {
@@ -36,7 +37,7 @@ class MatchedPrinters extends Component {
 				matching_printers : [], //printers that match the preferences i have listed 
 				active_printers : [],
 				print_options: {
-						transfer: "delivery",
+						transfer: "pickup",
 						sided: "single",
 						orientation: "portrait",
 						quality: "medium",
@@ -91,15 +92,14 @@ class MatchedPrinters extends Component {
 	};
 
 	calcIndivPrices = () => {
-		console.log('data : ' ,this.state.selected_pricing)
+		//console.log('data : ' ,this.state.selected_pricing)
 		let new_prices = {}
 		Object.keys(this.state.selected_pricing).map(option => {
-			console.log("OPTION SELECTION " , this.state.print_options[option])
+			//console.log("OPTION SELECTION " , this.state.print_options[option])
 			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the transfer option
 			if(option_selection === null) {
 				new_prices[option] = '0.00'
 			}
-
 			else {
 				let selection_index = printOptions[option].indexOf(option_selection)
 				let option_price = pricesPerPage[option][selection_index];
@@ -107,7 +107,7 @@ class MatchedPrinters extends Component {
 				new_prices[option] = option_price
 			}
 		})
-		console.log('NEW PRICES : ' , new_prices)
+		//console.log('NEW PRICES : ' , new_prices)
 		this.setState({
 			selected_pricing: new_prices,
 		})
@@ -158,11 +158,11 @@ class MatchedPrinters extends Component {
 
 			for(var i = 0; i < new_matches.length; i++) { //for each printer, if the option offered doesn't match my option selection, remove it from the list
 				let cur_printer = new_matches[i]
-				console.log("printer : ", cur_printer, " has: " , cur_printer[option] , "i want: ",  option_selection)
+				//console.log("printer : ", cur_printer, " has: " , cur_printer[option] , "i want: ",  option_selection)
 				if(option_selection !== null && cur_printer[option] !== option_selection) { 
 					//ex: this printer only has greyscale, but i picked color
 					//null means i didn't make a selection for the option yet, so i should only check if i made a selection
-					console.log("this one failed")
+					//console.log("this one failed")
 					new_matches.splice(i, 1);
 					i--;
 				}
@@ -170,7 +170,7 @@ class MatchedPrinters extends Component {
 
 		});
 
-		console.log("new_matches: ", new_matches);
+		//console.log("new_matches: ", new_matches);
 
 		//set matching_printers state to new matches, so that only the new matches are rendered
 		this.setState({
@@ -192,14 +192,15 @@ class MatchedPrinters extends Component {
 							/>
 					);
 			});
-			
 
 			return (
 			<div>
 					<div className="title">
 							The Following Printers Have Matched Your Criteria
 					</div>
-					
+					{this.state.print_options.transfer === 'delivery' ? 
+					<Trackbar activeStep={1} deliver/> :
+					<Trackbar activeStep={1}/>}
 					<div id="matches_div">
 						<div className="settings">
 								<Settings

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
 import Home from './Components/Home.js';
 import MatchedPrinters from './Components/MatchedPrinters.js';
 import JobInProgress from './Components/JobInProgress.js';
 import firebase from 'firebase';
+import './App.css';
 
 const PageEnum = {
 	HOME : 1,
@@ -72,14 +72,12 @@ class App extends Component {
 				})
 			}
 			reader.readAsDataURL(file)
-			console.log("new file selected")
 		}
 		else {
 			this.setState({
 				selected_file: null,
 				selected_file_data: null
 			})
-			console.log("no file selected")
 		}
 	}
 
@@ -87,7 +85,7 @@ class App extends Component {
 		let storageRef = firebase.storage().ref();
 		let fileRef = storageRef.child('printQueue/' + this.state.selected_file.name);
 		fileRef.put(this.state.selected_file).then(function(snapshot) {
-			console.log('successful upload');
+			// lolidk
 		});
 	}
 
@@ -126,15 +124,13 @@ class App extends Component {
 				break;
 			
 			default:
-				current_page = <Home/>
+				current_page = 'Oh no, something broke!';
 				break;
 		}
 
 		return (
 			<div className="App">
 				{current_page}
-				
-				
 			</div>
 		);
 	}

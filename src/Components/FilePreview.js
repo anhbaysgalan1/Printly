@@ -7,7 +7,6 @@ export default class FilePreview extends Component {
 
 	render() {
 		if(this.props.file_data && this.props.file_name) {
-			console.log("success! " , this.props.file_name)
 			return (
 				<FileViewer
 					key={this.props.file_name.name}
@@ -17,7 +16,6 @@ export default class FilePreview extends Component {
 			);
 		}
 		else {
-			console.log("PICK A FILE")
 			return (
 				<p>please select a file</p>)
 		}

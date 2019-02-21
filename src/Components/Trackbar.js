@@ -10,14 +10,14 @@ import '../App.css';
 const styles = ({
   stepLabel: {
     height: '30px',
-    width: '170px',
-    paddingTop: '5px',
+    width: '150px',
+    paddingTop: '7px',
     borderRadius: '7px',
   },
   stepLabelPulse: {
     height: '30px',
-    width: '170px',
-    paddingTop: '5px',
+    width: '150px',
+    paddingTop: '7px',
     borderRadius: '7px',
     animation: 'stepLabelPulse 1s infinite',
   },
@@ -52,58 +52,65 @@ const theme = createMuiTheme({
     },
     MuiTypography: {
       body1: {
-        fontSize: '1rem',
+        fontSize: '14px',
       }
     }
   },
 });
 
 const STEPS_PICKUP = [
-  'Uploading Document',
-  'Accepting Job',
+  'Upload Document',
+  'Choose Settings',
+  'Connecting to Printer',
   'Printing Document',
   'Preparing for Pickup'
 ];
 
 const STEPS_PICKUP_DONE = [
   'Document Uploaded', 
-  'Job Accepted', 
+  'Settings Applied',
+  'Connected with Printer', 
   'Document Printed', 
   'Ready for Pickup'
 ];
 
 const STEPS_DELIV= [
   'Uploading Document',
-  'Accepting Job',
+  'Choose Settings',
+  'Connecting to Printer',
   'Printing Document',
   'Document On the Way'
 ];
 
 const STEPS_DELIV_DONE = [
   'Document Uploaded', 
-  'Job Accepted', 
+  'Settings Applied',
+  'Connected with Printer',
   'Document Printed', 
   'Document Delivered'
 ];
 
 class Trackbar extends Component {
   state = {
-    activeStep: 1,
+    activeStep: this.props.activeStep,
     numSteps: (this.props.deliver ? STEPS_DELIV.length : STEPS_PICKUP.length),
     intervalID: 0
   };
 
   componentDidMount() {
-    let id = setInterval(() => {
-      let newStep = this.state.activeStep + 1;
-      this.setState({ activeStep: newStep });
-
-      if (newStep === this.state.numSteps) {
-        clearInterval(this.state.intervalID);
-      }
-    }, 3000);
-
-    this.setState({ intervalID : id});
+    // hacky updater for demo
+    if (this.state.activeStep >= 2) {
+      let id = setInterval(() => {
+        let newStep = this.state.activeStep + 1;
+        this.setState({ activeStep: newStep });
+  
+        if (newStep === this.state.numSteps) {
+          clearInterval(this.state.intervalID);
+        }
+      }, 3000);
+  
+      this.setState({ intervalID : id});
+    }
   }
 
   render() {

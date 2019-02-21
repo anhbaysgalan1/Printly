@@ -28,7 +28,9 @@ export default class JobInProgress extends Component {
 		return (
 			<div>
 				<div className="title">Job Status</div>
-				<Trackbar/>
+				{this.props.transfer === 'delivery' ? 
+				<Trackbar activeStep={2} deliver/> :
+				<Trackbar activeStep={2}/>}
 				<div className="job_info">
 	            	<div>
 	                	{this.props.printer_img}
