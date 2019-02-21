@@ -5,15 +5,15 @@
 html, body {
   margin: 0px;
   height: 100%;
-  background-color: rebeccapurple;
- /* background-color: #191970; */
+  /*background-color: rebeccapurple;*/
+  background-color: #D3D3D3;
 }
 
 .title {
   font-size: 20px;
   color: white;
- background-image: linear-gradient(135deg, rgba(141,126,170,1) 35%,rgba(190,149,201,1) 60%);
- /*background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);*/
+ /*background-image: linear-gradient(135deg, rgba(141,126,170,1) 35%,rgba(190,149,201,1) 60%);*/
+  background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
   padding: 10px 0 10px 0;
   border-bottom: 1px solid black;
 }
@@ -148,7 +148,8 @@ html, body {
 }
 
 .fa.fa-star.checked{
-  color: rebeccapurple;
+ /* color: rebeccapurple; */
+  color: #04619f;
   border-color: white;
 }
 
@@ -180,9 +181,9 @@ html, body {
 
 @keyframes stepLabelPulse {
   0% {
-    box-shadow: 0 0 0 0 rebeccapurple;
+    box-shadow: 0 0 0 0 #04619f;
   }
   90% {
-      box-shadow: 0 0 0 3px rebeccapurple;
+      box-shadow: 0 0 0 3px #04619f;
   }
 }

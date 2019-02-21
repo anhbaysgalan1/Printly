@@ -19,7 +19,7 @@ const theme = createMuiTheme({
     MuiRadio: {
       colorSecondary: {
         '&$checked': {
-          color: 'rebeccapurple',
+          color: '#04619f',
         }
       },
     },
