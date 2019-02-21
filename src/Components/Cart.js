@@ -52,7 +52,7 @@ class Cart extends React.Component {
 								{listItems}
 								<ListItem  key="total">
 									<ListItemText primary="Subtotal" 
-												  secondary={this.prettyText(this.props.price * this.props.copies)}/>
+												  secondary={this.prettyText(this.props.price)}/>
 								</ListItem>
 							</List>
 			</div>

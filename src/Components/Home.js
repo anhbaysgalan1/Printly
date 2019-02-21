@@ -6,11 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
-const PageEnum = {
-	HOME : 1,
-	MATCHEDPRINTERS : 2,
-	JOBINPROGRESS : 3,
-}
 
 const styles = theme => ({
 	button:{
@@ -32,14 +27,15 @@ class Home extends Component {
 					</input>
 				</div>
 				<br/>
-				<Button  variant="outlined" color="inherit" className={classes.button} onClick={() => this.props.changePage(PageEnum.MATCHEDPRINTERS)}>
-					Submit for Printing!
-				</Button>
 				<div id="file_preview">
 					Preview
 					<FilePreview file_data={this.props.selected_file_data}
 								file_name={this.props.selected_file}/>
 				</div>
+				<br/>
+				<Button  variant="outlined" color="inherit" className={classes.button} onClick={() => this.props.changePage(this.props.PageEnum.MATCHEDPRINTERS)}>
+					Submit for Printing!
+				</Button>
 			</div>
 		);
 	}

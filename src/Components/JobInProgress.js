@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
 import Trackbar from './Trackbar.js';
 import FilePreview from './FilePreview.js';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import '../App.css';
 
-const PageEnum = {
-	HOME : 1,
-	MATCHEDPRINTERS : 2,
-	JOBINPROGRESS : 3,
-}
-
-const pricesPerPage = {
-		transfer: [0.00, 0.50],
-		sided: [0.10, 0.07],
-		orientation: [0.00, 0.00],
-		quality: [0.03, 0.05, 0.10],
-		color: [0.05, 0.15]
-}
 
 export default class JobInProgress extends Component {
 	render() {
@@ -24,6 +13,15 @@ export default class JobInProgress extends Component {
 		{
             stars.push(<span className="fa fa-star checked" key={i}></span>)
 		}
+
+		const selected_options = Object.keys(this.props.print_options).map(option => (
+				<div>
+					<ListItem key={option}>
+						<ListItemText primary={option + ': ' + this.props.print_options[option]}/>
+					</ListItem>
+				</div>
+			)
+		);
 		
 		return (
 			<div>
@@ -44,11 +42,15 @@ export default class JobInProgress extends Component {
 	                	<br/>
 	                	<br/>
 	                	<div className="job_data">
+	                		Print Options:
+	                		<br/>
+	                		{selected_options}
+	                		<br/>
 		                	Total Cost: ${
-									(this.props.transfer === 'delivery') ?
-										(this.props.job_cost + pricesPerPage.transfer[1] * parseFloat(this.props.printer_data["distance"])).toFixed(2)
+									(this.props.print_options.transfer === 'delivery') ?
+										(this.props.price + this.props.pricesPerPage.transfer[1] * parseFloat(this.props.printer_data["distance"])).toFixed(2)
 									:
-										(this.props.job_cost).toFixed(2)
+										(this.props.price).toFixed(2)
 							}
 		                </div>
 	            	</div>
@@ -60,7 +62,7 @@ export default class JobInProgress extends Component {
 								 file_name={this.props.selected_file}/>
 				</div>
 	        	<br/>
-	        	<button onClick={() => this.props.changePage(PageEnum.HOME)}>
+	        	<button onClick={() => this.props.changePage(this.props.PageEnum.HOME)}>
 					Job Done
 				</button>
 			</div>

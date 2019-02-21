@@ -6,29 +6,6 @@ import Trackbar from './Trackbar';
 import '../App.css';
 
 
-const PageEnum = {
-		HOME : 1,
-		MATCHEDPRINTERS : 2,
-		JOBINPROGRESS : 3,
-}
-
-const printOptions = {
-			transfer: ['pickup', 'delivery'],
-			sided: ['single', 'double'],
-			orientation: ['portrait', 'landscape'],
-			quality: ['low', 'medium', 'high'],
-			color: ['black & white', 'color']
-}
-
-const pricesPerPage = {
-		transfer: [0.00, 1.50],
-		sided: [0.10, 0.05],
-		orientation: [0.00, 0.00],
-		quality: [0.05, 0.10, 0.15],
-		color: [0.05, 0.25]
-}
-
-
 class MatchedPrinters extends Component {
 	constructor(){
 			super();
@@ -47,14 +24,13 @@ class MatchedPrinters extends Component {
 						min_rating: 1
 				},
 				selected_pricing: {
-					transfer: '0.00',
 					sided: '0.00',
 					orientation: '0.00',
 					quality: '0.00',
 					color: '0.00',
 				},
 				handling_fee: '4.00',
-				price: 4.25,
+				price: 0.0,
 			};
 	};
 
@@ -65,12 +41,16 @@ class MatchedPrinters extends Component {
 						printer_buff.push(child.val());
 				})
 
+				let init_cost = this.calcCost();
+
 				this.setState({
 						active_printers: printer_buff,
 						matching_printers: printer_buff,
+						price: init_cost
 				});
 
-				this.filterPrinters();				
+				this.filterPrinters();
+				this.props.updatePrintOptions(this.state.print_options);
 		});
 		this.calcIndivPrices();
 	};
@@ -87,10 +67,11 @@ class MatchedPrinters extends Component {
 		this.filterPrinters();
 
 		let new_cost = this.calcCost();
-		this.props.updateCost(new_cost, this.state.print_options.transfer);
 		this.setState({price: new_cost});
 		this.calcIndivPrices();
-	};
+
+		this.props.updatePrintOptions(this.state.print_options);
+	}
 
 	calcIndivPrices = () => {
 		//console.log('data : ' ,this.state.selected_pricing)
@@ -102,8 +83,8 @@ class MatchedPrinters extends Component {
 				new_prices[option] = '0.00'
 			}
 			else {
-				let selection_index = printOptions[option].indexOf(option_selection)
-				let option_price = pricesPerPage[option][selection_index];
+				let selection_index = this.props.printOptions[option].indexOf(option_selection)
+				let option_price = this.props.pricesPerPage[option][selection_index];
 				option_price = option_price.toFixed(2);
 				new_prices[option] = option_price
 			}
@@ -118,32 +99,27 @@ class MatchedPrinters extends Component {
 		let total_cost = 0.0;
 		let copies = this.state.print_options.copies;
 
-		if (this.state.print_options.transfer === 'pickup')
-			total_cost += pricesPerPage.transfer[0] * copies;
-		else if (this.state.print_options.transfer === 'delivery')
-			total_cost += pricesPerPage.transfer[1] * copies;
-
 		if (this.state.print_options.sided === 'single')
-			total_cost += pricesPerPage.sided[0] * copies;
+			total_cost += this.props.pricesPerPage.sided[0] * copies;
 		else if (this.state.print_options.sided === 'double')
-			total_cost += pricesPerPage.sided[1] * copies;
+			total_cost += this.props.pricesPerPage.sided[1] * copies;
 
 		if (this.state.print_options.orientation === 'portrait')
-			total_cost += pricesPerPage.orientation[0] * copies;
+			total_cost += this.props.pricesPerPage.orientation[0] * copies;
 		else if (this.state.print_options.orientation === 'landscape')
-			total_cost += pricesPerPage.orientation[1] * copies;
+			total_cost += this.props.pricesPerPage.orientation[1] * copies;
 
 		if (this.state.print_options.quality === 'low')
-			total_cost += pricesPerPage.quality[0] * copies;
+			total_cost += this.props.pricesPerPage.quality[0] * copies;
 		else if (this.state.print_options.quality === 'medium')
-			total_cost += pricesPerPage.quality[1] * copies;
+			total_cost += this.props.pricesPerPage.quality[1] * copies;
 		else if (this.state.print_options.quality === 'high')
-			total_cost += pricesPerPage.quality[2] * copies;
+			total_cost += this.props.pricesPerPage.quality[2] * copies;
 
 		if (this.state.print_options.color === 'black & white')
-			total_cost += pricesPerPage.color[0] * copies;
+			total_cost += this.props.pricesPerPage.color[0] * copies;
 		else if (this.state.print_options.color === 'color')
-			total_cost += pricesPerPage.color[1] * copies;
+			total_cost += this.props.pricesPerPage.color[1] * copies;
 
 		total_cost += parseFloat(this.state.handling_fee);
 
@@ -170,7 +146,6 @@ class MatchedPrinters extends Component {
 					i--;
 				}
 			}
-
 		});
 
 		//console.log("new_matches: ", new_matches);
@@ -184,13 +159,15 @@ class MatchedPrinters extends Component {
 
 
 		render() {
-			this.calcCost();
 			let printer_data = Object.entries(this.state.matching_printers).map(([id, data]) => {
 					return (<PrinterInfo 
 								data={data} 
-								key={id} 
+								key={id}
+								PageEnum={this.props.PageEnum}
 								changePage={this.props.changePage}
-								job_cost={this.props.job_cost}
+								updateCost={this.props.updateCost}
+								price={this.calcCost()}
+								pricesPerPage={this.props.pricesPerPage}
 								transfer={this.state.print_options.transfer}
 							/>
 					);
@@ -207,10 +184,9 @@ class MatchedPrinters extends Component {
 					<div id="matches_div">
 						<div className="settings">
 								<Settings
-									printOptions={printOptions}
+									printOptions={this.props.printOptions}
 									handleChange={this.handleSettingsChange}
-									print_options_state={this.state.print_options}
-										
+									print_options_state={this.state.print_options}	
 								/>
 						</div>
 						<div className="printer_container">
@@ -219,7 +195,6 @@ class MatchedPrinters extends Component {
 					</div>
 					<div id="cart">
 						<Cart 
-							//id="cart"
 							handling_fee={this.state.handling_fee}
 							data={this.state.selected_pricing}
 							price={this.state.price}
@@ -241,6 +216,11 @@ class PrinterInfo extends Component {
 				};
 		}
 
+		handlePageChange = (new_page, new_printer_data, new_printer_img, new_cost, new_transfer) => {
+			this.props.updateCost(new_cost, new_transfer);
+			this.props.changePage(new_page, new_printer_data, new_printer_img);
+		}
+
 		render(){
 				let stars = [];
 				
@@ -249,7 +229,7 @@ class PrinterInfo extends Component {
 				}
 				let image = <img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
 				return (
-				<div className="printer_info" onClick={() => this.props.changePage(PageEnum.JOBINPROGRESS, this.props.data, image)}>
+				<div className="printer_info" onClick={() => this.handlePageChange(this.props.PageEnum.JOBINPROGRESS, this.props.data, image, this.props.price, this.props.transfer)}>
 						<div className="printer_data printer_title">
 						{this.props.data["name"]} 
 						</div>
@@ -262,11 +242,12 @@ class PrinterInfo extends Component {
 								<br/>
 								Distance: {this.props.data["distance"]}
 								<br/>
-								Delivery Cost: ${
-									(this.props.transfer === 'delivery') ?
-										(pricesPerPage.transfer[1] * parseFloat(this.props.data["distance"])).toFixed(2)
+								{(this.props.transfer === 'delivery') ?
+									<>
+										Delivery Cost: ${(this.props.pricesPerPage.transfer[1] * parseFloat(this.props.data["distance"])).toFixed(2)}
+									</>
 									:
-										"0.00"
+									null
 								}
 						</div>
 				</div>
