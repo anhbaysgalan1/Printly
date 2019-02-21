@@ -17,7 +17,7 @@ const printOptions = {
 			sided: ['single', 'double'],
 			orientation: ['portrait', 'landscape'],
 			quality: ['low', 'medium', 'high'],
-			color: ['greyscale', 'color']
+			color: ['black & white', 'color']
 }
 
 const pricesPerPage = {
@@ -41,7 +41,7 @@ class MatchedPrinters extends Component {
 						sided: "single",
 						orientation: "portrait",
 						quality: "medium",
-						color: "greyscale",
+						color: "black & white",
 						copies: 1,
 						max_distance: 5,
 						min_rating: 1
@@ -139,7 +139,7 @@ class MatchedPrinters extends Component {
 		else if (this.state.print_options.quality === 'high')
 			total_cost += pricesPerPage.quality[2] * copies;
 
-		if (this.state.print_options.color === 'greyscale')
+		if (this.state.print_options.color === 'black & white')
 			total_cost += pricesPerPage.color[0] * copies;
 		else if (this.state.print_options.color === 'color')
 			total_cost += pricesPerPage.color[1] * copies;
@@ -159,8 +159,8 @@ class MatchedPrinters extends Component {
 			for(var i = 0; i < new_matches.length; i++) { //for each printer, if the option offered doesn't match my option selection, remove it from the list
 				let cur_printer = new_matches[i]
 				//console.log("printer : ", cur_printer, " has: " , cur_printer[option] , "i want: ",  option_selection)
-				if(option_selection !== null && cur_printer[option] !== option_selection) { 
-					//ex: this printer only has greyscale, but i picked color
+				if(option_selection !== null && cur_printer[option] !== "both" && cur_printer[option] !==  option_selection) { 
+					//ex: this printer only has black & white, but i picked color
 					//null means i didn't make a selection for the option yet, so i should only check if i made a selection
 					//console.log("this one failed")
 					new_matches.splice(i, 1);
