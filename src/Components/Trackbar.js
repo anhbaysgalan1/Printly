@@ -37,10 +37,10 @@ const theme = createMuiTheme({
     MuiStepIcon: {
       root: {
         '&$active': {
-          color: 'rebeccapurple',
+          color: '#04619f',
         },
         '&$completed': {
-          color: 'rebeccapurple',
+          color: '#04619f',
         },
       },
     },
