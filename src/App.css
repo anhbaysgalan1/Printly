@@ -6,31 +6,22 @@ html, body {
   margin: 0px;
   height: 100%;
   background-color: rebeccapurple;
+ /* background-color: #191970; */
 }
+
+.title {
+  font-size: 20px;
+  color: white;
+ background-image: linear-gradient(135deg, rgba(141,126,170,1) 35%,rgba(190,149,201,1) 60%);
+ /*background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);*/
+  padding: 10px 0 10px 0;
+  border-bottom: 1px solid black;
+}
+
+
 
 .App {
   text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 /*
@@ -46,7 +37,7 @@ html, body {
 #cart {
   display: inline-block;
   position: absolute;
-  width: 13%;
+  width: 10%;
   right: 0;
   top: 50px;
 }
@@ -161,13 +152,7 @@ html, body {
   border-color: white;
 }
 
-.title {
-  font-size: 20px;
-  color: white;
-  background-image: linear-gradient(135deg, rgba(141,126,170,1) 35%,rgba(190,149,201,1) 60%);
-  padding: 10px 0 10px 0;
-  border-bottom: 1px solid black;
-}
+
 
 /*
   JobInProgress styling
