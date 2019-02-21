@@ -89,7 +89,7 @@ const STEPS_DELIV_DONE = [
 class Trackbar extends Component {
   state = {
     activeStep: 1,
-    numSteps: (this.props.deliver? STEPS_DELIV.length : STEPS_PICKUP.length),
+    numSteps: (this.props.deliver ? STEPS_DELIV.length : STEPS_PICKUP.length),
     intervalID: 0
   };
 

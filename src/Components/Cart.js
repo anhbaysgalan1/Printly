@@ -17,14 +17,14 @@ const styles = theme => ({
 	root: {
 		display: 'flex',
 		backgroundColor: 'white',
-		minHeight: '100vh',
+		//minHeight: '100px',
 	},
 });
 
 
 class Cart extends React.Component {
 	prettyText = (input) => {
-		return "$" + input
+		return "$" + parseFloat(input).toFixed(2)
 	}
 
 
@@ -35,7 +35,7 @@ class Cart extends React.Component {
 					<div>
 						<ListItem  key={option}>
 							<ListItemText primary={option} 
-														secondary={this.prettyText(this.props.data[option])}/>
+										  secondary={this.prettyText(parseFloat(this.props.data[option] * this.props.copies))}/>
 						</ListItem>
 						<Divider />
 					</div>
@@ -49,8 +49,8 @@ class Cart extends React.Component {
 								<Divider />
 								{listItems}
 								<ListItem  key="total">
-									<ListItemText primary="Total Price" 
-																secondary={this.prettyText(this.props.price.toFixed(2))}/>
+									<ListItemText primary="Subtotal" 
+												  secondary={this.prettyText(this.props.price * this.props.copies)}/>
 								</ListItem>
 							</List>
 			</div>

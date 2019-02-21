@@ -36,7 +36,7 @@ class MatchedPrinters extends Component {
 				matching_printers : [], //printers that match the preferences i have listed 
 				active_printers : [],
 				print_options: {
-						transfer: null,
+						transfer: "delivery",
 						sided: "single",
 						orientation: "portrait",
 						quality: "medium",
@@ -67,8 +67,8 @@ class MatchedPrinters extends Component {
 						active_printers: printer_buff,
 						matching_printers: printer_buff,
 				});
-				console.log(printer_buff);
-				
+
+				this.filterPrinters();				
 		});
 		this.calcIndivPrices();
 	};
@@ -203,15 +203,22 @@ class MatchedPrinters extends Component {
 								<Settings
 									printOptions={printOptions}
 									handleChange={this.handleSettingsChange}
-									print_options_state={this.state.print_options}>
+									print_options_state={this.state.print_options}
 										
-								</Settings>
+								/>
 						</div>
 						<div className="printer_container">
 							{printer_data}
 						</div>
 					</div>
-				<Cart id="cart" data={this.state.selected_pricing} price={this.state.price}></Cart>
+					<div id="cart">
+						<Cart 
+							//id="cart"
+							data={this.state.selected_pricing}
+							price={this.state.price}
+							copies={this.state.print_options.copies}
+						/>
+					</div>
 			</div>
 			);
 	}
@@ -246,14 +253,14 @@ class PrinterInfo extends Component {
 								<br/>
 								Rating: {stars}
 								<br/>
-								Cost: ${
-									(this.props.transfer === 'delivery') ?
-										(this.props.job_cost + pricesPerPage.transfer[1] * parseFloat(this.props.data["distance"])).toFixed(2)
-									:
-										this.props.job_cost.toFixed(2)
-								}
-								<br/>
 								Distance: {this.props.data["distance"]}
+								<br/>
+								Delivery Cost: ${
+									(this.props.transfer === 'delivery') ?
+										(pricesPerPage.transfer[1] * parseFloat(this.props.data["distance"])).toFixed(2)
+									:
+										"0.00"
+								}
 						</div>
 				</div>
 				);

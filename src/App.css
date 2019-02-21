@@ -39,16 +39,16 @@ html, body {
 
 #matches_div {
   display: inline-block;
-  width: 85%;
-  float: right;
+  width: 90%;
+  float: left;
 }
 
 #cart {
   display: inline-block;
   position: absolute;
-  width: 50%;
-  left: 0;
-  top: 0;
+  width: 13%;
+  right: 0;
+  top: 50px;
 }
 
 .popup {
