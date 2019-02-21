@@ -211,7 +211,7 @@ class MatchedPrinters extends Component {
 							{printer_data}
 						</div>
 					</div>
-				<Cart id="cart" data={this.state.selected_pricing}></Cart>
+				<Cart id="cart" data={this.state.selected_pricing} price={this.state.price}></Cart>
 			</div>
 			);
 	}

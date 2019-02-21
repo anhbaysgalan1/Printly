@@ -22,17 +22,20 @@ const styles = theme => ({
 });
 
 
-
 class Cart extends React.Component {
+	prettyText = (input) => {
+		return "$" + input
+	}
+
 
 	render() {
 		const { classes, theme } = this.props;
 		console.log('MY DATA : ', this.props.data)
 		const listItems = Object.keys(this.props.data).map(option => (
 					<div>
-						<ListItem button key={option}>
+						<ListItem  key={option}>
 							<ListItemText primary={option} 
-														secondary={this.props.data[option]}/>
+														secondary={this.prettyText(this.props.data[option])}/>
 						</ListItem>
 						<Divider />
 					</div>
@@ -45,6 +48,10 @@ class Cart extends React.Component {
 								Your Current Price Breakdown<br/><br/><br/>
 								<Divider />
 								{listItems}
+								<ListItem  key="total">
+									<ListItemText primary="Total Price" 
+																secondary={this.prettyText(this.props.price.toFixed(2))}/>
+								</ListItem>
 							</List>
 			</div>
 		);
