@@ -76,14 +76,14 @@ const STEPS_DELIV= [
   'Uploading Document',
   'Accepting Job',
   'Printing Document',
-  'Preparing for Pickup'
+  'Document On the Way'
 ];
 
 const STEPS_DELIV_DONE = [
   'Document Uploaded', 
   'Job Accepted', 
   'Document Printed', 
-  'Ready for Pickup'
+  'Document Delivered'
 ];
 
 class Trackbar extends Component {
