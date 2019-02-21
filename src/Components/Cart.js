@@ -10,7 +10,8 @@ const styles = ({
 	root: {
 		display: 'flex',
 		backgroundColor: 'white',
-		//minHeight: '100px',
+		border: '1px solid black',
+		borderRadius: '7px',
 	},
 });
 

@@ -16,6 +16,11 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiOutlinedInput: {
+      root: {
+        margin: '2px',
+      },
+    },
     MuiRadio: {
       colorSecondary: {
         '&$checked': {
@@ -85,18 +90,20 @@ class Settings extends React.Component{
       <div className="specific_setting">
             <div className={classes.root}>
               {optionButtons}
-              <TextField
-              id="outlined-number"
-              label="Number of Copies"
-              value={this.props.print_options_state.copies}
-              onChange={(e) => this.props.handleChange('copies', e)}
-              type="number"
-              InputLabelProps={{
-                minvalue: 1,
-              }}
-              margin="normal"
-              variant="outlined"
-            />
+              <MuiThemeProvider theme={theme}>
+                <TextField
+                id="outlined-number"
+                label="Number of Copies"
+                value={this.props.print_options_state.copies}
+                onChange={(e) => this.props.handleChange('copies', e)}
+                type="number"
+                InputLabelProps={{
+                  minvalue: 1,
+                }}
+                margin="normal"
+                variant="outlined"
+              />
+            </MuiThemeProvider>
             </div>
           </div>
     );

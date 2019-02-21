@@ -5,20 +5,16 @@
 html, body {
   margin: 0px;
   height: 100%;
-  /*background-color: rebeccapurple;*/
   background-color: #D3D3D3;
 }
 
 .title {
   font-size: 20px;
   color: white;
- /*background-image: linear-gradient(135deg, rgba(141,126,170,1) 35%,rgba(190,149,201,1) 60%);*/
   background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
   padding: 10px 0 10px 0;
   border-bottom: 1px solid black;
 }
-
-
 
 .App {
   text-align: center;
@@ -28,18 +24,12 @@ html, body {
   Popup Styling
 */
 
-#matches_div {
-  display: inline-block;
-  width: 90%;
-  float: left;
-}
-
 #cart {
   display: inline-block;
   position: absolute;
   width: 10%;
-  right: 0;
-  top: 50px;
+  top: 134px;
+  right: 10px;
 }
 
 .popup {
@@ -84,12 +74,18 @@ html, body {
 }
 
 /*
-  MatchedPrinters
+  MatchedPrinters styling
 */
 
 .settingsheading {
   font-size: 12px;
   margin-bottom: -10px;
+}
+
+#matches_div {
+  display: inline-block;
+  width: 89%;
+  float: left;
 }
 
 .printer_header{
@@ -152,8 +148,6 @@ html, body {
   color: #04619f;
   border-color: white;
 }
-
-
 
 /*
   JobInProgress styling
