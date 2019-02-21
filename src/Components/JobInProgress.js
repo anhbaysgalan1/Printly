@@ -44,9 +44,9 @@ export default class JobInProgress extends Component {
 	                	<div className="job_data">
 		                	Total Cost: ${
 									(this.props.transfer === 'delivery') ?
-										this.props.job_cost + pricesPerPage.transfer[1] * parseFloat(this.props.printer_data["distance"])
+										(this.props.job_cost + pricesPerPage.transfer[1] * parseFloat(this.props.printer_data["distance"])).toFixed(2)
 									:
-										this.props.job_cost
+										(this.props.job_cost).toFixed(2)
 							}
 		                </div>
 	            	</div>
