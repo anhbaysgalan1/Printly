@@ -23,7 +23,10 @@ class Home extends Component {
 
 		return (
 			<div>
-				<div className="title">Home</div>
+				<div className="title">
+				Home
+				</div>
+				<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
 				<Trackbar activeStep={0} />
 				<div>
 					<input type="file" onChange={this.props.chooseFile}>

@@ -175,6 +175,7 @@ class MatchedPrinters extends Component {
 					<div className="title">
 							The Following Printers Have Matched Your Criteria
 					</div>
+					<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
 					{this.state.print_options.transfer === 'delivery' ? 
 					<Trackbar activeStep={1} deliver/> :
 					<Trackbar activeStep={1}/>}
