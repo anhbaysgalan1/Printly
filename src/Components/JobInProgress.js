@@ -45,7 +45,7 @@ class JobInProgress extends Component {
 		return (
 			<div>
 				<div className="title">Job Status</div>
-				{this.props.transfer === 'delivery' ? 
+				{this.props.print_options['transfer'] === 'delivery' ? 
 				<Trackbar activeStep={2} deliver updateJobStatus={this.updateJobStatus}/> :
 				<Trackbar activeStep={2} updateJobStatus={this.updateJobStatus}/>}
 				<div className="job_info">
