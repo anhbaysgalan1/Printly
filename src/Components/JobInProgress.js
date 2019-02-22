@@ -4,10 +4,29 @@ import FilePreview from './FilePreview.js';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import '../App.css';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
+const styles = theme => ({
+	button:{
+		color: '#04619f',
+		background: '#FFFFFF',
+	},
+});
 
-export default class JobInProgress extends Component {
+class JobInProgress extends Component {
+	state = {
+		jobComplete: false
+	}
+
+	updateJobStatus = () => {
+		this.setState({ jobComplete: true });
+	}
+
 	render() {
+		const { classes } = this.props;
+
 		let stars = [];
 		for (let i = 0; i < this.props.printer_data["rating"]; i++)
 		{
@@ -27,8 +46,8 @@ export default class JobInProgress extends Component {
 			<div>
 				<div className="title">Job Status</div>
 				{this.props.transfer === 'delivery' ? 
-				<Trackbar activeStep={2} deliver/> :
-				<Trackbar activeStep={2}/>}
+				<Trackbar activeStep={2} deliver updateJobStatus={this.updateJobStatus}/> :
+				<Trackbar activeStep={2} updateJobStatus={this.updateJobStatus}/>}
 				<div className="job_info">
 	            	<div>
 	                	{this.props.printer_img}
@@ -55,17 +74,26 @@ export default class JobInProgress extends Component {
 		                </div>
 	            	</div>
 	        	</div>
-	        	<br/>
 	        	<div id="file_preview">
 					Preview
 					<FilePreview file_data={this.props.selected_file_data}
 								 file_name={this.props.selected_file}/>
 				</div>
 	        	<br/>
-	        	<button onClick={() => this.props.changePage(this.props.PageEnum.HOME)}>
-					Job Done
-				</button>
+	        	<Button  variant="outlined" 
+						color="inherit" 
+						className={classes.button} 
+						onClick={() => this.props.changePage(this.props.PageEnum.HOME)}
+						disabled={this.state.jobComplete ? false : true}>
+					Finish
+				</Button>
 			</div>
 		);
 	}
 }
+
+JobInProgress.propTypes = {
+	classes: PropTypes.object.isRequired
+  };
+
+export default withStyles(styles)(JobInProgress);

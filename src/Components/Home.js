@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 
-
 const styles = theme => ({
 	button:{
 		color: '#04619f',
@@ -14,7 +13,11 @@ const styles = theme => ({
 	},
 });
 
-class Home extends Component {	
+class Home extends Component {
+	state = {
+		submitDisabled: true
+	}
+
 	render() {
 		const { classes } = this.props;
 
@@ -26,14 +29,17 @@ class Home extends Component {
 					<input type="file" onChange={this.props.chooseFile}>
 					</input>
 				</div>
-				<br/>
 				<div id="file_preview">
 					Preview
 					<FilePreview file_data={this.props.selected_file_data}
 								file_name={this.props.selected_file}/>
 				</div>
 				<br/>
-				<Button  variant="outlined" color="inherit" className={classes.button} onClick={() => this.props.changePage(this.props.PageEnum.MATCHEDPRINTERS)}>
+				<Button  variant="outlined" 
+						color="inherit" 
+						className={classes.button} 
+						onClick={() => this.props.changePage(this.props.PageEnum.MATCHEDPRINTERS)}
+						disabled={this.props.selected_file_data === null ? true : false}>
 					Submit for Printing!
 				</Button>
 			</div>

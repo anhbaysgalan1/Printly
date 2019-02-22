@@ -58,6 +58,16 @@ class App extends Component {
 	}
 
 	changePage = (newPage, new_printer_data, new_printer_img) => {
+		// purge file data from previous job, if any
+		if (newPage === PageEnum.HOME) {
+			this.setState({
+				// TODO delete from firebase
+				selected_file: null,
+				selected_file_data: null
+			})
+		}
+
+		// upload to firebase for printing
 		if (newPage === PageEnum.MATCHEDPRINTERS && this.state.selected_file != null) {
 			this.uploadFile();
 		}

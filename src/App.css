@@ -9,10 +9,10 @@ html, body {
 }
 
 .title {
-  font-size: 20px;
+  font-size: 30px;
   color: white;
   background-image: linear-gradient(147deg, #000000 0%, #04619f 74%);
-  padding: 10px 0 10px 0;
+  padding: 15px 0 15px 0;
   border-bottom: 1px solid black;
 }
 
@@ -159,6 +159,7 @@ html, body {
   float: right;
   width: 20%;
   padding-bottom: 10px;
+  margin-left: 10px;
   margin-right: 10px;
 }
 
@@ -168,9 +169,11 @@ html, body {
 }
 
 #file_preview {
-  margin-top: 5%;
-  overflow-y: scroll;
-  height: 30em;
+  margin-left: 10px;
+  margin-right: 10px;
+  overflow-y: hidden;
+  height: 35em;
+  border: 1px solid gray;
 }
 
 @keyframes stepLabelPulse {

@@ -106,6 +106,7 @@ class Trackbar extends Component {
   
         if (newStep === this.state.numSteps) {
           clearInterval(this.state.intervalID);
+          this.props.updateJobStatus();
         }
       }, 3000);
   

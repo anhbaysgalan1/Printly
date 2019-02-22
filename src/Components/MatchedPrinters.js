@@ -35,7 +35,8 @@ class MatchedPrinters extends Component {
 	};
 
 	componentWillMount = () => {
-		firebase.database().ref('active_printers').on('value', (snapshot) => {
+		
+		firebase.database().ref('active_printers').once('value', (snapshot) => {
 				let printer_buff = [];
 				snapshot.forEach((child) => {
 						printer_buff.push(child.val());
@@ -48,7 +49,7 @@ class MatchedPrinters extends Component {
 						matching_printers: printer_buff,
 						price: init_cost
 				});
-
+				
 				this.filterPrinters();
 				this.props.updatePrintOptions(this.state.print_options);
 		});
@@ -128,9 +129,8 @@ class MatchedPrinters extends Component {
 
 	filterPrinters = () => {
 		var filterOptions = ['transfer', 'quality', 'color']; //THESE ARE THE OPTIONS I AM USING TO FILTER
-		let new_matches = Array.from(this.state.active_printers); //deep copy so i don't affect the actual active_printers state 
+		let new_matches = Array.from(this.state.active_printers); //deep copy so i don't affect the actual active_printers state
 		
-
 		//for each option that we're filtering by, do this:
 		filterOptions.map(option => {
 			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the transfer option
@@ -148,13 +148,10 @@ class MatchedPrinters extends Component {
 			}
 		});
 
-		//console.log("new_matches: ", new_matches);
-
 		//set matching_printers state to new matches, so that only the new matches are rendered
 		this.setState({
 			matching_printers: new_matches,
 		})
-		// console.log("matching_printers: " , this.state.matching_printers);
 	};
 
 
