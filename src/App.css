@@ -11,7 +11,7 @@ html, body {
 .title {
   font-size: 30px;
   color: white;
-  background-image: linear-gradient(125deg, #003d60 85.5%, #04619f 0);
+  background-image: linear-gradient(125deg, #003d60 85.5%, #ffffff 0);
   padding: 0.75% 0 0.75% 0;
   border-bottom: 1px solid black;
 }
