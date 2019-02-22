@@ -11,8 +11,8 @@ html, body {
 .title {
   font-size: 30px;
   color: white;
-  background-image: linear-gradient(125deg, #003d60 85%, #04619f 74%);
-  padding: 15px 0 15px 0;
+  background-image: linear-gradient(125deg, #003d60 85.5%, #04619f 0);
+  padding: 0.75% 0 0.75% 0;
   border-bottom: 1px solid black;
 }
 
@@ -25,7 +25,7 @@ html, body {
   height: 12%;
   position: absolute;
   top: -22px;
-  right: 9px;
+  right: 0px;
 }
 
 /*
