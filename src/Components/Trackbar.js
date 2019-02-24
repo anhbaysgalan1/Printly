@@ -12,12 +12,22 @@ const styles = ({
     height: '30px',
     width: '150px',
     paddingTop: '7px',
+    marginBottom: '1px',
+    borderRadius: '7px',
+  },
+  stepLabelActive: {
+    height: '30px',
+    width: '150px',
+    paddingTop: '7px',
+    marginBottom: '1px',
+    border: '1px solid #04619f',
     borderRadius: '7px',
   },
   stepLabelPulse: {
     height: '30px',
     width: '150px',
     paddingTop: '7px',
+    marginBottom: '1px',
     borderRadius: '7px',
     animation: 'stepLabelPulse 1s infinite',
   },
@@ -129,8 +139,15 @@ class Trackbar extends Component {
                 label = stepsDone[index];
               }
 
-              let labelStyle =
-                index === this.state.activeStep ? classes.stepLabelPulse : classes.stepLabel;
+              let labelStyle = null;
+              if (index === this.state.activeStep) {
+                // active step only flashes on JobInProgress
+                labelStyle = 
+                  index < 2 ? labelStyle = classes.stepLabelActive : classes.stepLabelPulse;
+              }
+              else {
+                labelStyle = classes.stepLabel;
+              }
 
               return (
                 <Step key={label}>

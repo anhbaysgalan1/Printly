@@ -39,10 +39,17 @@ html, body {
   Popup Styling
 */
 
+.cartTitle {
+  font-size: 15px;
+  text-align: center;
+  padding-bottom: 0.5rem;
+}
+
 #cart {
   display: inline-block;
   position: absolute;
   width: 10%;
+  margin-top: 0.5em;
   right: 10px;
 }
 
@@ -192,9 +199,9 @@ html, body {
 
 @keyframes stepLabelPulse {
   0% {
-    box-shadow: 0 0 0 0 #04619f;
+    box-shadow: 0 0 0 0px #04619f;
   }
   90% {
-      box-shadow: 0 0 0 3px #04619f;
+    box-shadow: 0 0 0 3px #04619f;
   }
 }
