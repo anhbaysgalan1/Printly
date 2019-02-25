@@ -3,8 +3,8 @@ import firebase from "firebase";
 import Settings from './Settings.js';
 import Cart from './Cart.js'
 import Trackbar from './Trackbar';
+import Button from '@material-ui/core/Button';
 import '../App.css';
-
 
 class MatchedPrinters extends Component {
 	constructor(){
@@ -30,12 +30,13 @@ class MatchedPrinters extends Component {
 					color: '0.00',
 				},
 				handling_fee: '4.00',
-				price: 0.0,
+				selected_printer_image: null,
+				selected_printer_data: null,
+				subtotal: 0.0
 			};
 	};
 
 	componentWillMount = () => {
-		
 		firebase.database().ref('active_printers').once('value', (snapshot) => {
 				let printer_buff = [];
 				snapshot.forEach((child) => {
@@ -47,7 +48,7 @@ class MatchedPrinters extends Component {
 				this.setState({
 						active_printers: printer_buff,
 						matching_printers: printer_buff,
-						price: init_cost
+						subtotal: init_cost
 				});
 				
 				this.filterPrinters();
@@ -55,7 +56,6 @@ class MatchedPrinters extends Component {
 		});
 		this.calcIndivPrices();
 	};
-
 
 	handleSettingsChange = (name, event) => {
 		let newState = this.state.print_options;
@@ -68,10 +68,22 @@ class MatchedPrinters extends Component {
 		this.filterPrinters();
 
 		let new_cost = this.calcCost();
-		this.setState({price: new_cost});
+		this.setState({subtotal: new_cost});
 		this.calcIndivPrices();
 
 		this.props.updatePrintOptions(this.state.print_options);
+	}
+
+	handlePrinterChange = (printer_image, printer_data) => {
+		this.setState({
+			selected_printer_image: printer_image,
+			selected_printer_data: printer_data
+		});
+	}
+
+	handlePageChange = (new_page, new_printer_data, new_printer_img, new_cost, new_transfer) => {
+		this.props.updateCost(new_cost, new_transfer);
+		this.props.changePage(new_page, new_printer_data, new_printer_img);
 	}
 
 	calcIndivPrices = () => {
@@ -154,53 +166,68 @@ class MatchedPrinters extends Component {
 		})
 	};
 
+	render() {
+		let printer_data = Object.entries(this.state.matching_printers).map(([id, data]) => {
+				let selected = false;
+				if (this.state.selected_printer_data != null && 
+					this.state.selected_printer_data["id"] === data["id"]) {
+						selected = true;
+				}
 
-		render() {
-			let printer_data = Object.entries(this.state.matching_printers).map(([id, data]) => {
-					return (<PrinterInfo 
-								data={data} 
-								key={id}
-								PageEnum={this.props.PageEnum}
-								changePage={this.props.changePage}
-								updateCost={this.props.updateCost}
-								price={this.calcCost()}
-								pricesPerPage={this.props.pricesPerPage}
-								transfer={this.state.print_options.transfer}
-							/>
-					);
-			});
-
-			return (
-			<div>
-					<div className="title">
-						<div className="pagetitle">The Following Printers Have Matched Your Criteria</div>
-						<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
-					</div>
-					{this.state.print_options.transfer === 'delivery' ? 
-					<Trackbar activeStep={1} deliver/> :
-					<Trackbar activeStep={1}/>}
-					<div id="matches_div">
-						<div className="settings">
-								<Settings
-									printOptions={this.props.printOptions}
-									handleChange={this.handleSettingsChange}
-									print_options_state={this.state.print_options}	
-								/>
-						</div>
-						<div className="printer_container">
-							{printer_data}
-						</div>
-					</div>
-					<div id="cart">
-						<Cart 
-							handling_fee={this.state.handling_fee}
-							data={this.state.selected_pricing}
-							price={this.state.price}
-							copies={this.state.print_options.copies}
+				return (<PrinterInfo
+							data={data} 
+							key={id}
+							price={this.state.subtotal}
+							pricesPerPage={this.props.pricesPerPage}
+							transfer={this.state.print_options.transfer}
+							choose={this.handlePrinterChange}
+							isSelected={selected}
 						/>
+				);
+		});
+
+		return (
+		<div>
+				<div className="title">
+					<div className="pagetitle">The Following Printers Have Matched Your Criteria</div>
+					<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
+				</div>
+				{this.state.print_options.transfer === 'delivery' ? 
+				<Trackbar activeStep={1} deliver/> :
+				<Trackbar activeStep={1}/>}
+				<div id="matches_div">
+					<div className="settings">
+							<Settings
+								printOptions={this.props.printOptions}
+								handleChange={this.handleSettingsChange}
+								print_options_state={this.state.print_options}	
+							/>
 					</div>
-			</div>
-			);
+					<div className="printer_container">
+						{printer_data}
+					</div>
+				</div>
+				<div id="cart">
+					<Cart 
+						handling_fee={this.state.handling_fee}
+						data={this.state.selected_pricing}
+						price={this.state.subtotal}
+						copies={this.state.print_options.copies}
+					/>
+				</div>
+				<Button variant="outlined"
+						color="inherit"
+						onClick={() => this.handlePageChange(
+							this.props.PageEnum.JOBINPROGRESS,
+							this.state.selected_printer_data,
+							this.state.selected_printer_image,
+							this.state.subtotal,
+							this.state.print_options.transfer)}
+						disabled={this.state.selected_printer_data === null ? true : false}>
+					Send Job to Printer
+				</Button>
+		</div>
+		);
 	}
 }
 
@@ -214,20 +241,18 @@ class PrinterInfo extends Component {
 				};
 		}
 
-		handlePageChange = (new_page, new_printer_data, new_printer_img, new_cost, new_transfer) => {
-			this.props.updateCost(new_cost, new_transfer);
-			this.props.changePage(new_page, new_printer_data, new_printer_img);
-		}
-
 		render(){
 				let stars = [];
-				
 				for (let i = 0; i < this.props.data["rating"]; i++){
 						stars.push(<span className="fa fa-star checked" key={i}></span>)
 				}
+				
 				let image = <img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
+				
+				let classname = this.props.isSelected === true ? "selected_printer_info" : "printer_info";
+
 				return (
-				<div className="printer_info" onClick={() => this.handlePageChange(this.props.PageEnum.JOBINPROGRESS, this.props.data, image, this.props.price, this.props.transfer)}>
+				<div className={classname} onClick={() => this.props.choose(image, this.props.data)}>
 						<div className="printer_data printer_title">
 						{this.props.data["name"]} 
 						</div>

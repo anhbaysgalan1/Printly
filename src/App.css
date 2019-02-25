@@ -127,6 +127,16 @@ html, body {
   cursor: pointer;
 }
 
+.selected_printer_info{
+  display: inline-block;
+  background-color: turquoise;
+  width: 260px;
+  height: 260px;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
 .printer_image{
   display: inline-block;
   width: 50%;
