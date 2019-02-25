@@ -7,6 +7,7 @@ import '../App.css';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import Rating from 'material-ui-rating'
 
 const styles = theme => ({
 	button:{
@@ -17,11 +18,17 @@ const styles = theme => ({
 
 class JobInProgress extends Component {
 	state = {
-		jobComplete: false
+		jobComplete: false,
+		showDonePopup: false,
 	}
 
 	updateJobStatus = () => {
 		this.setState({ jobComplete: true });
+	}
+
+	closePopup = () => {
+		this.setState({ showDonePopup: false });
+		this.props.changePage(this.props.PageEnum.HOME)
 	}
 
 	render() {
@@ -105,11 +112,21 @@ class JobInProgress extends Component {
 	        	<Button  variant="outlined" 
 						color="inherit" 
 						className={classes.button} 
-						onClick={() => this.props.changePage(this.props.PageEnum.HOME)}
+						onClick={() => this.setState({ showDonePopup: true })}
 						disabled={this.state.jobComplete ? false : true}>
 					Finish
 				</Button>
 				</div>
+
+				{this.state.showDonePopup ? 
+					<JobDonePopup
+						closePopup={this.closePopup}
+						print_options={this.props.print_options}
+						printer_data={this.props.printer_data}
+						price={this.props.price}
+						pricesPerPage={this.props.pricesPerPage}/>
+					: null
+				}
 			</div>
 		);
 	}
@@ -120,3 +137,47 @@ JobInProgress.propTypes = {
   };
 
 export default withStyles(styles)(JobInProgress);
+
+
+class JobDonePopup extends Component {
+	state = {
+		rating: 0,
+	}
+
+	render() {
+		return (
+			<div className="popup">
+				<div className="popup_inner">
+					<div className="popup_title">Summary & Review</div>
+					<br/>
+					Total Cost: ${
+						(this.props.print_options.transfer === 'delivery') ?
+							(this.props.price + this.props.pricesPerPage.transfer[1] * parseFloat(this.props.printer_data["distance"])).toFixed(2)
+						:
+							(this.props.price).toFixed(2)
+					}
+					<br/>
+					<br/>
+					<br/>
+					Rate {this.props.printer_data["name"]}
+					{<Rating
+								value={this.state.rating}
+								max={5}
+								onChange={(value) => this.setState({ rating: value })}
+							/>}
+					<br/>
+					Leave a comment!
+					<br/>
+					<textarea rows="4" cols="50"/>
+					<br/>
+					<br/>
+					<Button variant="outlined"
+							color="blue"
+							onClick={() => this.props.closePopup()}>
+						Confirm & Submit
+					</Button>
+				</div>
+			</div>
+		)
+	}
+}

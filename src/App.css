@@ -76,6 +76,16 @@ html, body {
   background-color: rgba(0,0,0, 0.5);
 }
 
+.popup_title {
+  display: flex;
+  align-items: center;
+  height: 8vh;
+  padding-left: 25%;
+  font-size: 25px;
+  color: white;
+  background: #003d60;
+}
+
 .popup_inner {
   width: fit-content;
   height: auto;
@@ -83,25 +93,6 @@ html, body {
   padding: 2em;
   padding-bottom: 4em;
   background: white;
-}
-
-.popup_button.left {
-  float:left;
-  margin-left: 10%;
-  height: 25px;
-}
-
-.popup_button.right {
-  float: right;
-  margin-right: 10%;
-  height: 25px;
-}
-
-.popup_button {
-  width: 32%;
-  background-color: whitesmoke;
-  border-radius: 20px;
-  border: 1px solid #FF9F1C;
 }
 
 /*
