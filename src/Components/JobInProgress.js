@@ -83,7 +83,7 @@ class JobInProgress extends Component {
 								 file_name={this.props.selected_file}/>
 				</div>
 	        	<br/>
-	        	<div>
+	        	<div className="posn">
 	        	<Button  variant="outlined" 
 						color="inherit" 
 						className={classes.button} 

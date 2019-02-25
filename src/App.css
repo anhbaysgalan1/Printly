@@ -8,6 +8,11 @@ html, body {
   background-color: #D3D3D3;
 }
 
+.posn {
+  
+  margin-right: 40px;
+}
+
 .buttonspace {
   margin-right: 5px;
 }
