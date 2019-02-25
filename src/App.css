@@ -8,6 +8,11 @@ html, body {
   background-color: #D3D3D3;
 }
 
+.buttonspace {
+  margin-right: 5px;
+}
+
+
 .title {
   display: flex;
   align-items: center;

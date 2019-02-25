@@ -230,7 +230,18 @@ class MatchedPrinters extends Component {
 						deliv_fee={deliv_cost}
 					/>
 				</div>
-				<Button variant="outlined"
+
+				<div>
+				<Button className="buttonspace" variant="outlined"
+						color="inherit"
+						onClick={() => this.handlePageChange(
+							this.props.PageEnum.HOME)}>
+					Back to Home
+				</Button>
+				&nbsp;
+				&nbsp;
+				&nbsp;
+				<Button className="buttonspace" variant="outlined"
 						color="inherit"
 						onClick={() => this.handlePageChange(
 							this.props.PageEnum.JOBINPROGRESS,
@@ -241,6 +252,7 @@ class MatchedPrinters extends Component {
 						disabled={this.state.selected_printer_data === null ? true : false}>
 					Send Job to Printer
 				</Button>
+				</div>
 		</div>
 		);
 	}
