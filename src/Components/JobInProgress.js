@@ -86,6 +86,15 @@ class JobInProgress extends Component {
 	        	<Button  variant="outlined" 
 						color="inherit" 
 						className={classes.button} 
+						onClick={() => this.props.changePage(this.props.PageEnum.MATCHEDPRINTERS)}>
+					Back to Matched Printers
+				</Button>
+				&nbsp;
+				&nbsp;
+				&nbsp;
+	        	<Button  variant="outlined" 
+						color="inherit" 
+						className={classes.button} 
 						onClick={() => this.props.changePage(this.props.PageEnum.HOME)}
 						disabled={this.state.jobComplete ? false : true}>
 					Finish
