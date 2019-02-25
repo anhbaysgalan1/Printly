@@ -58,13 +58,20 @@ class MatchedPrinters extends Component {
 	};
 
 	handleSettingsChange = (name, event) => {
-		let newState = this.state.print_options;
-		newState[name] = event.target.value;
-		this.setState({ print_options: newState });
-		
-		if(!event.target.value || event.target.value < 1) {
+		if (!event.target.value || event.target.value < 1) {
 			this.setState({ [name]: null });
 		}
+		else {
+			let newState = this.state.print_options;
+			newState[name] = event.target.value;
+
+			this.setState({
+				print_options: newState,
+				selected_printer_image: null,
+				selected_printer_data: null
+			})
+		}
+
 		this.filterPrinters();
 
 		let new_cost = this.calcCost();
@@ -186,6 +193,13 @@ class MatchedPrinters extends Component {
 				);
 		});
 
+		// for cart to display
+		let deliv_cost = 0.0;
+		if (this.state.print_options.transfer === "delivery" && this.state.selected_printer_data != null) {
+			deliv_cost =
+				(this.props.pricesPerPage.transfer[1] * parseFloat(this.state.selected_printer_data["distance"])).toFixed(2);
+		}
+
 		return (
 		<div>
 				<div className="title">
@@ -208,11 +222,12 @@ class MatchedPrinters extends Component {
 					</div>
 				</div>
 				<div id="cart">
-					<Cart 
-						handling_fee={this.state.handling_fee}
+					<Cart
 						data={this.state.selected_pricing}
 						price={this.state.subtotal}
 						copies={this.state.print_options.copies}
+						handling_fee={this.state.handling_fee}
+						deliv_fee={deliv_cost}
 					/>
 				</div>
 				<Button variant="outlined"
