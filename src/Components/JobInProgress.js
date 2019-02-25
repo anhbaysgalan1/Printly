@@ -83,11 +83,21 @@ class JobInProgress extends Component {
 								 file_name={this.props.selected_file}/>
 				</div>
 	        	<br/>
+	        	<div>
 	        	<Button  variant="outlined" 
 						color="inherit" 
 						className={classes.button} 
 						onClick={() => this.props.changePage(this.props.PageEnum.MATCHEDPRINTERS)}>
 					Back to Matched Printers
+				</Button>
+				&nbsp;
+				&nbsp;
+				&nbsp;
+				<Button  variant="outlined" 
+						color="inherit" 
+						className={classes.button} 
+						onClick={() => this.props.changePage(this.props.PageEnum.HOME)}>
+					Cancel Job
 				</Button>
 				&nbsp;
 				&nbsp;
@@ -99,6 +109,7 @@ class JobInProgress extends Component {
 						disabled={this.state.jobComplete ? false : true}>
 					Finish
 				</Button>
+				</div>
 			</div>
 		);
 	}
