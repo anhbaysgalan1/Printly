@@ -127,8 +127,10 @@ class App extends Component {
 					selected_file: file,
 					selected_file_data: reader.result
 				})
+
 			}
-			reader.readAsDataURL(file)
+			// reader.readAsDataURL(file)
+			reader.readAsBinaryString(file)
 			const fbImg = storageRef.child("preview");
 			fbImg.put(file);
 		}
