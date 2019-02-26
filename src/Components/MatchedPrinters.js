@@ -5,7 +5,26 @@ import Cart from './Cart.js'
 import Trackbar from './Trackbar';
 import Button from '@material-ui/core/Button';
 import SortDropDown from './SortDropDown.js';
+import PropTypes from 'prop-types';
+import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import '../App.css';
+
+const theme = createMuiTheme({
+	overrides: {
+		MuiButton: {
+			root: {
+				marginTop: '10px',
+			},
+		},
+	},
+})
+
+const styles = theme => ({
+	button:{
+		color: '#04619f',
+		background: '#FFFFFF',
+	},
+});
 
 const SortEnum = {
 	RATING : "Rating",
@@ -291,6 +310,8 @@ class MatchedPrinters extends Component {
 	};
 
 	render() {
+		const { classes } = this.props;
+
 		let printer_data = Object.entries(this.state.matching_printers).map(([id, data]) => {
 				let selected = false;
 				if (this.state.selected_printer_data != null && 
@@ -319,10 +340,10 @@ class MatchedPrinters extends Component {
 
 		return (
 		<div>
-				<div className="title">
-					<div className="pagetitle">The Following Printers Have Matched Your Criteria</div>
-					<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
-				</div>
+			<div className="title">
+				<div className="pagetitle">The Following Printers Have Matched Your Criteria</div>
+				<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
+			</div>
 				{this.state.print_options.transfer === 'delivery' ? 
 				<Trackbar activeStep={1} deliver/> :
 				<Trackbar activeStep={1}/>}
@@ -339,6 +360,8 @@ class MatchedPrinters extends Component {
 						{printer_data}
 					</div>
 				</div>
+			</div>
+			<div className="MatchedPrintersSidebar">
 				<div id="cart">
 					<Cart
 						data={this.state.selected_pricing}
@@ -348,29 +371,26 @@ class MatchedPrinters extends Component {
 						deliv_fee={deliv_cost}
 					/>
 				</div>
-
-				<div>
-				<Button className="buttonspace" variant="outlined"
-						color="inherit"
-						onClick={() => this.handlePageChange(
-							this.props.PageEnum.HOME)}>
-					Back to Home
-				</Button>
-				&nbsp;
-				&nbsp;
-				&nbsp;
-				<Button className="buttonspace" variant="outlined"
-						color="inherit"
-						onClick={() => this.handlePageChange(
-							this.props.PageEnum.JOBINPROGRESS,
-							this.state.selected_printer_data,
-							this.state.selected_printer_image,
-							this.state.subtotal,
-							this.state.print_options.transfer)}
-						disabled={this.state.selected_printer_data === null ? true : false}>
-					Send Job to Printer
-				</Button>
-				</div>
+				<MuiThemeProvider theme={theme}>
+					<Button className={classes.button} variant="outlined"
+							color="inherit"
+							onClick={() => this.handlePageChange(
+								this.props.PageEnum.HOME)}>
+						Back to Home Page
+					</Button>
+					<Button className={classes.button} variant="outlined"
+							color="inherit"
+							onClick={() => this.handlePageChange(
+								this.props.PageEnum.JOBINPROGRESS,
+								this.state.selected_printer_data,
+								this.state.selected_printer_image,
+								this.state.subtotal,
+								this.state.print_options.transfer)}
+							disabled={this.state.selected_printer_data === null ? true : false}>
+						Send Job to Printer
+					</Button>
+				</MuiThemeProvider>
+			</div>
 		</div>
 		);
 	}
@@ -424,4 +444,8 @@ class PrinterInfo extends Component {
 		}
 }
 
-export default MatchedPrinters;
+MatchedPrinters.propTypes = {
+	classes: PropTypes.object.isRequired
+  };
+
+export default withStyles(styles)(MatchedPrinters);

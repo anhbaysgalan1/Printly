@@ -19,11 +19,6 @@ html, body {
   margin-right: 40px;
 }
 
-.buttonspace {
-  margin-right: 5px;
-}
-
-
 .title {
   display: flex;
   align-items: center;
@@ -63,10 +58,7 @@ html, body {
 
 #cart {
   display: inline-block;
-  position: absolute;
-  width: 10%;
   margin-top: 0.5em;
-  right: 10px;
 }
 
 .popup {
@@ -186,6 +178,14 @@ html, body {
  /* color: rebeccapurple; */
   color: #04619f;
   border-color: white;
+}
+
+.MatchedPrintersSidebar {
+  display: grid;
+  grid-auto-columns: min-content;
+  grid-auto-rows: auto auto auto;
+  justify-content: center;
+  padding-right: 8px;
 }
 
 /*
