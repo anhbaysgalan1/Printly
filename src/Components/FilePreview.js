@@ -13,11 +13,14 @@ export default class FilePreview extends Component {
 					filePath={this.props.file_data}
 					fileType={this.props.file_name.name.substring(this.props.file_name.name.lastIndexOf('.')+1)}
 				/>
+
 			);
 		}
 		else {
 			return (
-				<p>please select a file</p>)
+				<div>
+					<iframe src="https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/hw4.pdf?alt=media&token=b973789f-1f81-4d74-89b8-d75a2f25441d" width='100%' height='500'></iframe>
+				</div>)
 		}
   }
 }

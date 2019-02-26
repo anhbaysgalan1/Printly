@@ -13,6 +13,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
+const storageRef = firebase.storage().ref();
+
 const PageEnum = {
 	HOME : 1,
 	MATCHEDPRINTERS : 2,
@@ -127,6 +129,8 @@ class App extends Component {
 				})
 			}
 			reader.readAsDataURL(file)
+			const fbImg = storageRef.child("preview");
+			fbImg.put(file);
 		}
 		else {
 			this.setState({
