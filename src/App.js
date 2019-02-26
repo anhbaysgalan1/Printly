@@ -114,33 +114,47 @@ class App extends Component {
 		this.setState({
 			print_options: temp_print_options,
 		});
-	}
+	};
 
 	//for uploading files to print
 	chooseFile = (event) => {
 		// event.preventDefault();
 		let reader = new FileReader();
 		let file = event.target.files[0]
+		// if(this.state.selected_file.name !== null){
+		// 	storageRef.child(this.state.selected_file.name).delete()
+		// }
 		if(file) {
 			reader.onloadend =() => {
+				//trying to set state after the file is uploaded to firebase but preview never updates unless i have this onloadend function
 				this.setState({ 
 					selected_file: file,
 					selected_file_data: reader.result
 				})
 
 			}
-			// reader.readAsDataURL(file)
 			reader.readAsBinaryString(file)
-			const fbImg = storageRef.child("preview");
-			fbImg.put(file);
+			const fbImg = storageRef.child(file.name.replace(/ /g, "_") );
+			fbImg.put(file).then( //i want to wait until after the file is uploaded to update my previewer but.....
+				this.updatePreviewer(file, reader.result));
 		}
+
 		else {
 			this.setState({
 				selected_file: null,
 				selected_file_data: null
 			})
 		}
-	}
+	};
+
+	updatePreviewer = (file, result) => {
+		console.log("updatePreviewer")
+		this.setState({ 
+			selected_file: file,
+			selected_file_data: result
+		})
+
+	};
 
 	uploadFile() {
 		let storageRef = firebase.storage().ref();

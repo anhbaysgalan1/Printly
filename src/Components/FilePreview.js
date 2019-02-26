@@ -7,8 +7,13 @@ export default class FilePreview extends Component {
 
 	render() {
 		if(this.props.file_data && this.props.file_name) {
+			let url = "https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/" + this.props.file_name.name.replace(/ /g, "_") + "?alt=media" 
+			console.log("filename: " , this.props.file_name.name)
+			console.log("filename_formatted: " , this.props.file_name.name.replace(/ /g, "%2520"))
+			console.log("encoded: ", encodeURIComponent(this.props.file_name.name))
+			console.log("URL: " , url);
 			return (
-				<iframe src="https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/preview?alt=media&token=b973789f-1f81-4d74-89b8-d75a2f25441d" width='100%' height='500'></iframe>
+				<embed src={url} width='100%' height='500'></embed>
 
 			);
 		}
