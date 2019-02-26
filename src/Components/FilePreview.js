@@ -13,7 +13,7 @@ export default class FilePreview extends Component {
 			console.log("encoded: ", encodeURIComponent(this.props.file_name.name))
 			console.log("URL: " , url);
 			return (
-				<embed src={url} width='100%' height='500'></embed>
+				<object><embed src={url} width='100%' height='500'></embed></object>
 
 			);
 		}
