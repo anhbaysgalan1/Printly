@@ -28,7 +28,7 @@ class JobInProgress extends Component {
 		this.setState({ jobComplete: true });
 	}
 
-	closePopup = (rating) => {
+	closePopup = (rating, comment) => {
 		let printer_path = "active_printers/" + String(this.props.printer_data["id"]);
 		let printer_ref = firebase.database().ref(printer_path);
 
@@ -49,7 +49,12 @@ class JobInProgress extends Component {
 			let rating_count = snapshot.child("rating_count").val();
 			let rating_ref = printer_ref.child('rating');
 			rating_ref.set(rating_total/rating_count);
+
+			let comment_ref = firebase.database().ref(printer_path + "/comments");
+			comment_ref.push(comment);
 		});
+
+
 
 		this.setState({ showDonePopup: false });
 		this.props.changePage(this.props.PageEnum.HOME)
@@ -227,12 +232,12 @@ class JobDonePopup extends Component {
 					<br/>
 					Leave a comment!
 					<br/>
-					<textarea rows="4" cols="50"/>
+					<textarea id="comment" rows="4" cols="50"/>
 					<br/>
 					<br/>
 					<Button variant="outlined"
 							color="blue"
-							onClick={() => this.props.closePopup(this.state.rating)}>
+							onClick={() => this.props.closePopup(this.state.rating, document.getElementById("comment").value)}>
 						Confirm & Submit
 					</Button>
 				</div>
