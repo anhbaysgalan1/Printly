@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Rating from 'material-ui-rating'
+import firebase from "firebase";
 
 const styles = theme => ({
 	button:{
@@ -27,7 +28,29 @@ class JobInProgress extends Component {
 		this.setState({ jobComplete: true });
 	}
 
-	closePopup = () => {
+	closePopup = (rating) => {
+		let printer_path = "active_printers/" + String(this.props.printer_data["id"]);
+		let printer_ref = firebase.database().ref(printer_path);
+
+		let rating_total_ref = printer_ref.child('rating_total');
+		rating_total_ref.once('value', function(snapshot) {
+			let prev_rating_total = snapshot.val();
+			rating_total_ref.set(prev_rating_total + rating);
+		});
+
+		let rating_count_ref = printer_ref.child('rating_count');
+		rating_count_ref.once('value', function(snapshot) {
+			let prev_rating_count = snapshot.val();
+			rating_count_ref.set(prev_rating_count + 1);
+		});
+
+		printer_ref.once('value', function(snapshot) {
+			let rating_total = snapshot.child("rating_total").val();
+			let rating_count = snapshot.child("rating_count").val();
+			let rating_ref = printer_ref.child('rating');
+			rating_ref.set(rating_total/rating_count);
+		});
+
 		this.setState({ showDonePopup: false });
 		this.props.changePage(this.props.PageEnum.HOME)
 	}
@@ -40,7 +63,7 @@ class JobInProgress extends Component {
 		const { classes } = this.props;
 
 		let stars = [];
-		for (let i = 0; i < this.props.printer_data["rating"]; i++)
+		for (let i = 0; i < Math.round(this.props.printer_data["rating"]); i++)
 		{
             stars.push(<span className="fa fa-star checked" key={i}></span>)
 		}
@@ -209,7 +232,7 @@ class JobDonePopup extends Component {
 					<br/>
 					<Button variant="outlined"
 							color="blue"
-							onClick={() => this.props.closePopup()}>
+							onClick={() => this.props.closePopup(this.state.rating)}>
 						Confirm & Submit
 					</Button>
 				</div>

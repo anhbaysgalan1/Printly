@@ -83,7 +83,7 @@ class MatchedPrinters extends Component {
 						matching_printers: printer_buff,
 						subtotal: init_cost
 				});
-				
+
 				this.filterPrinters();
 				
 				this.props.updatePrintOptions(this.state.print_options);
@@ -424,7 +424,7 @@ class PrinterInfo extends Component {
 
 		render(){
 				let stars = [];
-				for (let i = 0; i < this.props.data["rating"]; i++){
+				for (let i = 0; i < Math.round(this.props.data["rating"]); i++){
 						stars.push(<span className="fa fa-star checked" key={i}></span>)
 				}
 				
