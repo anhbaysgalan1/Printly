@@ -77,7 +77,7 @@ class Cart extends React.Component {
 						</ListItem>
 						<Divider/>
 						<ListItem>
-							<ListItemText primary="grand total" 
+							<ListItemText primary="grand total" className = "flashit"
 											secondary={this.prettyText(parseFloat(this.props.price) + parseFloat(this.props.deliv_fee))}/>
 						</ListItem>
 					</List>
