@@ -101,13 +101,28 @@ class MatchedPrinters extends Component {
 
 			this.setState({
 				print_options: newState,
-				selected_printer_image: null,
-				selected_printer_data: null
 			})
 		}
 
 		this.filterPrinters();
-		//this.sortPrinters(this.state.sort_by);
+		if (this.state.selected_printer_image != null) {
+			// deselect chosen printer if unavailable under new settings
+			let shouldDeselect = true;
+
+			for (var i = 0; i < this.state.matching_printers.length; i++) {
+				if (this.state.selected_printer_data["id"] === (this.state.matching_printers[i])["id"]) {
+					shouldDeselect = false;
+					break;
+				}
+			}
+
+			if (shouldDeselect) {
+				this.setState({
+					selected_printer_image: null,
+					selected_printer_data: null
+				});
+			}
+		}
 
 		let new_cost = this.calcCost();
 		this.setState({subtotal: new_cost});
@@ -447,6 +462,6 @@ class PrinterInfo extends Component {
 
 MatchedPrinters.propTypes = {
 	classes: PropTypes.object.isRequired
-  };
+};
 
 export default withStyles(styles)(MatchedPrinters);
