@@ -34,7 +34,6 @@ class JobInProgress extends Component {
 
 	closeCancelPopup = () => {
 		this.setState({ showCancelPopup: false });
-		this.props.changePage(this.props.PageEnum.JOBINPROGRESS)
 	}
 
 	render() {
@@ -155,7 +154,17 @@ class CancelPopup extends Component {
 					<Button variant="outlined"
 							color="blue"
 							onClick={() => this.props.closePopup()}>
-						Confirm
+						Yes
+					</Button>
+
+					&nbsp;
+					&nbsp;
+					&nbsp;
+
+					<Button variant="outlined"
+							color="blue"
+							onClick={() => this.props.closeCancelPopup()}>
+						No
 					</Button>
 					
 					</div>
