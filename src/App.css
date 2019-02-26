@@ -8,6 +8,12 @@ html, body {
   background-color: #D3D3D3;
 }
 
+
+
+.cancelled {
+  text-align: center;
+}
+
 .posn {
   
   margin-right: 40px;
@@ -84,6 +90,7 @@ html, body {
   font-size: 25px;
   color: white;
   background: #003d60;
+  text-align: center;
 }
 
 .popup_inner {

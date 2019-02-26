@@ -20,6 +20,7 @@ class JobInProgress extends Component {
 	state = {
 		jobComplete: false,
 		showDonePopup: false,
+		showCancelPopup: false,
 	}
 
 	updateJobStatus = () => {
@@ -29,6 +30,11 @@ class JobInProgress extends Component {
 	closePopup = () => {
 		this.setState({ showDonePopup: false });
 		this.props.changePage(this.props.PageEnum.HOME)
+	}
+
+	closeCancelPopup = () => {
+		this.setState({ showCancelPopup: false });
+		this.props.changePage(this.props.PageEnum.JOBINPROGRESS)
 	}
 
 	render() {
@@ -94,7 +100,7 @@ class JobInProgress extends Component {
 				<Button  variant="outlined" 
 						color="inherit" 
 						className={classes.button} 
-						onClick={() => this.props.changePage(this.props.PageEnum.HOME)}>
+						onClick={() => this.setState({ showCancelPopup: true})}>
 					Cancel Job
 				</Button>
 				&nbsp;
@@ -118,6 +124,15 @@ class JobInProgress extends Component {
 						pricesPerPage={this.props.pricesPerPage}/>
 					: null
 				}
+
+				{this.state.showCancelPopup ? 
+					<CancelPopup
+					closePopup={this.closePopup}
+					closeCancelPopup={this.closeCancelPopup}/>
+					: null
+				}
+
+				
 			</div>
 		);
 	}
@@ -128,6 +143,27 @@ JobInProgress.propTypes = {
   };
 
 export default withStyles(styles)(JobInProgress);
+
+class CancelPopup extends Component {
+  render() {
+  	return (
+  	<div className="popup">
+				<div className="popup_inner">
+					<div className="popup_title">Cancel Print Job</div>
+					<br/>
+					<p> You will still be charged for this print job. Are you sure you want to cancel?</p>
+					<Button variant="outlined"
+							color="blue"
+							onClick={() => this.props.closePopup()}>
+						Confirm
+					</Button>
+					
+					</div>
+					</div>
+  	)
+  }
+
+}
 
 
 class JobDonePopup extends Component {
