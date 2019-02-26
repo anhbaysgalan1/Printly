@@ -4,7 +4,20 @@ import Settings from './Settings.js';
 import Cart from './Cart.js'
 import Trackbar from './Trackbar';
 import Button from '@material-ui/core/Button';
+import SortDropDown from './SortDropDown.js';
 import '../App.css';
+
+const SortEnum = {
+	RATING : "Rating",
+	DISTANCE : "Distance",
+	PRICE : "Price",
+}
+
+const SortOptions = [
+	"Rating",
+	"Distance",
+	"Price"
+]
 
 class MatchedPrinters extends Component {
 	constructor(){
@@ -32,7 +45,8 @@ class MatchedPrinters extends Component {
 				handling_fee: '4.00',
 				selected_printer_image: null,
 				selected_printer_data: null,
-				subtotal: 0.0
+				subtotal: 0.0,
+				sort_by: SortEnum.RATING
 			};
 	};
 
@@ -52,6 +66,7 @@ class MatchedPrinters extends Component {
 				});
 				
 				this.filterPrinters();
+				
 				this.props.updatePrintOptions(this.state.print_options);
 		});
 		this.calcIndivPrices();
@@ -73,6 +88,7 @@ class MatchedPrinters extends Component {
 		}
 
 		this.filterPrinters();
+		//this.sortPrinters(this.state.sort_by);
 
 		let new_cost = this.calcCost();
 		this.setState({subtotal: new_cost});
@@ -146,6 +162,109 @@ class MatchedPrinters extends Component {
 		return total_cost;
 	};
 
+	handleSortChange = (new_val) => {
+		this.sortPrinters(this.state.matching_printers, new_val);
+	};
+
+	sortIncreasing = (printers, key) => {
+		let new_order = [];
+		//console.log("key in increasing", key);
+		let helper_array = [];
+
+		for (var index = 0; index < printers.length; index++){
+			//console.log("index", index);
+			//console.log("printers[index]", printers[index]);
+			//console.log("printers[index][key]", printers[index][key], key);
+			helper_array.push([printers[index][key], index]);
+		}
+		
+		helper_array.sort(function(first, second) {
+			return first[0] - second[0];
+		});
+		
+		//console.log.log(helper_array);
+		
+		for (var new_index = 0; new_index < helper_array.length; new_index++){
+			new_order.push(printers[helper_array[new_index][1]]);
+			////console.log.log(helper_array[new_index], new_index);
+		}
+		//console.log.log("after sorting", new_order);
+		//console.log.log("returning", new_order);
+		
+		return new_order;
+	};
+
+	sortDecreasing = (printers, key) => {
+		let new_order = [];
+		//console.log.log("key in decreasing", key);
+		let helper_array = [];
+
+		for (var index = 0; index < printers.length; index++){
+			//console.log("index", index);
+			//console.log("printers[index]", printers[index]);
+			//console.log("printers[index][key]", printers[index][key], key);
+			helper_array.push([printers[index][key], index]);
+		}
+		
+		helper_array.sort(function(first, second) {
+			return second[0] - first[0];
+		});
+		
+		//console.log.log(helper_array);
+		
+		for (var new_index = 0; new_index < helper_array.length; new_index++){
+			new_order.push(printers[helper_array[new_index][1]]);
+			////console.log.log(helper_array[new_index], new_index);
+		}
+		//console.log.log("after sorting", new_order);
+		//console.log.log("returning", new_order);
+		
+		return new_order;
+	};
+
+	sortPrinters = (printers, new_val) => {
+		//console.log.log("inside sort printers", new_val);
+		//console.log.log("printers before:", printers);
+		
+		let new_matched;
+		if (new_val == "Rating"){
+			new_matched = this.sortDecreasing(printers, "rating");
+			this.setState({
+				sort_by: new_val,
+				matching_printers : new_matched
+			});
+		} else if (new_val == "Distance"){
+			new_matched = this.sortIncreasing(printers, "distance");
+			this.setState({
+				sort_by: new_val,
+				matching_printers : new_matched
+			});
+		} else if (new_val == "Price"){
+			if (this.state.print_options["transfer"] == 'delivery'){
+				new_matched = this.sortIncreasing(printers, "distance");
+				this.setState({
+					sort_by: new_val,
+					matching_printers : new_matched
+				});
+			} else {
+				this.setState({
+					sort_by: new_val
+				});
+				//console.log("Will not sort on price when pickup selected");
+			}
+		} else {
+			//console.log("Unkown sort key given to sortPrinters, returning original");
+			new_matched = printers;
+			this.setState({
+				sort_by: new_val
+			});
+		}
+		//console.log("returning sorted: ", new_matched);
+		
+		
+		return new_matched;
+	};
+
 	filterPrinters = () => {
 		var filterOptions = ['transfer', 'quality', 'color']; //THESE ARE THE OPTIONS I AM USING TO FILTER
 		let new_matches = Array.from(this.state.active_printers); //deep copy so i don't affect the actual active_printers state
@@ -166,11 +285,9 @@ class MatchedPrinters extends Component {
 				}
 			}
 		});
-
-		//set matching_printers state to new matches, so that only the new matches are rendered
-		this.setState({
-			matching_printers: new_matches,
-		})
+		
+		/// ---- Sort Printers will set the state
+		this.sortPrinters(new_matches, this.state.sort_by);	
 	};
 
 	render() {
@@ -197,7 +314,7 @@ class MatchedPrinters extends Component {
 		let deliv_cost = 0.0;
 		if (this.state.print_options.transfer === "delivery" && this.state.selected_printer_data != null) {
 			deliv_cost =
-				(this.props.pricesPerPage.transfer[1] * parseFloat(this.state.selected_printer_data["distance"])).toFixed(2);
+				(this.props.pricesPerPage.transfer[1] * this.state.selected_printer_data["distance"]).toFixed(2);
 		}
 
 		return (
@@ -217,6 +334,7 @@ class MatchedPrinters extends Component {
 								print_options_state={this.state.print_options}	
 							/>
 					</div>
+					<SortDropDown options={SortOptions} onChange={this.handleSortChange} value={this.state.sort_by}></SortDropDown>
 					<div className="printer_container">
 						{printer_data}
 					</div>
@@ -290,7 +408,8 @@ class PrinterInfo extends Component {
 								<br/>
 								Rating: {stars}
 								<br/>
-								Distance: {this.props.data["distance"]}
+								Distance: {this.props.data["distance"]} mile{(this.props.data["distance"] === 1) ? 
+								"" : "s"}
 								<br/>
 								{(this.props.transfer === 'delivery') ?
 									<>
