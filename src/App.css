@@ -229,6 +229,7 @@ html, body {
   margin-right: 10px;
   overflow-y: hidden;
   height: 35em;
+  background-color: white;
   border: 1px solid gray;
 }
 

@@ -5,6 +5,7 @@ import '../App.css';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
 
 const styles = theme => ({
 	button:{
@@ -29,14 +30,21 @@ class Home extends Component {
 				</div>
 				<Trackbar activeStep={0} />
 				<div>
-					<input type="file" onChange={this.props.chooseFile}>
-					</input>
+					<Button
+					  variant="outlined"
+					  component="label"
+					  className={classes.button}
+					>
+					  Upload File
+					   <input type="file" 
+					  style={{display: 'none'}}
+					  onChange={this.props.chooseFile}>
+						</input>
+					</Button>
 				</div>
 				<div id="file_preview">
-					Preview
 					<FilePreview file_url={this.props.selected_file_url}/>
 				</div>
-				<br/>
 				<Button  variant="outlined" 
 						color="inherit" 
 						className={classes.button} 

@@ -7,7 +7,7 @@ export default class FilePreview extends Component {
 		console.log(this.props.file_url);
 		if(this.props.file_url) {
 			return (
-				<iframe src={this.props.file_url} width='100%' height='500'></iframe>
+				<iframe src={this.props.file_url} width='100%' height='490'></iframe>
 			);
 		}
 		else {
