@@ -135,8 +135,24 @@ class App extends Component {
 			}
 			reader.readAsBinaryString(file)
 			const fbImg = storageRef.child(file.name.replace(/ /g, "_") );
-			fbImg.put(file).then( //i want to wait until after the file is uploaded to update my previewer but.....
-				this.updatePreviewer(file, reader.result));
+			const upload = fbImg.put(file);
+			const promises = [];
+			promises.push(upload)
+
+			upload.on('state_changed', snapshot => {
+				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				console.log(progress);
+			}, error => { console.log("error!: " , error) }, () => {
+				upload.snapshot.ref.getDownloadURL().then(downloadURL => {
+					console.log("download url!: " , downloadURL);
+				});
+			});
+
+			Promise.all(promises).then(tasks => {
+				this.updatePreviewer(file, reader.result)
+				console.log("promises finished!")
+			})
+			
 		}
 
 		else {
