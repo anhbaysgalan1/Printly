@@ -13,8 +13,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-const storageRef = firebase.storage().ref();
-
 const PageEnum = {
 	HOME : 1,
 	MATCHEDPRINTERS : 2,
@@ -45,8 +43,7 @@ class App extends Component {
 			page : PageEnum.HOME,
 			printer_data: null,
 			printer_img: null,
-			selected_file: null,
-			selected_file_data: null,
+			selected_file_url: null,
 			price: 0.0,
 			print_options: {
 				transfer: null,
@@ -64,14 +61,8 @@ class App extends Component {
 		if (newPage === PageEnum.HOME) {
 			this.setState({
 				// TODO delete from firebase
-				selected_file: null,
-				selected_file_data: null
+				selected_file_url: null
 			})
-		}
-
-		// upload to firebase for printing
-		if (newPage === PageEnum.MATCHEDPRINTERS && this.state.selected_file != null) {
-			this.uploadFile();
 		}
 
 		this.setState({
@@ -116,69 +107,25 @@ class App extends Component {
 		});
 	};
 
-	//for uploading files to print
 	chooseFile = (event) => {
-		// event.preventDefault();
-		let reader = new FileReader();
 		let file = event.target.files[0]
-		// if(this.state.selected_file.name !== null){
-		// 	storageRef.child(this.state.selected_file.name).delete()
-		// }
+
 		if(file) {
-			reader.onloadend =() => {
-				//trying to set state after the file is uploaded to firebase but preview never updates unless i have this onloadend function
-				this.setState({ 
-					selected_file: file,
-					selected_file_data: reader.result
-				})
-
-			}
-			reader.readAsBinaryString(file)
-			const fbImg = storageRef.child(file.name.replace(/ /g, "_") );
-			const upload = fbImg.put(file);
-			const promises = [];
-			promises.push(upload)
-
-			upload.on('state_changed', snapshot => {
-				const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-				console.log(progress);
-			}, error => { console.log("error!: " , error) }, () => {
-				upload.snapshot.ref.getDownloadURL().then(downloadURL => {
-					console.log("download url!: " , downloadURL);
+			let self = this;
+			let storageRef = firebase.storage().ref();
+			let fileRef = storageRef.child('printQueue/' + file.name);
+			fileRef.put(file).then(function() {
+				fileRef.getDownloadURL().then(function(url) {
+					self.setState({ selected_file_url: url});
 				});
 			});
-
-			Promise.all(promises).then(tasks => {
-				this.updatePreviewer(file, reader.result)
-				console.log("promises finished!")
-			})
-			
 		}
-
 		else {
 			this.setState({
-				selected_file: null,
-				selected_file_data: null
+				selected_file_url: null
 			})
 		}
 	};
-
-	updatePreviewer = (file, result) => {
-		console.log("updatePreviewer")
-		this.setState({ 
-			selected_file: file,
-			selected_file_data: result
-		})
-
-	};
-
-	uploadFile() {
-		let storageRef = firebase.storage().ref();
-		let fileRef = storageRef.child('printQueue/' + this.state.selected_file.name);
-		fileRef.put(this.state.selected_file).then(function(snapshot) {
-			// lolidk
-		});
-	}
 
 	render() {
 		let current_page = null;
@@ -190,8 +137,7 @@ class App extends Component {
 									changePage={this.changePage}
 									chooseFile={this.chooseFile}
 									uploadDoc={this.uploadDoc}
-									selected_file={this.state.selected_file}
-									selected_file_data={this.state.selected_file_data}
+									selected_file_url={this.state.selected_file_url}
 								/>
 				break;
 
@@ -212,8 +158,7 @@ class App extends Component {
 									changePage={this.changePage}
 									printer_data={this.state.printer_data}
 									printer_img={this.state.printer_img}
-									selected_file={this.state.selected_file}
-									selected_file_data={this.state.selected_file_data}
+									selected_file_url={this.state.selected_file_url}
 									price={this.state.price}
 									pricesPerPage={pricesPerPage}
 									print_options={this.state.print_options}

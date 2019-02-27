@@ -91,8 +91,7 @@ class JobInProgress extends Component {
 	        	</div>
 	        	<div id="file_preview">
 					Preview
-					<FilePreview file_data={this.props.selected_file_data}
-								 file_name={this.props.selected_file}/>
+					<FilePreview file_url={this.props.selected_file_url}/>
 				</div>
 	        	<br/>
 	        	<div className="posn">
