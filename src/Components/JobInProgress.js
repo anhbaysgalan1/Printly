@@ -50,8 +50,11 @@ class JobInProgress extends Component {
 			let rating_ref = printer_ref.child('Rating');
 			rating_ref.set(rating_total/rating_count);
 
-			let comment_ref = firebase.database().ref(printer_path + "/comments");
-			comment_ref.push(comment);
+			if (comment != "")
+			{
+				let comment_ref = firebase.database().ref(printer_path + "/comments");
+				comment_ref.push(comment);
+			}
 		});
 
 
@@ -102,7 +105,11 @@ class JobInProgress extends Component {
 	            	<div>
 	                	{this.props.printer_data["name"]} 
 	                	<br/>
-	                	Address: {this.props.printer_data["address"]}
+	                	{(this.props.print_options.Transfer === 'Delivery') ?
+							null
+							:
+	                		<div>Address: {this.props.printer_data["address"]}</div>
+	                	}
 	                	<br/>
 	                	Rating: {stars}
 	                	<br/>

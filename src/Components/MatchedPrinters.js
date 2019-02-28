@@ -65,7 +65,8 @@ class MatchedPrinters extends Component {
 				selected_printer_image: null,
 				selected_printer_data: null,
 				subtotal: 0.0,
-				sort_by: SortEnum.RATING
+				sort_by: SortEnum.RATING,
+				showConfirmPopup: false,
 			};
 	};
 
@@ -325,6 +326,24 @@ class MatchedPrinters extends Component {
 		this.sortPrinters(new_matches, this.state.sort_by);	
 	};
 
+	calcETA = (dist) => {
+		let num = Math.ceil((dist * 10)/5)*5;
+		return (num)  + "-" + (num + 5) + " minutes";
+	};
+
+	closePopup = (confirmed) => {
+		this.setState({ showConfirmPopup: false });
+		if (confirmed)
+		{
+			this.handlePageChange(
+				this.props.PageEnum.JOBINPROGRESS,
+				this.state.selected_printer_data,
+				this.state.selected_printer_image,
+				this.state.subtotal,
+				this.state.print_options.Transfer);
+		}
+	};
+
 	render() {
 		const { classes } = this.props;
 
@@ -343,6 +362,7 @@ class MatchedPrinters extends Component {
 							Transfer={this.state.print_options.Transfer}
 							choose={this.handlePrinterChange}
 							isSelected={selected}
+							calcETA={this.calcETA}
 						/>
 				);
 		});
@@ -398,17 +418,26 @@ class MatchedPrinters extends Component {
 					</Button>
 					<Button className={classes.button} variant="outlined"
 							color="inherit"
-							onClick={() => this.handlePageChange(
-								this.props.PageEnum.JOBINPROGRESS,
-								this.state.selected_printer_data,
-								this.state.selected_printer_image,
-								this.state.subtotal,
-								this.state.print_options.Transfer)}
+							onClick={() => this.setState({ showConfirmPopup: true })}
 							disabled={this.state.selected_printer_data === null ? true : false}>
 						Send Job to Printer
 					</Button>
 				</MuiThemeProvider>
 			</div>
+
+			{this.state.showConfirmPopup ?
+				<ConfirmPopup
+					closePopup={this.closePopup}
+					print_options={this.state.print_options}
+					selected_printer_image={this.state.selected_printer_image}
+					selected_printer_data={this.state.selected_printer_data}
+					pricesPerPage={this.props.pricesPerPage}
+					calcETA={this.calcETA}
+					subtotal={this.state.subtotal}/>
+				:
+				null
+			}
+
 		</div>
 		);
 	}
@@ -422,11 +451,6 @@ class PrinterInfo extends Component {
 				this.state = {
 						images : []
 				};
-		}
-
-		calcETA = (dist) => {
-			let num = Math.ceil((dist * 10)/5)*5;
-			return (num)  + "-" + (num + 5) + " minutes";
 		}
 
 		render(){
@@ -453,7 +477,7 @@ class PrinterInfo extends Component {
 								<br/>
 								{(this.props.Transfer === 'Delivery') ?
 									<>
-										ETA: {this.calcETA(this.props.data["Distance"])}
+										ETA: {this.props.calcETA(this.props.data["Distance"])}
 										<br/>
 										Delivery Cost: ${(this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.data["Distance"])).toFixed(2)}
 									</>
@@ -469,6 +493,80 @@ class PrinterInfo extends Component {
 				);
 		}
 }
+
+
+class ConfirmPopup extends Component {
+	render() {
+		let stars = [];
+			for (let i = 0; i < Math.round(this.props.selected_printer_data["Rating"]); i++){
+					stars.push(<span className="fa fa-star checked" key={i}></span>)
+			}
+
+		let job_description = null;
+		if (this.props.print_options.Transfer === 'Delivery')
+		{
+			let delivery_cost = this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.selected_printer_data["Distance"])
+			job_description = 
+				<div>
+					Subtotal: ${this.props.subtotal.toFixed(2)}
+					<br/>
+					Delivery: ${delivery_cost.toFixed(2)}
+					<br/>
+					<br/>
+					Total Cost: ${(this.props.subtotal + delivery_cost).toFixed(2)}
+					<br/>
+					<br/>
+					ETA: {this.props.calcETA(this.props.selected_printer_data["Distance"])}
+				</div>
+		}
+		else
+		{
+			job_description = 
+				<div>
+					Printer Address: {this.props.selected_printer_data["address"]}
+					<br/>
+					Distance: {this.props.selected_printer_data["Distance"]}
+					<br/>
+					<br/>
+					Total Cost: ${this.props.subtotal.toFixed(2)}
+				</div>
+		}
+
+		return (
+			<div className="popup">
+				<div className="popup_inner">
+					<div className="popup_title">Print Confirmation</div>
+					<br/>
+					{this.props.selected_printer_image}
+					<br/>
+					{this.props.selected_printer_data["name"]}
+					<br/>
+					{stars}
+					<br/>
+					<br/>
+					{job_description}
+					<br/>
+					<Button variant="outlined"
+							color="blue"
+							onClick={() => this.props.closePopup(true)}>
+						Confirm & Submit!
+					</Button>
+
+					&nbsp;
+					&nbsp;
+					&nbsp;
+
+					<Button variant="outlined"
+							color="blue"
+							onClick={() => this.props.closePopup(false)}>
+						Cancel
+					</Button>
+				</div>
+			</div>
+		);
+	}
+}
+
 
 MatchedPrinters.propTypes = {
 	classes: PropTypes.object.isRequired
