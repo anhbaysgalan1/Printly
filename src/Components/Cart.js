@@ -15,10 +15,13 @@ const theme = createMuiTheme({
 		},
 		MuiListItem: {
 			root: {
-				fontSize: '10px',
 				paddingTop: '2.5px',
 				paddingBottom: '2.5px',
 			},
+			gutters: {
+				paddingLeft: '10px',
+				paddingRight: '10px',
+			}
 		},
 	},
 });

@@ -203,7 +203,7 @@ html, body {
 
 .MatchedPrintersSidebar {
   display: grid;
-  grid-auto-columns: min-content;
+  grid-auto-columns: auto;
   grid-auto-rows: auto auto auto;
   justify-content: right;
   padding-right: 10px;
