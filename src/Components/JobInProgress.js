@@ -60,8 +60,12 @@ class JobInProgress extends Component {
 		this.props.changePage(this.props.PageEnum.HOME)
 	}
 
-	closeCancelPopup = () => {
+	closeCancelPopup = (change_page) => {
 		this.setState({ showCancelPopup: false });
+		if (change_page)
+		{
+			this.props.change_page(this.props.PageEnum.HOME)
+		}
 	}
 
 	render() {
@@ -153,7 +157,6 @@ class JobInProgress extends Component {
 
 				{this.state.showCancelPopup ? 
 					<CancelPopup
-					closePopup={this.closePopup}
 					closeCancelPopup={this.closeCancelPopup}/>
 					: null
 				}
@@ -180,7 +183,7 @@ class CancelPopup extends Component {
 					<p> You will still be charged for this print job. Are you sure you want to cancel?</p>
 					<Button variant="outlined"
 							color="blue"
-							onClick={() => this.props.closePopup()}>
+							onClick={() => this.props.closeCancelPopup(true)}>
 						Yes
 					</Button>
 
@@ -190,7 +193,7 @@ class CancelPopup extends Component {
 
 					<Button variant="outlined"
 							color="blue"
-							onClick={() => this.props.closeCancelPopup()}>
+							onClick={() => this.props.closeCancelPopup(false)}>
 						No
 					</Button>
 					
