@@ -142,6 +142,8 @@ html, body {
   margin: 10px;
   text-align: center;
   cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid #04619f;
 }
 
 .selected_printer_info{
