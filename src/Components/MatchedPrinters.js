@@ -331,7 +331,7 @@ class MatchedPrinters extends Component {
 
 	calcETA = (dist) => {
 		let num = Math.ceil((dist * 10)/5)*5;
-		return (num)  + "-" + (num + 5) + " minutes";
+		return (num)  + "-" + (num + 5) + " min";
 	};
 
 	closePopup = (confirmed) => {
