@@ -46,20 +46,20 @@ class MatchedPrinters extends Component {
 				matching_printers : [], //printers that match the preferences i have listed 
 				active_printers : [],
 				print_options: {
-						transfer: "pickup",
-						sided: "single",
-						orientation: "portrait",
-						quality: "medium",
-						color: "black & white",
+						Transfer: "Pickup",
+						Sided: "Single",
+						Orientation: "Portrait",
+						Quality: "Medium",
+						Color: "Black & White",
 						copies: 1,
 						max_distance: 5,
 						min_rating: 1
 				},
 				selected_pricing: {
-					sided: '0.00',
-					orientation: '0.00',
-					quality: '0.00',
-					color: '0.00',
+					Sided: '0.00',
+					Orientation: '0.00',
+					Quality: '0.00',
+					Color: '0.00',
 				},
 				handling_fee: '4.00',
 				selected_printer_image: null,
@@ -169,26 +169,26 @@ class MatchedPrinters extends Component {
 		let total_cost = 0.0;
 		let copies = this.state.print_options.copies;
 
-		if (this.state.print_options.sided === 'single')
+		if (this.state.print_options.sided === 'Single')
 			total_cost += this.props.pricesPerPage.sided[0] * copies;
-		else if (this.state.print_options.sided === 'double')
+		else if (this.state.print_options.sided === 'Double')
 			total_cost += this.props.pricesPerPage.sided[1] * copies;
 
-		if (this.state.print_options.orientation === 'portrait')
+		if (this.state.print_options.orientation === 'Portrait')
 			total_cost += this.props.pricesPerPage.orientation[0] * copies;
-		else if (this.state.print_options.orientation === 'landscape')
+		else if (this.state.print_options.orientation === 'Landscape')
 			total_cost += this.props.pricesPerPage.orientation[1] * copies;
 
-		if (this.state.print_options.quality === 'low')
+		if (this.state.print_options.quality === 'Low')
 			total_cost += this.props.pricesPerPage.quality[0] * copies;
-		else if (this.state.print_options.quality === 'medium')
+		else if (this.state.print_options.quality === 'Medium')
 			total_cost += this.props.pricesPerPage.quality[1] * copies;
-		else if (this.state.print_options.quality === 'high')
+		else if (this.state.print_options.quality === 'High')
 			total_cost += this.props.pricesPerPage.quality[2] * copies;
 
-		if (this.state.print_options.color === 'black & white')
+		if (this.state.print_options.color === 'Black & White')
 			total_cost += this.props.pricesPerPage.color[0] * copies;
-		else if (this.state.print_options.color === 'color')
+		else if (this.state.print_options.color === 'Color')
 			total_cost += this.props.pricesPerPage.color[1] * copies;
 
 		total_cost += parseFloat(this.state.handling_fee);
@@ -262,20 +262,20 @@ class MatchedPrinters extends Component {
 		
 		let new_matched;
 		if (new_val == "Rating"){
-			new_matched = this.sortDecreasing(printers, "rating");
+			new_matched = this.sortDecreasing(printers, "Rating");
 			this.setState({
 				sort_by: new_val,
 				matching_printers : new_matched
 			});
 		} else if (new_val == "Distance"){
-			new_matched = this.sortIncreasing(printers, "distance");
+			new_matched = this.sortIncreasing(printers, "Distance");
 			this.setState({
 				sort_by: new_val,
 				matching_printers : new_matched
 			});
 		} else if (new_val == "Price"){
-			if (this.state.print_options["transfer"] == 'delivery'){
-				new_matched = this.sortIncreasing(printers, "distance");
+			if (this.state.print_options["Transfer"] == 'Delivery'){
+				new_matched = this.sortIncreasing(printers, "Distance");
 				this.setState({
 					sort_by: new_val,
 					matching_printers : new_matched
@@ -300,7 +300,7 @@ class MatchedPrinters extends Component {
 	};
 
 	filterPrinters = () => {
-		var filterOptions = ['transfer', 'quality', 'color']; //THESE ARE THE OPTIONS I AM USING TO FILTER
+		var filterOptions = ['Transfer', 'Quality', 'Color']; //THESE ARE THE OPTIONS I AM USING TO FILTER
 		let new_matches = Array.from(this.state.active_printers); //deep copy so i don't affect the actual active_printers state
 		
 		//for each option that we're filtering by, do this:
@@ -339,7 +339,7 @@ class MatchedPrinters extends Component {
 							key={id}
 							price={this.state.subtotal}
 							pricesPerPage={this.props.pricesPerPage}
-							transfer={this.state.print_options.transfer}
+							Transfer={this.state.print_options.Transfer}
 							choose={this.handlePrinterChange}
 							isSelected={selected}
 						/>
@@ -348,9 +348,9 @@ class MatchedPrinters extends Component {
 
 		// for cart to display
 		let deliv_cost = 0.0;
-		if (this.state.print_options.transfer === "delivery" && this.state.selected_printer_data != null) {
+		if (this.state.print_options.transfer === "Delivery" && this.state.selected_printer_data != null) {
 			deliv_cost =
-				(this.props.pricesPerPage.transfer[1] * this.state.selected_printer_data["distance"]).toFixed(2);
+				(this.props.pricesPerPage.transfer[1] * this.state.selected_printer_data["Distance"]).toFixed(2);
 		}
 
 		return (
@@ -360,7 +360,7 @@ class MatchedPrinters extends Component {
 				<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
 			</div>
 			<div>
-				{this.state.print_options.transfer === 'delivery' ? 
+				{this.state.print_options.transfer === 'Delivery' ? 
 				<Trackbar activeStep={1} deliver/> :
 				<Trackbar activeStep={1}/>}
 				<div id="matches_div">
@@ -401,7 +401,7 @@ class MatchedPrinters extends Component {
 								this.state.selected_printer_data,
 								this.state.selected_printer_image,
 								this.state.subtotal,
-								this.state.print_options.transfer)}
+								this.state.print_options.Transfer)}
 							disabled={this.state.selected_printer_data === null ? true : false}>
 						Send Job to Printer
 					</Button>
@@ -422,9 +422,14 @@ class PrinterInfo extends Component {
 				};
 		}
 
+		calcETA = (dist) => {
+			let num = Math.ceil((dist * 10)/5)*5;
+			return (num)  + "-" + (num + 5) + " minutes";
+		}
+
 		render(){
 				let stars = [];
-				for (let i = 0; i < Math.round(this.props.data["rating"]); i++){
+				for (let i = 0; i < Math.round(this.props.data["Rating"]); i++){
 						stars.push(<span className="fa fa-star checked" key={i}></span>)
 				}
 				
@@ -444,15 +449,18 @@ class PrinterInfo extends Component {
 								<br/>
 								Rating: {stars}
 								<br/>
-								Distance: {this.props.data["distance"]} mile{(this.props.data["distance"] === 1) ? 
-								"" : "s"}
-								<br/>
-								{(this.props.transfer === 'delivery') ?
+								{(this.props.Transfer === 'Delivery') ?
 									<>
-										Delivery Cost: ${(this.props.pricesPerPage.transfer[1] * parseFloat(this.props.data["distance"])).toFixed(2)}
+										ETA: {this.calcETA(this.props.data["Distance"])}
+										<br/>
+										Delivery Cost: ${(this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.data["Distance"])).toFixed(2)}
 									</>
 									:
-									null
+									<>
+										Distance: {this.props.data["Distance"]} mile{(this.props.data["Distance"] === 1) ? 
+										"" : "s"}
+										<br/>
+									</>
 								}
 						</div>
 				</div>

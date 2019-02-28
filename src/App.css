@@ -148,12 +148,14 @@ html, body {
 
 .selected_printer_info{
   display: inline-block;
-  background-color: turquoise;
+  background-color: lightgoldenrodyellow;
   width: 260px;
   height: 260px;
   margin: 10px;
   text-align: center;
   cursor: pointer;
+  border-radius: 10px;
+  border: 1px solid gold;
 }
 
 .printer_image{

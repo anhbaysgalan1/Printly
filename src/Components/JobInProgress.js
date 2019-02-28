@@ -47,7 +47,7 @@ class JobInProgress extends Component {
 		printer_ref.once('value', function(snapshot) {
 			let rating_total = snapshot.child("rating_total").val();
 			let rating_count = snapshot.child("rating_count").val();
-			let rating_ref = printer_ref.child('rating');
+			let rating_ref = printer_ref.child('Rating');
 			rating_ref.set(rating_total/rating_count);
 
 			let comment_ref = firebase.database().ref(printer_path + "/comments");
@@ -72,7 +72,7 @@ class JobInProgress extends Component {
 		const { classes } = this.props;
 
 		let stars = [];
-		for (let i = 0; i < Math.round(this.props.printer_data["rating"]); i++)
+		for (let i = 0; i < Math.round(this.props.printer_data["Rating"]); i++)
 		{
             stars.push(<span className="fa fa-star checked" key={i}></span>)
 		}
@@ -92,7 +92,7 @@ class JobInProgress extends Component {
 					<div className="pagetitle">Job Status</div>
 					<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
 				</div>
-				{this.props.print_options['transfer'] === 'delivery' ? 
+				{this.props.print_options['Transfer'] === 'Delivery' ? 
 				<Trackbar activeStep={2} deliver updateJobStatus={this.updateJobStatus}/> :
 				<Trackbar activeStep={2} updateJobStatus={this.updateJobStatus}/>}
 				<div className="job_info">
@@ -113,8 +113,8 @@ class JobInProgress extends Component {
 	                		{selected_options}
 	                		<br/>
 		                	Total Cost: ${
-									(this.props.print_options.transfer === 'delivery') ?
-										(this.props.price + this.props.pricesPerPage.transfer[1] * parseFloat(this.props.printer_data["distance"])).toFixed(2)
+									(this.props.print_options.Transfer === 'Delivery') ?
+										(this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"])).toFixed(2)
 									:
 										(this.props.price).toFixed(2)
 							}
@@ -217,8 +217,8 @@ class JobDonePopup extends Component {
 					<div className="popup_title">Summary & Review</div>
 					<br/>
 					Total Cost: ${
-						(this.props.print_options.transfer === 'delivery') ?
-							(this.props.price + this.props.pricesPerPage.transfer[1] * parseFloat(this.props.printer_data["distance"])).toFixed(2)
+						(this.props.print_options.Transfer === 'Delivery') ?
+							(this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"])).toFixed(2)
 						:
 							(this.props.price).toFixed(2)
 					}

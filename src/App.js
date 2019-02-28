@@ -20,19 +20,19 @@ const PageEnum = {
 }
 
 const printOptions = {
-	transfer: ['pickup', 'delivery'],
-	sided: ['single', 'double'],
-	orientation: ['portrait', 'landscape'],
-	quality: ['low', 'medium', 'high'],
-	color: ['black & white', 'color']
+	Transfer: ['Pickup', 'Delivery'],
+	Sided: ['Single', 'Double'],
+	Orientation: ['Portrait', 'Landscape'],
+	Quality: ['Low', 'Medium', 'High'],
+	Color: ['Black & White', 'Color']
 }
 
 const pricesPerPage = {
-	transfer: [0.00, 1.50],
-	sided: [0.10, 0.05],
-	orientation: [0.00, 0.00],
-	quality: [0.05, 0.10, 0.15],
-	color: [0.05, 0.25]
+	Transfer: [0.00, 1.50],
+	Sided: [0.10, 0.05],
+	Orientation: [0.00, 0.00],
+	Quality: [0.05, 0.10, 0.15],
+	Color: [0.05, 0.25]
 }
 
 class App extends Component {
@@ -46,11 +46,11 @@ class App extends Component {
 			selected_file_url: null,
 			price: 0.0,
 			print_options: {
-				transfer: null,
-				sided: null,
-				orientation: null,
-				quality: null,
-				color: null,
+				Transfer: null,
+				Sided: null,
+				Orientation: null,
+				Quality: null,
+				Color: null,
 				copies: null,
 			},
 		};
@@ -68,7 +68,7 @@ class App extends Component {
 		this.setState({
 			page: newPage,
 		});
-
+		
 		if (newPage === PageEnum.JOBINPROGRESS)
 		{
 			this.setState({
@@ -81,25 +81,25 @@ class App extends Component {
 	updateCost = (new_cost, new_transfer) => {
 		this.setState({
 			price: new_cost,
-			transfer: new_transfer
+			Transfer: new_transfer
 		});
 	}
 
 	updatePrintOptions = (new_print_options) => {
 		let temp_print_options = {
-			transfer: null,
-			sided: null,
-			orientation: null,
-			quality: null,
-			color: null,
+			Transfer: null,
+			Sided: null,
+			Orientation: null,
+			Quality: null,
+			Color: null,
 			copies: null,
 		};
 
-		temp_print_options.transfer = new_print_options.transfer;
-		temp_print_options.sided = new_print_options.sided;
-		temp_print_options.orientation = new_print_options.orientation;
-		temp_print_options.quality = new_print_options.quality;
-		temp_print_options.color = new_print_options.color;
+		temp_print_options.Transfer = new_print_options.Transfer;
+		temp_print_options.Sided = new_print_options.Sided;
+		temp_print_options.Orientation = new_print_options.Orientation;
+		temp_print_options.Quality = new_print_options.Quality;
+		temp_print_options.Color = new_print_options.Color;
 		temp_print_options.copies = new_print_options.copies
 
 		this.setState({

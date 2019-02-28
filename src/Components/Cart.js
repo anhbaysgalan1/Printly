@@ -53,7 +53,7 @@ class Cart extends React.Component {
 		listItems.push(
 		<div>
 			<ListItem  key={"handling_fee"}>
-				<ListItemText primary={"handling"} 
+				<ListItemText primary={"Handling"} 
 							  secondary={this.prettyText(parseFloat(this.props.handling_fee))}/>
 			</ListItem>
 			<Divider />
@@ -67,17 +67,17 @@ class Cart extends React.Component {
 						<Divider />
 						{listItems}
 						<ListItem  key="total">
-							<ListItemText primary="subtotal" 
+							<ListItemText primary="Subtotal" 
 											secondary={this.prettyText(this.props.price)}/>
 						</ListItem>
 						<Divider/>
 						<ListItem>
-							<ListItemText primary="delivery" 
+							<ListItemText primary="Delivery" 
 											secondary={this.prettyText(this.props.deliv_fee)}/>
 						</ListItem>
 						<Divider/>
 						<ListItem>
-							<ListItemText primary="grand total" className = "flashit"
+							<ListItemText primary="Grand Total" className = "flashit"
 											secondary={this.prettyText(parseFloat(this.props.price) + parseFloat(this.props.deliv_fee))}/>
 						</ListItem>
 					</List>
