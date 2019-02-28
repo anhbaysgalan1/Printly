@@ -169,29 +169,30 @@ class MatchedPrinters extends Component {
 		let total_cost = 0.0;
 		let copies = this.state.print_options.copies;
 
-		if (this.state.print_options.sided === 'Single')
-			total_cost += this.props.pricesPerPage.sided[0] * copies;
-		else if (this.state.print_options.sided === 'Double')
-			total_cost += this.props.pricesPerPage.sided[1] * copies;
+		if (this.state.print_options.Sided === 'Single')
+			total_cost += this.props.pricesPerPage.Sided[0] * copies;
+		else if (this.state.print_options.Sided === 'Double')
+			total_cost += this.props.pricesPerPage.Sided[1] * copies;
 
-		if (this.state.print_options.orientation === 'Portrait')
-			total_cost += this.props.pricesPerPage.orientation[0] * copies;
-		else if (this.state.print_options.orientation === 'Landscape')
-			total_cost += this.props.pricesPerPage.orientation[1] * copies;
+		if (this.state.print_options.Orientation === 'Portrait')
+			total_cost += this.props.pricesPerPage.Orientation[0] * copies;
+		else if (this.state.print_options.Orientation === 'Landscape')
+			total_cost += this.props.pricesPerPage.Orientation[1] * copies;
 
-		if (this.state.print_options.quality === 'Low')
-			total_cost += this.props.pricesPerPage.quality[0] * copies;
-		else if (this.state.print_options.quality === 'Medium')
-			total_cost += this.props.pricesPerPage.quality[1] * copies;
-		else if (this.state.print_options.quality === 'High')
-			total_cost += this.props.pricesPerPage.quality[2] * copies;
+		if (this.state.print_options.Quality === 'Low')
+			total_cost += this.props.pricesPerPage.Quality[0] * copies;
+		else if (this.state.print_options.Quality === 'Medium')
+			total_cost += this.props.pricesPerPage.Quality[1] * copies;
+		else if (this.state.print_options.Quality === 'High')
+			total_cost += this.props.pricesPerPage.Quality[2] * copies;
 
-		if (this.state.print_options.color === 'Black & White')
-			total_cost += this.props.pricesPerPage.color[0] * copies;
-		else if (this.state.print_options.color === 'Color')
-			total_cost += this.props.pricesPerPage.color[1] * copies;
+		if (this.state.print_options.Color === 'Black & White')
+			total_cost += this.props.pricesPerPage.Color[0] * copies;
+		else if (this.state.print_options.Color === 'Color')
+			total_cost += this.props.pricesPerPage.Color[1] * copies;
 
 		total_cost += parseFloat(this.state.handling_fee);
+		console.log("total cost:", total_cost);
 
 		return total_cost;
 	};
@@ -353,6 +354,7 @@ class MatchedPrinters extends Component {
 				(this.props.pricesPerPage.transfer[1] * this.state.selected_printer_data["Distance"]).toFixed(2);
 		}
 
+		console.log("passing to cart", this.state.selected_pricing, this.state.print_options);
 		return (
 		<div>
 			<div className="title">
