@@ -49,7 +49,7 @@ class Home extends Component {
 						color="inherit" 
 						className={classes.button} 
 						onClick={() => this.props.changePage(this.props.PageEnum.MATCHEDPRINTERS)}
-						disabled={this.props.selected_file_data === null ? true : false}>
+						disabled={this.props.selected_file_url === null ? true : false}>
 					Submit for Printing!
 				</Button>
 			</div>
