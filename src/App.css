@@ -8,6 +8,8 @@ html, body {
   background-color: #D3D3D3;
 }
 
+
+/*
 .flashit{
   color:#f2f;
   -webkit-animation: flash linear 1s infinite;
@@ -24,6 +26,7 @@ html, body {
   50% { opacity: .1; } 
   100% { opacity: 1; }
 }
+*/
 
 
 
