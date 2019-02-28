@@ -60,11 +60,11 @@ class JobInProgress extends Component {
 		this.props.changePage(this.props.PageEnum.HOME)
 	}
 
-	closeCancelPopup = (change_page) => {
+	closeCancelPopup = (return_home) => {
 		this.setState({ showCancelPopup: false });
-		if (change_page)
+		if (return_home)
 		{
-			this.props.change_page(this.props.PageEnum.HOME)
+			this.props.changePage(this.props.PageEnum.HOME)
 		}
 	}
 
