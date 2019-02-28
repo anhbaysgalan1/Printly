@@ -525,7 +525,7 @@ class ConfirmPopup extends Component {
 				<div>
 					Printer Address: {this.props.selected_printer_data["address"]}
 					<br/>
-					Distance: {this.props.selected_printer_data["Distance"]}
+					Distance: {this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"}
 					<br/>
 					<br/>
 					Total Cost: ${this.props.subtotal.toFixed(2)}
