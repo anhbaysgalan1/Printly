@@ -138,8 +138,8 @@ class MatchedPrinters extends Component {
 		});
 	}
 
-	handlePageChange = (new_page, new_printer_data, new_printer_img, new_cost, new_transfer) => {
-		this.props.updateCost(new_cost, new_transfer);
+	handlePageChange = (new_page, new_printer_data, new_printer_img, new_cost, new_Transfer) => {
+		this.props.updateCost(new_cost, new_Transfer);
 		this.props.changePage(new_page, new_printer_data, new_printer_img);
 	}
 
@@ -148,7 +148,7 @@ class MatchedPrinters extends Component {
 		let new_prices = {}
 		Object.keys(this.state.selected_pricing).map(option => {
 			//console.log("OPTION SELECTION " , this.state.print_options[option])
-			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the transfer option
+			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the Transfer option
 			if(option_selection === null) {
 				new_prices[option] = '0.00'
 			}
@@ -306,7 +306,7 @@ class MatchedPrinters extends Component {
 		
 		//for each option that we're filtering by, do this:
 		filterOptions.map(option => {
-			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the transfer option
+			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the Transfer option
 
 			for(var i = 0; i < new_matches.length; i++) { //for each printer, if the option offered doesn't match my option selection, remove it from the list
 				let cur_printer = new_matches[i]
@@ -349,9 +349,9 @@ class MatchedPrinters extends Component {
 
 		// for cart to display
 		let deliv_cost = 0.0;
-		if (this.state.print_options.transfer === "Delivery" && this.state.selected_printer_data != null) {
+		if (this.state.print_options.Transfer === "Delivery" && this.state.selected_printer_data != null) {
 			deliv_cost =
-				(this.props.pricesPerPage.transfer[1] * this.state.selected_printer_data["Distance"]).toFixed(2);
+				(this.props.pricesPerPage.Transfer[1] * this.state.selected_printer_data["Distance"]).toFixed(2);
 		}
 
 		console.log("passing to cart", this.state.selected_pricing, this.state.print_options);
@@ -362,7 +362,7 @@ class MatchedPrinters extends Component {
 				<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
 			</div>
 			<div>
-				{this.state.print_options.transfer === 'Delivery' ? 
+				{this.state.print_options.Transfer === 'Delivery' ? 
 				<Trackbar activeStep={1} deliver/> :
 				<Trackbar activeStep={1}/>}
 				<div id="matches_div">
