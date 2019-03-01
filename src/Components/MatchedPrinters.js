@@ -92,20 +92,7 @@ class MatchedPrinters extends Component {
 		this.calcIndivPrices();
 	};
 
-	handleSettingsChange = (name, event) => {
-		if (!event.target.value || event.target.value < 1) {
-			this.setState({ [name]: null });
-		}
-		else {
-			let newState = this.state.print_options;
-			newState[name] = event.target.value;
-
-			this.setState({
-				print_options: newState,
-			})
-		}
-
-		this.filterPrinters();
+	componentDidUpdate = () => {
 		if (this.state.selected_printer_image != null) {
 			// deselect chosen printer if unavailable under new settings
 			let shouldDeselect = true;
@@ -124,6 +111,22 @@ class MatchedPrinters extends Component {
 				});
 			}
 		}
+	}
+
+	handleSettingsChange = (name, event) => {
+		if (!event.target.value || event.target.value < 1) {
+			this.setState({ [name]: null });
+		}
+		else {
+			let newState = this.state.print_options;
+			newState[name] = event.target.value;
+
+			this.setState({
+				print_options: newState,
+			})
+		}
+
+		this.filterPrinters();
 
 		let new_cost = this.calcCost();
 		this.setState({subtotal: new_cost});
