@@ -55,16 +55,14 @@ class App extends Component {
 				copies: null,
 			},
 		};
+
+		window.onbeforeunload = () => {this.deleteSelectedFile();};
 	}
 
 	changePage = (newPage, new_printer_data, new_printer_img) => {
 		// purge file data from previous job, if any
 		if (newPage === PageEnum.HOME) {
-			if (this.state.selected_file_name != null) {
-				let oldRef = firebase.storage().ref().child('printQueue/' + this.state.selected_file_name);
-				oldRef.delete();
-			}
-
+			this.deleteSelectedFile();
 			this.setState({
 				selected_file_url: null,
 				selected_file_name: null
@@ -114,13 +112,12 @@ class App extends Component {
 	};
 
 	chooseFile = (event) => {
+		this.deleteSelectedFile();
 		let file = event.target.files[0]
-		let old = this.state.selected_file_name;
-		let storageRef = firebase.storage().ref();
 
 		if(file) {
 			let self = this;
-			let fileRef = storageRef.child('printQueue/' + file.name);
+			let fileRef = firebase.storage().ref().child('printQueue/' + file.name);
 			fileRef.put(file).then(function() {
 				fileRef.getDownloadURL().then(function(url) {
 					self.setState({
@@ -136,12 +133,14 @@ class App extends Component {
 				selected_file_name: null
 			})
 		}
+	};
 
-		if (old != null) {
-			let oldRef = storageRef.child('printQueue/' + old);
+	deleteSelectedFile() {
+		if (this.state.selected_file_name != null) {
+			let oldRef = firebase.storage().ref().child('printQueue/' + this.state.selected_file_name);
 			oldRef.delete();
 		}
-	};
+	}
 
 	render() {
 		let current_page = null;
