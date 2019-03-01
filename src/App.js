@@ -44,6 +44,7 @@ class App extends Component {
 			printer_data: null,
 			printer_img: null,
 			selected_file_url: null,
+			selected_file_name: null,
 			price: 0.0,
 			print_options: {
 				Transfer: null,
@@ -59,9 +60,14 @@ class App extends Component {
 	changePage = (newPage, new_printer_data, new_printer_img) => {
 		// purge file data from previous job, if any
 		if (newPage === PageEnum.HOME) {
+			if (this.state.selected_file_name != null) {
+				let oldRef = firebase.storage().ref().child('printQueue/' + this.state.selected_file_name);
+				oldRef.delete();
+			}
+
 			this.setState({
-				// TODO delete from firebase
-				selected_file_url: null
+				selected_file_url: null,
+				selected_file_name: null
 			})
 		}
 
@@ -109,21 +115,31 @@ class App extends Component {
 
 	chooseFile = (event) => {
 		let file = event.target.files[0]
+		let old = this.state.selected_file_name;
+		let storageRef = firebase.storage().ref();
 
 		if(file) {
 			let self = this;
-			let storageRef = firebase.storage().ref();
 			let fileRef = storageRef.child('printQueue/' + file.name);
 			fileRef.put(file).then(function() {
 				fileRef.getDownloadURL().then(function(url) {
-					self.setState({ selected_file_url: url});
+					self.setState({
+						selected_file_url: url,
+						selected_file_name: file.name
+					});
 				});
 			});
 		}
 		else {
 			this.setState({
-				selected_file_url: null
+				selected_file_url: null,
+				selected_file_name: null
 			})
+		}
+
+		if (old != null) {
+			let oldRef = storageRef.child('printQueue/' + old);
+			oldRef.delete();
 		}
 	};
 

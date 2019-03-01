@@ -8,7 +8,6 @@ html, body {
   background-color: #D3D3D3;
 }
 
-
 /*
 .flashit{
   color:#f2f;
@@ -27,8 +26,6 @@ html, body {
   100% { opacity: 1; }
 }
 */
-
-
 
 .cancelled {
   text-align: center;
@@ -208,8 +205,8 @@ html, body {
   display: grid;
   grid-auto-columns: min-content;
   grid-auto-rows: auto auto auto;
-  justify-content: center;
-  padding-right: 8px;
+  justify-content: right;
+  padding-right: 10px;
 }
 
 /*

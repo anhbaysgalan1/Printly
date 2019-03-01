@@ -15,6 +15,7 @@ const theme = createMuiTheme({
 		},
 		MuiListItem: {
 			root: {
+				fontSize: '10px',
 				paddingTop: '2.5px',
 				paddingBottom: '2.5px',
 			},
@@ -39,15 +40,17 @@ class Cart extends React.Component {
 
 	render() {
 		const { classes } = this.props;
-		const listItems = Object.keys(this.props.data).map(option => (
-					<div>
-						<ListItem  key={option}>
-							<ListItemText primary={option} 
-										  secondary={this.prettyText(parseFloat(this.props.data[option] * this.props.copies))}/>
-						</ListItem>
-						<Divider />
-					</div>
-					)
+		const listItems = Object.keys(this.props.data)
+								.filter(option => (option != "Orientation"))
+								.map(option => (
+			<div>
+				<ListItem  key={option}>
+					<ListItemText primary={option} 
+									secondary={this.prettyText(parseFloat(this.props.data[option] * this.props.copies))}/>
+				</ListItem>
+				<Divider />
+			</div>
+			)
 		);
 
 		listItems.push(
