@@ -423,6 +423,7 @@ class MatchedPrinters extends Component {
 				<div id="matches_div">
 					<div className="settings">
 							<Settings
+								pricesPerPage={this.props.pricesPerPage}
 								printOptions={this.props.printOptions}
 								handleChange={this.handleSettingsChange}
 								print_options_state={this.state.print_options}	
