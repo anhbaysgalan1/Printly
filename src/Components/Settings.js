@@ -6,8 +6,8 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import TextField from '@material-ui/core/TextField';
 import HelpOutline from '@material-ui/icons/HelpOutline';
-import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Tooltip from '@material-ui/core/Tooltip'
 import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -72,23 +72,24 @@ class Settings extends React.Component{
 		
 	  return (
 	  	<div>
-		  	<div className="tooltip"><ToolTip option={options[0]}/></div>
-			<div>
-			  <MuiThemeProvider theme={theme}>
-				<FormControl component="fieldset" className={classes.formControl}>
-				  <FormLabel component="legend">{options[0]}</FormLabel>
-				  <RadioGroup row
-					name={options[0]}
-					className={classes.group}
-					value={this.props.print_options_state[name]}
-					onChange={(e) => this.props.handleChange(name, e)}
-				  >
-					{opts}
-				  </RadioGroup>
-				</FormControl>
-			  </MuiThemeProvider>
-			</div>
-		</div>
+          <MuiThemeProvider theme={theme}>
+          <Tooltip title={this.props.optionInfo[name]} placement="top">
+                <HelpOutline style={{color: 'grey'}}/>
+              </Tooltip>
+            <FormControl component="fieldset" className={classes.formControl}>
+              
+              <FormLabel component="legend">{name}</FormLabel>
+              <RadioGroup row
+                name={name}
+                className={classes.group}
+                value={this.props.print_options_state[name]}
+                onChange={(e) => this.props.handleChange(name, e)}
+              >
+                {opts}
+              </RadioGroup>
+            </FormControl>
+          </MuiThemeProvider>
+        </div>
 	  )}
 	);
 

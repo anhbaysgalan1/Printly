@@ -27,6 +27,14 @@ const printOptions = {
 	Color: ['Black & White', 'Color']
 }
 
+const optionInfo = {
+	Transfer: "Would you like to pick up your document, or have it delivered?",
+	Sided: "Would you like your document to be single- or double- sided?",
+	Orientation: "Is your document orientation landscape or portrait?",
+	Quality: "Select 'low' for everyday documents, 'medium' for important documents, and 'high' for photos.",
+	Color: "Would you like your documented to be printed in black & white or in color?"
+}
+
 const pricesPerPage = {
 	Transfer: [0.00, 1.50],
 	Sided: [0.10, 0.05],
@@ -40,7 +48,7 @@ class App extends Component {
 		super();
 
 		this.state = {
-			page : PageEnum.HOME,
+			page : PageEnum.MATCHEDPRINTERS,
 			printer_data: null,
 			printer_img: null,
 			selected_file_url: null,
@@ -164,6 +172,7 @@ class App extends Component {
 									updatePrintOptions={this.updatePrintOptions}
 									printOptions={printOptions}
 									pricesPerPage={pricesPerPage}
+									optionInfo={optionInfo}
 								/>
 				break;
 

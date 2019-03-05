@@ -427,6 +427,7 @@ class MatchedPrinters extends Component {
 								printOptions={this.props.printOptions}
 								handleChange={this.handleSettingsChange}
 								print_options_state={this.state.print_options}	
+								optionInfo={this.props.optionInfo}
 							/>
 					</div>
 					<SortDropDown options={SortOptions} onChange={this.handleSortChange} value={this.state.sort_by}></SortDropDown>
