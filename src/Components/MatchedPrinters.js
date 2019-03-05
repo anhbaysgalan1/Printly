@@ -511,27 +511,35 @@ class ConfirmPopup extends Component {
 			let delivery_cost = this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.selected_printer_data["Distance"])
 			job_description = 
 				<div>
+					<div className="underline">ETA</div>
+					{this.props.calcETA(this.props.selected_printer_data["Distance"])}
+					<br/>
+					<br/>
+					<br/>
 					Subtotal: ${this.props.subtotal.toFixed(2)}
 					<br/>
 					Delivery: ${delivery_cost.toFixed(2)}
 					<br/>
 					<br/>
-					Total Cost: ${(this.props.subtotal + delivery_cost).toFixed(2)}
 					<br/>
-					<br/>
-					ETA: {this.props.calcETA(this.props.selected_printer_data["Distance"])}
+					<div className="bold">Total Cost: ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
 				</div>
 		}
 		else
 		{
 			job_description = 
 				<div>
-					Printer Address: {this.props.selected_printer_data["address"]}
+					<div className="underline">Printer Address</div>
+					{this.props.selected_printer_data["address"]}
 					<br/>
-					Distance: {this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"}
 					<br/>
 					<br/>
-					Total Cost: ${this.props.subtotal.toFixed(2)}
+					<div className="underline">Distance</div>
+					{this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"}
+					<br/>
+					<br/>
+					<br/>
+					<div className="bold">Total Cost: ${this.props.subtotal.toFixed(2)}</div>
 				</div>
 		}
 
@@ -540,19 +548,24 @@ class ConfirmPopup extends Component {
 				<div className="popup_inner">
 					<div className="popup_title">Print Confirmation</div>
 					<br/>
-					{this.props.selected_printer_image}
+					<div>
+						<div className="printer_preview">
+							{this.props.selected_printer_image}
+							<br/>
+							{this.props.selected_printer_data["name"]}
+							<br/>
+							{stars}
+						</div>
+						<br/>
+						{job_description}
+					</div>
 					<br/>
-					{this.props.selected_printer_data["name"]}
 					<br/>
-					{stars}
-					<br/>
-					<br/>
-					{job_description}
 					<br/>
 					<Button variant="outlined"
 							color="blue"
-							onClick={() => this.props.closePopup(true)}>
-						Confirm & Submit!
+							onClick={() => this.props.closePopup(false)}>
+						Cancel
 					</Button>
 
 					&nbsp;
@@ -561,8 +574,8 @@ class ConfirmPopup extends Component {
 
 					<Button variant="outlined"
 							color="blue"
-							onClick={() => this.props.closePopup(false)}>
-						Cancel
+							onClick={() => this.props.closePopup(true)}>
+						Confirm & Submit!
 					</Button>
 				</div>
 			</div>

@@ -27,6 +27,15 @@ html, body {
 }
 */
 
+.bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
 .cancelled {
   text-align: center;
 }
@@ -162,6 +171,11 @@ html, body {
   display: inline-block;
   width: 50%;
   margin: 7px;
+}
+
+.printer_preview{
+  width: 50%;
+  float: right;
 }
 
 .id_image{
