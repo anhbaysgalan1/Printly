@@ -21,6 +21,8 @@ class Home extends Component {
 
 	render() {
 		const { classes } = this.props;
+		let temp_center = classes.button + " buttoncenter";
+		let temp_right = classes.button + " buttonright";
 
 		return (
 			<div>
@@ -29,11 +31,11 @@ class Home extends Component {
 					<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
 				</div>
 				<Trackbar activeStep={0} />
-				<div>
+				<div className="navigation">
 					<Button
 					  variant="outlined"
 					  component="label"
-					  className={classes.button}
+					  className={temp_center} //{classes.button}
 					>
 					  Upload File
 					   <input type="file" 
@@ -41,17 +43,18 @@ class Home extends Component {
 					  onChange={this.props.chooseFile}>
 						</input>
 					</Button>
-				</div>
-				<div id="file_preview">
-					<FilePreview file_url={this.props.selected_file_url}/>
-				</div>
-				<Button  variant="outlined" 
+
+					<Button  variant="outlined" 
 						color="inherit" 
-						className={classes.button} 
+						className={temp_right}//{classes.button}
 						onClick={() => this.props.changePage(this.props.PageEnum.MATCHEDPRINTERS)}
 						disabled={this.props.selected_file_url === null ? true : false}>
 					Submit for Printing!
 				</Button>
+				</div>
+				<div id="file_preview">
+					<FilePreview file_url={this.props.selected_file_url}/>
+				</div>
 			</div>
 		);
 	}

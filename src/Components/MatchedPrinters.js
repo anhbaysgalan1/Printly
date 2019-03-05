@@ -24,6 +24,15 @@ const styles = theme => ({
 		color: '#04619f',
 		background: '#FFFFFF',
 	},
+	buttonleft:{
+		color: '#04619f',
+		background: '#FFFFFF',
+	},
+	buttonright:{
+		color: '#04619f',
+		background: '#FFFFFF',
+	}
+
 });
 
 const SortEnum = {
@@ -377,6 +386,13 @@ class MatchedPrinters extends Component {
 				(this.props.pricesPerPage.Transfer[1] * this.state.selected_printer_data["Distance"]).toFixed(2);
 		}
 
+		//<MuiThemeProvider theme={theme}>
+		// THIS WAS WRAPPING NAVIGATION BUTTONS			
+		//		</MuiThemeProvider>
+
+		let temp_left = classes.button + " buttonleft";
+		let temp_right = classes.button + " buttonright";
+
 		console.log("passing to cart", this.state.selected_pricing, this.state.print_options);
 		return (
 		<div>
@@ -388,6 +404,22 @@ class MatchedPrinters extends Component {
 				{this.state.print_options.Transfer === 'Delivery' ? 
 				<Trackbar activeStep={1} deliver/> :
 				<Trackbar activeStep={1}/>}
+				<div className="navigation">
+				<Button className={temp_left}//{classes.button} 
+							variant="outlined"
+							color="inherit"
+							onClick={() => this.handlePageChange(
+								this.props.PageEnum.HOME)}>
+						Back to Home Page
+					</Button>
+					<Button className={temp_right}//{classes.button} 
+							variant="outlined"
+							color="inherit"
+							onClick={() => this.setState({ showConfirmPopup: true })}
+							disabled={this.state.selected_printer_data === null ? true : false}>
+						Send Job to Printer
+					</Button>
+				</div>
 				<div id="matches_div">
 					<div className="settings">
 							<Settings
@@ -412,20 +444,7 @@ class MatchedPrinters extends Component {
 						deliv_fee={deliv_cost}
 					/>
 				</div>
-				<MuiThemeProvider theme={theme}>
-					<Button className={classes.button} variant="outlined"
-							color="inherit"
-							onClick={() => this.handlePageChange(
-								this.props.PageEnum.HOME)}>
-						Back to Home Page
-					</Button>
-					<Button className={classes.button} variant="outlined"
-							color="inherit"
-							onClick={() => this.setState({ showConfirmPopup: true })}
-							disabled={this.state.selected_printer_data === null ? true : false}>
-						Send Job to Printer
-					</Button>
-				</MuiThemeProvider>
+				
 			</div>
 
 			{this.state.showConfirmPopup ?
@@ -551,8 +570,8 @@ class ConfirmPopup extends Component {
 					<br/>
 					<Button variant="outlined"
 							color="blue"
-							onClick={() => this.props.closePopup(true)}>
-						Confirm & Submit!
+							onClick={() => this.props.closePopup(false)}>
+						Cancel
 					</Button>
 
 					&nbsp;
@@ -561,8 +580,8 @@ class ConfirmPopup extends Component {
 
 					<Button variant="outlined"
 							color="blue"
-							onClick={() => this.props.closePopup(false)}>
-						Cancel
+							onClick={() => this.props.closePopup(true)}>
+						Confirm & Submit!
 					</Button>
 				</div>
 			</div>
