@@ -89,6 +89,9 @@ class JobInProgress extends Component {
 			)
 		);
 		
+		let temp_left = classes.button + " buttonleft";
+		let temp_right = classes.button + " buttonright";
+
 		return (
 			<div>
 				<div className="title">
@@ -98,6 +101,23 @@ class JobInProgress extends Component {
 				{this.props.print_options['Transfer'] === 'Delivery' ? 
 				<Trackbar activeStep={2} deliver updateJobStatus={this.updateJobStatus}/> :
 				<Trackbar activeStep={2} updateJobStatus={this.updateJobStatus}/>}
+				<div className="navigation">
+					<Button  variant="outlined" 
+							color="inherit" 
+							className={temp_left} 
+							onClick={() => this.setState({ showCancelPopup: true})}>
+						Cancel Job
+					</Button>
+
+					<Button  variant="outlined" 
+							color="inherit" 
+							className={temp_right} 
+							onClick={() => this.setState({ showDonePopup: true })}
+							disabled={this.state.jobComplete ? false : true}>
+						Finish
+					</Button>
+
+				</div>
 				<div className="job_info">
 	            	<div>
 	                	{this.props.printer_img}
@@ -133,24 +153,6 @@ class JobInProgress extends Component {
 					<FilePreview file_url={this.props.selected_file_url}/>
 				</div>
 	        	<br/>
-	        	<div className="posn">
-				<Button  variant="outlined" 
-						color="inherit" 
-						className={classes.button} 
-						onClick={() => this.setState({ showCancelPopup: true})}>
-					Cancel Job
-				</Button>
-				&nbsp;
-				&nbsp;
-				&nbsp;
-	        	<Button  variant="outlined" 
-						color="inherit" 
-						className={classes.button} 
-						onClick={() => this.setState({ showDonePopup: true })}
-						disabled={this.state.jobComplete ? false : true}>
-					Finish
-				</Button>
-				</div>
 
 				{this.state.showDonePopup ? 
 					<JobDonePopup
