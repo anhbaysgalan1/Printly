@@ -530,7 +530,7 @@ class ConfirmPopup extends Component {
 			let delivery_cost = this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.selected_printer_data["Distance"])
 			job_description = 
 				<div>
-					<div className="underline">ETA</div>
+					<div className="underline bold">ETA</div>
 					{this.props.calcETA(this.props.selected_printer_data["Distance"])}
 					<br/>
 					<br/>
@@ -548,12 +548,12 @@ class ConfirmPopup extends Component {
 		{
 			job_description = 
 				<div>
-					<div className="underline">Printer Address</div>
+					<div className="underline bold">Printer Address</div>
 					{this.props.selected_printer_data["address"]}
 					<br/>
 					<br/>
 					<br/>
-					<div className="underline">Distance</div>
+					<div className="underline bold">Distance</div>
 					{this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"}
 					<br/>
 					<br/>
