@@ -15,14 +15,6 @@ const styles = ({
     marginBottom: '1px',
     borderRadius: '7px',
   },
-  stepLabelActive: {
-    height: '30px',
-    width: '150px',
-    paddingTop: '7px',
-    marginBottom: '1px',
-    border: '1px solid #04619f',
-    borderRadius: '7px',
-  },
   stepLabelPulse: {
     height: '30px',
     width: '150px',
@@ -38,10 +30,8 @@ const theme = createMuiTheme({
     MuiStepper: {
       root: {
         width: '100%',
-        padding: '10px 10px 10px 10px',
-        margin: '10px',
-        border: '1px solid black',
-        borderRadius: '10px',
+        padding: '10px 7px 10px 7px',
+        borderBottom: '1px solid black',
       },
     },
     MuiStepIcon: {
@@ -143,7 +133,7 @@ class Trackbar extends Component {
               if (index === this.state.activeStep) {
                 // active step only flashes on JobInProgress
                 labelStyle = 
-                  index < 2 ? labelStyle = classes.stepLabelActive : classes.stepLabelPulse;
+                  index < 2 ? labelStyle = classes.stepLabel : classes.stepLabelPulse;
               }
               else {
                 labelStyle = classes.stepLabel;
