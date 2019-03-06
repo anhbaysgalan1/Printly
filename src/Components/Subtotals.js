@@ -34,10 +34,6 @@ const theme = createMuiTheme({
 
 const styles = ({
 	root: {
-		display: 'inline-flex',
-		flexDirection: 'columns',
-		padding: '1.5em',
-		marginTop: '0.5em',
 		backgroundColor: 'white',
 		border: '1px solid black',
 		borderRadius: '10px',

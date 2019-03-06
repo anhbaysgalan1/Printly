@@ -64,7 +64,7 @@ const styles = ({
 		display: 'inline-flex',
 		flexDirection: 'rows',
 		paddingTop: '1em',
-		margin: '0px 10px 0px 10px',
+		marginRight: '5px',
   },
   formControl: {
 		borderRight: '1px solid gray',

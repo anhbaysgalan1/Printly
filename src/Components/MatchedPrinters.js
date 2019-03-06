@@ -434,31 +434,34 @@ class MatchedPrinters extends Component {
 					</Button>
 				</div>
 				<div id="matches_div">
-					<div className="settings">
+					<div className="matches_bar">
+						<div className="settings_div">
 							<Settings
-								pricesPerPage={this.props.pricesPerPage}
-								printOptions={this.props.printOptions}
-								handleChange={this.handleSettingsChange}
-								print_options_state={this.state.print_options}	
-								optionInfo={this.props.optionInfo}
-								data={this.state.selected_pricing}
+									pricesPerPage={this.props.pricesPerPage}
+									printOptions={this.props.printOptions}
+									handleChange={this.handleSettingsChange}
+									print_options_state={this.state.print_options}	
+									optionInfo={this.props.optionInfo}
+									data={this.state.selected_pricing}
+									deliv_fee={deliv_cost}
+									copies={this.state.print_options.copies}
+								/>
+						</div>
+						<div className="subtotals_div">
+							<Subtotals
+								price={this.state.subtotal}
 								deliv_fee={deliv_cost}
-								copies={this.state.print_options.copies}
+								handling_fee={this.state.handling_fee}
 							/>
+						</div>
 					</div>
+					
 					<SortDropDown options={SortOptions} onChange={this.handleSortChange} value={this.state.sort_by}></SortDropDown>
 					<div className="printer_container">
 						{printer_data}
 					</div>
 				</div>
 			</div>
-			<div>
-				<Subtotals price={this.state.subtotal}
-							deliv_fee={deliv_cost}
-							handling_fee={this.state.handling_fee}>
-							</Subtotals>
-			</div>
-
 			{this.state.showConfirmPopup ?
 				<ConfirmPopup
 					closePopup={this.closePopup}

@@ -151,7 +151,21 @@ html, body {
 
 #matches_div {
   display: inline-block;
-  width: 89%;
+  width: 100%;
+}
+
+.matches_bar {
+  display: grid;
+  grid-template-columns: 88% 12%;
+  margin: 0px 10px 0px 10px;
+}
+
+.settings_div {
+  display: inline-block;
+}
+
+.subtotals_div {
+  display: inline-block;
 }
 
 .printer_header{
