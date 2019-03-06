@@ -12,139 +12,174 @@ import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/
 
 const theme = createMuiTheme({
   overrides: {
-	MuiFormLabel: {
-	  root: {
-		'&$focused': {
-		  color: 'grey',
+		MuiFormLabel: {
+	  	root: {
+				'&$focused': {
+		  	color: 'grey',
+			},
+	  },
+	},
+		MuiOutlinedInput: {
+	  	root: {
+				margin: '2px',
+	  	},
 		},
-	  },
-	},
-	MuiOutlinedInput: {
-	  root: {
-		margin: '2px',
-	  },
-	},
-	MuiRadio: {
-	  colorSecondary: {
-		'&$checked': {
-		  color: '#04619f',
-		}
-	  },
-	},
+		MuiRadio: {
+	  	colorSecondary: {
+				'&$checked': {
+		  		color: '#04619f',
+				}
+	  	},
+		},
+		MuiSvgIcon: {
+			root: {
+				fontSize: '1em',
+				marginRight: '-8px',
+			},
+		},
+		MuiIconButton: {
+			root: {
+				padding: '5px 15px 5px 10px'
+			},
+		},
   },
+});
+
+const tooltipTheme = createMuiTheme({
+	overrides: {
+		MuiSvgIcon: {
+			root: {
+				fontSize: '12px',
+				marginLeft: '5px',
+			},
+		},
+	},
 });
 
 const styles = ({
-  root: {
-	backgroundColor: 'white',
-	border: '1px solid black',
-	borderRadius: '10px',
-	display: 'inline-flex',
-	flexDirection: 'rows',
-	paddingTop: '1em',
-	margin: '0.5em'
+	root: {
+		backgroundColor: 'white',
+		border: '1px solid black',
+		borderRadius: '10px',
+		display: 'inline-flex',
+		flexDirection: 'rows',
+		paddingTop: '1em',
+		margin: '0px 10px 0px 10px',
   },
   formControl: {
-	borderRight: '1px solid gray',
-	paddingLeft: '15px',
-	marginBottom: '5px',
+		borderRight: '1px solid gray',
+		paddingLeft: '15px',
+		marginBottom: '5px',
+	},
+	formControlCopies: {
+		padding: '0 1em 0 1em',
+		marginBottom: '5px',
   },
   group: {
-	//margin: `${theme.spacing.unit}px 0`,
-	margin: '0.1em',
-	marginBottom: '1em'
+		//margin: `${theme.spacing.unit}px 0`,
+		margin: '0.1em',
+		marginBottom: '1em'
   },
 });
 
-
-
 class Settings extends React.Component{
-  
   render() {
-	const { classes } = this.props;
-	const optionButtons = Object.entries(this.props.printOptions).map((options) => {
-	  let name = options[0]
-	  let opts = Object.entries(options[1]).map((val) => {
-		return (
-			<FormControlLabel value={val[1]} control={<Radio/>} label={val[1]}/>
-		  );
+		const { classes } = this.props;
+		const optionButtons = Object.entries(this.props.printOptions).map((options) => {
+			let name = options[0]
+			let opts = Object.entries(options[1]).map((val) => {
+				return (
+					<FormControlLabel value={val[1]} control={<Radio/>} label={val[1]}/>
+				);
+			});
+
+			if(name === "Transfer") {
+				return (
+					<div>
+						<MuiThemeProvider theme={theme}>
+							<FormControl component="fieldset" className={classes.formControl}>	
+								<FormLabel component="legend">
+									{name}
+									<MuiThemeProvider theme={tooltipTheme}>
+										<Tooltip title={this.props.optionInfo[name]} placement="top">
+											<HelpOutline style={{color: 'grey'}}/>
+										</Tooltip>
+									</MuiThemeProvider>
+								</FormLabel>
+								<RadioGroup row
+														name={name}
+														className={classes.group}
+														value={this.props.print_options_state[name]}
+														onChange={(e) => this.props.handleChange(name, e)}>
+									{opts}
+								</RadioGroup>
+								<div style={{textAlign: 'center', color: 'grey', marginLeft: '-12%', marginTop:'-8%'}}>
+									{(this.props.print_options_state[name] === "Delivery") && (this.props.deliv_fee === 0.0) ?
+										<p>(No printer selected)</p>
+										:
+										<p>+${this.props.deliv_fee}</p>}
+								</div>
+							</FormControl>
+						</MuiThemeProvider>
+					</div>
+				)
+			}
+			else {
+				return (
+					<div>
+						<MuiThemeProvider theme={theme}>
+							<FormControl component="fieldset" className={classes.formControl}>	
+								<FormLabel component="legend">
+									{name}
+									<MuiThemeProvider theme={tooltipTheme}>
+										<Tooltip title={this.props.optionInfo[name]} placement="top">
+											<HelpOutline style={{color: 'grey'}}/>
+										</Tooltip>
+									</MuiThemeProvider>
+								</FormLabel>
+								<RadioGroup row
+														name={name}
+														className={classes.group}
+														value={this.props.print_options_state[name]}
+														onChange={(e) => this.props.handleChange(name, e)}>
+									{opts}
+								</RadioGroup>
+								<div style={{textAlign: 'center', color: 'grey', marginLeft: '-12%', marginTop: '-8%'}}>
+									<p>+${this.props.data[name]}/copy</p>
+								</div>
+							</FormControl>
+						</MuiThemeProvider>
+					</div>
+				)
+			}
 		});
-		if(name === "Transfer") {
-			return (
-				<div>
-				  <MuiThemeProvider theme={theme}>
-				  <Tooltip title={this.props.optionInfo[name]} placement="top">
-						<HelpOutline style={{color: 'grey'}}/>
-					  </Tooltip>
-					<FormControl component="fieldset" className={classes.formControl}>
-					  
-					  <FormLabel component="legend">{name}</FormLabel>
-					  <RadioGroup row
-						name={name}
-						className={classes.group}
-						value={this.props.print_options_state[name]}
-						onChange={(e) => this.props.handleChange(name, e)}
-					  >
-						{opts}
-					  </RadioGroup>
-					  {(this.props.print_options_state[name] === "Delivery") && (this.props.deliv_fee === 0.0) ?
-					    <p style={{color: 'grey'}}>(Please select a printer)</p>
-					    :
-					    <p style={{color: 'grey'}}>+${this.props.deliv_fee}</p>
-					  }
-					</FormControl>
-				  </MuiThemeProvider>
-				</div>
-		)}
-		else {
-		  return (
-			<div>
-			  <MuiThemeProvider theme={theme}>
-			  <Tooltip title={this.props.optionInfo[name]} placement="top">
-					<HelpOutline style={{color: 'grey'}}/>
-				  </Tooltip>
-				<FormControl component="fieldset" className={classes.formControl}>
-				  
-				  <FormLabel component="legend">{name}</FormLabel>
-				  <RadioGroup row
-					name={name}
-					className={classes.group}
-					value={this.props.print_options_state[name]}
-					onChange={(e) => this.props.handleChange(name, e)}
-				  >
-					{opts}
-				  </RadioGroup>
-				  <p style={{color: 'grey'}}>+${this.props.data[name]}/copy</p>
-				</FormControl>
-			  </MuiThemeProvider>
-			</div>
-		  )}
-		}
-	);
 
 	return (
 	  <div className="specific_setting">
 			<div className={classes.root}>
 			  {optionButtons}
 			  <MuiThemeProvider theme={theme}>
-				<TextField
-				id="outlined-number"
-				label="Number of Copies"
-				value={this.props.print_options_state.copies}
-				onChange={(e) => this.props.handleChange('copies', e)}
-				type="number"
-				InputLabelProps={{
-				  minvalue: 1,
-				}}
-				margin="normal"
-				variant="outlined"
-			  />
+					<FormControl component="fieldset" className={classes.formControlCopies}>
+						<FormLabel component="legend">
+							Copies Needed
+						</FormLabel>
+						<TextField
+							id="outlined-number"
+							value={this.props.print_options_state.copies}
+							onChange={(e) => this.props.handleChange('copies', e)}
+							type="number"
+							InputLabelProps={{
+								minvalue: 1,
+							}}
+							margin="normal"
+							variant="outlined"
+						/>
+					</FormControl>
 			</MuiThemeProvider>
 			</div>
 		  </div>
 	);
   }
 }
-
 
 export default withStyles(styles)(Settings);

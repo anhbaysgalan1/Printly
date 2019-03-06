@@ -12,25 +12,23 @@ html, body {
   padding-top: 5px;
   padding-bottom: 2px;
   display: inline-block;
-  width: 96%;
+  width: 100%;
 }
 
 .buttonright{
   float: right;
-  margin-right: 5%;
+  right: 10px;
 }
 
 .buttoncenter{
-  margin-left: 2.5%;
-  float:left;
+  float: left;
+  left: 10px;
 }
 
 .buttonleft{
-  margin-left: 2.5%;
-  float:left;
+  float: left;
+  left: 10px;
 }
-
-
 
 /*
 .flashit{
@@ -64,7 +62,6 @@ html, body {
 }
 
 .posn {
-  
   margin-right: 40px;
 }
 
@@ -155,7 +152,6 @@ html, body {
 #matches_div {
   display: inline-block;
   width: 89%;
-  float: left;
 }
 
 .printer_header{
@@ -168,6 +164,7 @@ html, body {
 
 .printer_info{
   display: inline-block;
+  vertical-align: top;
   background-color: white;
   width: 260px;
   height: 260px;
