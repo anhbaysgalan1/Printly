@@ -13,6 +13,11 @@ const theme = createMuiTheme({
 				paddingBottom: '0px',
 			},
 		},
+		MuiTypography: {
+			subheading: {
+				fontWeight: 'bold',
+			},
+		},
 		MuiListItem: {
 			root: {
 				paddingTop: '2px',

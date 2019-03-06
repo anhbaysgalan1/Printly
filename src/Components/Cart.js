@@ -13,6 +13,11 @@ const theme = createMuiTheme({
 				paddingBottom: '0px',
 			},
 		},
+		MuiTypography: {
+			root: {
+				fontWeight: 'bold',
+			},
+		},
 		MuiListItem: {
 			root: {
 				paddingTop: '2.5px',
@@ -32,6 +37,7 @@ const styles = ({
 		backgroundColor: 'white',
 		border: '1px solid black',
 		borderRadius: '10px',
+		fontWeight: 'bold',
 	},
 });
 
@@ -83,7 +89,7 @@ class Cart extends React.Component {
 						</ListItem>
 						<Divider/>
 						<ListItem>
-							<ListItemText primary="Grand Total" className = "flashit"
+							<ListItemText primary="Grand Total"
 											secondary={this.prettyText(parseFloat(this.props.price) + parseFloat(this.props.deliv_fee))}/>
 						</ListItem>
 					</List>
