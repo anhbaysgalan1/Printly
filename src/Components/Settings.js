@@ -87,7 +87,11 @@ class Settings extends React.Component{
 					  >
 						{opts}
 					  </RadioGroup>
-					  <p style={{color: 'grey'}}>+${this.props.deliv_fee}</p>
+					  {(this.props.print_options_state[name] === "Delivery") && (this.props.deliv_fee === 0.0) ?
+					    <p style={{color: 'grey'}}>(Please select a printer)</p>
+					    :
+					    <p style={{color: 'grey'}}>+${this.props.deliv_fee}</p>
+					  }
 					</FormControl>
 				  </MuiThemeProvider>
 				</div>
@@ -138,47 +142,6 @@ class Settings extends React.Component{
 			</MuiThemeProvider>
 			</div>
 		  </div>
-	);
-  }
-}
-
-
-class ToolTip extends React.Component {
-  state = {
-	open: false,
-  }
-
-  handleClose = () => {
-	this.setState({ open: false});
-  }
-
-  handleOpen = () => {
-	this.setState({ open: true });
-  }
-
-  handleSwitch = () => {
-	this.setState({ open: !this.state.open })
-  }
-
-  render() {
-	return (
-	  //<ClickAwayListener onClickAway={this.handleTooltipClose}>
-		  <div>
-			<Tooltip
-			  PopperProps={{
-				disablePortal: true,
-			  }}
-			  onClose={this.handleClose}
-			  open={this.state.open}
-			  disableFocusListener
-			  disableHoverListener
-			  disableTouchListener
-			  title="Add"
-			>
-			  <HelpOutline onClick={this.handleSwitch}>Click</HelpOutline>
-			</Tooltip>
-		  </div>
-	  //</ClickAwayListener>
 	);
   }
 }
