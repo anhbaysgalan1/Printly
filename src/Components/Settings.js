@@ -69,28 +69,53 @@ class Settings extends React.Component{
 			<FormControlLabel value={val[1]} control={<Radio/>} label={val[1]}/>
 		  );
 		});
-		
-	  return (
-	  	<div>
-          <MuiThemeProvider theme={theme}>
-          <Tooltip title={this.props.optionInfo[name]} placement="top">
-                <HelpOutline style={{color: 'grey'}}/>
-              </Tooltip>
-            <FormControl component="fieldset" className={classes.formControl}>
-              
-              <FormLabel component="legend">{name}</FormLabel>
-              <RadioGroup row
-                name={name}
-                className={classes.group}
-                value={this.props.print_options_state[name]}
-                onChange={(e) => this.props.handleChange(name, e)}
-              >
-                {opts}
-              </RadioGroup>
-            </FormControl>
-          </MuiThemeProvider>
-        </div>
-	  )}
+		if(name === "Transfer") {
+			return (
+				<div>
+				  <MuiThemeProvider theme={theme}>
+				  <Tooltip title={this.props.optionInfo[name]} placement="top">
+						<HelpOutline style={{color: 'grey'}}/>
+					  </Tooltip>
+					<FormControl component="fieldset" className={classes.formControl}>
+					  
+					  <FormLabel component="legend">{name}</FormLabel>
+					  <RadioGroup row
+						name={name}
+						className={classes.group}
+						value={this.props.print_options_state[name]}
+						onChange={(e) => this.props.handleChange(name, e)}
+					  >
+						{opts}
+					  </RadioGroup>
+					  <p style={{color: 'grey'}}>+${this.props.deliv_fee}</p>
+					</FormControl>
+				  </MuiThemeProvider>
+				</div>
+		)}
+		else {
+		  return (
+			<div>
+			  <MuiThemeProvider theme={theme}>
+			  <Tooltip title={this.props.optionInfo[name]} placement="top">
+					<HelpOutline style={{color: 'grey'}}/>
+				  </Tooltip>
+				<FormControl component="fieldset" className={classes.formControl}>
+				  
+				  <FormLabel component="legend">{name}</FormLabel>
+				  <RadioGroup row
+					name={name}
+					className={classes.group}
+					value={this.props.print_options_state[name]}
+					onChange={(e) => this.props.handleChange(name, e)}
+				  >
+					{opts}
+				  </RadioGroup>
+				  <p style={{color: 'grey'}}>+${this.props.data[name]}/copy</p>
+				</FormControl>
+			  </MuiThemeProvider>
+			</div>
+		  )}
+		}
 	);
 
 	return (
@@ -132,16 +157,16 @@ class ToolTip extends React.Component {
   }
 
   handleSwitch = () => {
-  	this.setState({ open: !this.state.open })
+	this.setState({ open: !this.state.open })
   }
 
   render() {
 	return (
 	  //<ClickAwayListener onClickAway={this.handleTooltipClose}>
-	      <div>
+		  <div>
 			<Tooltip
 			  PopperProps={{
-			    disablePortal: true,
+				disablePortal: true,
 			  }}
 			  onClose={this.handleClose}
 			  open={this.state.open}
@@ -152,8 +177,8 @@ class ToolTip extends React.Component {
 			>
 			  <HelpOutline onClick={this.handleSwitch}>Click</HelpOutline>
 			</Tooltip>
-	      </div>
-      //</ClickAwayListener>
+		  </div>
+	  //</ClickAwayListener>
 	);
   }
 }

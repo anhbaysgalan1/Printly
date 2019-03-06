@@ -3,6 +3,7 @@ import firebase from "firebase";
 import Settings from './Settings.js';
 import Cart from './Cart.js'
 import Trackbar from './Trackbar';
+import Subtotals from './Subtotals'
 import Button from '@material-ui/core/Button';
 import SortDropDown from './SortDropDown.js';
 import PropTypes from 'prop-types';
@@ -65,6 +66,7 @@ class MatchedPrinters extends Component {
 						min_rating: 1
 				},
 				selected_pricing: {
+					Transfer: '0.00',
 					Sided: '0.00',
 					Orientation: '0.00',
 					Quality: '0.00',
@@ -149,6 +151,7 @@ class MatchedPrinters extends Component {
 			selected_printer_image: printer_image,
 			selected_printer_data: printer_data
 		});
+		this.calcIndivPrices();
 	}
 
 	handlePageChange = (new_page, new_printer_data, new_printer_img, new_cost, new_Transfer) => {
@@ -164,6 +167,15 @@ class MatchedPrinters extends Component {
 			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the Transfer option
 			if(option_selection === null) {
 				new_prices[option] = '0.00'
+			}
+			if(option === "Transfer") { 
+				let deliv_cost = 0.0;
+				if (this.state.print_options.Transfer === "Delivery" && this.state.selected_printer_data != null) {
+					deliv_cost =
+						(this.props.pricesPerPage.Transfer[1] * this.state.selected_printer_data["Distance"]).toFixed(2);
+				}
+				new_prices[option] = deliv_cost;
+		
 			}
 			else {
 				let selection_index = this.props.printOptions[option].indexOf(option_selection)
@@ -205,7 +217,7 @@ class MatchedPrinters extends Component {
 			total_cost += this.props.pricesPerPage.Color[1] * copies;
 
 		total_cost += parseFloat(this.state.handling_fee);
-		console.log("total cost:", total_cost);
+		// console.log("total cost:", total_cost);
 
 		return total_cost;
 	};
@@ -385,6 +397,7 @@ class MatchedPrinters extends Component {
 			deliv_cost =
 				(this.props.pricesPerPage.Transfer[1] * this.state.selected_printer_data["Distance"]).toFixed(2);
 		}
+		
 
 		//<MuiThemeProvider theme={theme}>
 		// THIS WAS WRAPPING NAVIGATION BUTTONS			
@@ -428,6 +441,9 @@ class MatchedPrinters extends Component {
 								handleChange={this.handleSettingsChange}
 								print_options_state={this.state.print_options}	
 								optionInfo={this.props.optionInfo}
+								data={this.state.selected_pricing}
+								deliv_fee={deliv_cost}
+								copies={this.state.print_options.copies}
 							/>
 					</div>
 					<SortDropDown options={SortOptions} onChange={this.handleSortChange} value={this.state.sort_by}></SortDropDown>
@@ -436,17 +452,11 @@ class MatchedPrinters extends Component {
 					</div>
 				</div>
 			</div>
-			<div className="MatchedPrintersSidebar">
-				<div id="cart">
-					<Cart
-						data={this.state.selected_pricing}
-						price={this.state.subtotal}
-						copies={this.state.print_options.copies}
-						handling_fee={this.state.handling_fee}
-						deliv_fee={deliv_cost}
-					/>
-				</div>
-				
+			<div>
+				<Subtotals price={this.state.subtotal}
+							deliv_fee={deliv_cost}
+							handling_fee={this.state.handling_fee}>
+							</Subtotals>
 			</div>
 
 			{this.state.showConfirmPopup ?
@@ -467,6 +477,19 @@ class MatchedPrinters extends Component {
 	}
 }
 
+
+// <div className="MatchedPrintersSidebar">
+// 				<div id="cart">
+// 					<Cart
+// 						data={this.state.selected_pricing}
+// 						price={this.state.subtotal}
+// 						copies={this.state.print_options.copies}
+// 						handling_fee={this.state.handling_fee}
+// 						deliv_fee={deliv_cost}
+// 					/>
+// 				</div>
+				
+// 			</div>
 
 class PrinterInfo extends Component {
 		constructor(){
