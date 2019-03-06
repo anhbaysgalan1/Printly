@@ -505,8 +505,15 @@ class PrinterInfo extends Component {
 				for (let i = 0; i < Math.round(this.props.data["Rating"]); i++){
 						stars.push(<span className="fa fa-star checked" key={i}></span>)
 				}
+				let imageRef = firebase.storage().ref().child('id_pictures/' + this.props.data["name"] + ".png");
+				imageRef.getDownloadURL().then((url) => {
+					document.getElementById(this.props.data["id"]).src = url;
+					//console.log("got url chaning id", this.props.data["id"], this.props.data["name"]);
+				}).catch(function (error) {
+					//console.log(error);
+				});
 				
-				let image = <img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
+				let image = <img id={this.props.data["id"]} src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
 				
 				let classname = this.props.isSelected === true ? "selected_printer_info" : "printer_info";
 

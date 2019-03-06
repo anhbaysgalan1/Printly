@@ -193,6 +193,7 @@ html, body {
 .printer_image{
   display: inline-block;
   width: 50%;
+  height: 50%;
   margin: 7px;
 }
 
