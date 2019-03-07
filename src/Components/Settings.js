@@ -119,7 +119,7 @@ class Settings extends React.Component{
 								</RadioGroup>
 								<div style={{textAlign: 'center', color: 'grey', marginLeft: '-12%', marginTop:'-8%'}}>
 									{(this.props.print_options_state[name] === "Delivery") && (this.props.deliv_fee === 0.0) ?
-										<p>(No printer selected)</p>
+										<p>Please select a printer</p>
 										:
 										<p>+${this.props.deliv_fee}</p>}
 								</div>
@@ -153,7 +153,7 @@ class Settings extends React.Component{
 									{opts}
 								</RadioGroup>
 								<div style={{textAlign: 'center', color: 'grey', marginLeft: '-12%', marginTop: '-8%'}}>
-									<p>+${this.props.data[name]}/copy</p>
+									<p>+${(parseFloat(this.props.data[name])*this.props.copies).toFixed(2)}</p>
 								</div>
 							</FormControl>
 						</MuiThemeProvider>

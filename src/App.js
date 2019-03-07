@@ -50,6 +50,7 @@ class App extends Component {
 			printer_img: null,
 			selected_file_url: null,
 			selected_file_name: null,
+			selected_file_size: null,
 			price: 0.0,
 			print_options: {
 				Transfer: null,
@@ -72,6 +73,14 @@ class App extends Component {
 				selected_file_url: null,
 				selected_file_name: null
 			})
+		}
+
+		if (newPage === PageEnum.MATCHEDPRINTERS) {
+			let self = this;
+			let fileRef = firebase.storage().ref().child('printQueue/' + this.state.selected_file_name);
+			fileRef.getMetadata().then(function(metadata) {
+				self.setState({ selected_file_size: (metadata.size/1000) });
+			});
 		}
 
 		this.setState({
@@ -170,6 +179,7 @@ class App extends Component {
 									printOptions={printOptions}
 									pricesPerPage={pricesPerPage}
 									optionInfo={optionInfo}
+									file_size={this.state.selected_file_size}
 								/>
 				break;
 

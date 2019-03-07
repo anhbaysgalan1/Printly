@@ -193,32 +193,31 @@ class MatchedPrinters extends Component {
 
 	calcCost = () => {
 		let total_cost = 0.0;
-		let copies = this.state.print_options.copies;
 
 		if (this.state.print_options.Sided === 'Single')
-			total_cost += this.props.pricesPerPage.Sided[0] * copies;
+			total_cost += this.props.pricesPerPage.Sided[0];
 		else if (this.state.print_options.Sided === 'Double')
-			total_cost += this.props.pricesPerPage.Sided[1] * copies;
+			total_cost += this.props.pricesPerPage.Sided[1];
 
 		if (this.state.print_options.Orientation === 'Portrait')
-			total_cost += this.props.pricesPerPage.Orientation[0] * copies;
+			total_cost += this.props.pricesPerPage.Orientation[0];
 		else if (this.state.print_options.Orientation === 'Landscape')
-			total_cost += this.props.pricesPerPage.Orientation[1] * copies;
+			total_cost += this.props.pricesPerPage.Orientation[1];
 
 		if (this.state.print_options.Quality === 'Low')
-			total_cost += this.props.pricesPerPage.Quality[0] * copies;
+			total_cost += this.props.pricesPerPage.Quality[0];
 		else if (this.state.print_options.Quality === 'Medium')
-			total_cost += this.props.pricesPerPage.Quality[1] * copies;
+			total_cost += this.props.pricesPerPage.Quality[1];
 		else if (this.state.print_options.Quality === 'High')
-			total_cost += this.props.pricesPerPage.Quality[2] * copies;
+			total_cost += this.props.pricesPerPage.Quality[2];
 
 		if (this.state.print_options.Color === 'Black & White')
-			total_cost += this.props.pricesPerPage.Color[0] * copies;
+			total_cost += this.props.pricesPerPage.Color[0];
 		else if (this.state.print_options.Color === 'Color')
-			total_cost += this.props.pricesPerPage.Color[1] * copies;
+			total_cost += this.props.pricesPerPage.Color[1];
 
+		total_cost = total_cost * this.props.file_size*0.05 * this.state.print_options.copies;
 		total_cost += parseFloat(this.state.handling_fee);
-		// console.log("total cost:", total_cost);
 
 		return total_cost;
 	};
@@ -311,7 +310,6 @@ class MatchedPrinters extends Component {
 				this.setState({
 					sort_by: new_val
 				});
-				//console.log("Will not sort on price when pickup selected");
 			}
 		} else {
 			//console.log("Unkown sort key given to sortPrinters, returning original");
@@ -320,9 +318,6 @@ class MatchedPrinters extends Component {
 				sort_by: new_val
 			});
 		}
-		//console.log("returning sorted: ", new_matched);
-		
-		
 		return new_matched;
 	};
 
