@@ -33,6 +33,15 @@ html, body {
   margin: auto;
 }
 
+.trackbar_container{
+  border-bottom: 10px solid #3586c7;
+  border-top: 5px solid #09273f;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
 /*.wrap {
     width: 100vw;
     height: 600px;
@@ -100,8 +109,8 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
   height: 8vh;
   font-size: 25px;
   color: white;
-  background-image: linear-gradient(125deg, #003d60 84%, white 0);
-  border-bottom: 1px solid black;
+  background-color: #3586c7;
+  border-bottom: 5px solid #09273f;
 }
 
 .App {
