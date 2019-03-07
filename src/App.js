@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from './Components/Home.js';
 import MatchedPrinters from './Components/MatchedPrinters.js';
 import JobInProgress from './Components/JobInProgress.js';
+import SignIn from './Components/SignIn.js';
 import firebase from 'firebase';
 import './App.css';
 
@@ -12,8 +13,10 @@ var config = {
     storageBucket: "printly.appspot.com",
 };
 firebase.initializeApp(config);
+firebase.auth().signOut();
 
 const PageEnum = {
+	SIGNIN : 0,
 	HOME : 1,
 	MATCHEDPRINTERS : 2,
 	JOBINPROGRESS : 3,
@@ -45,7 +48,9 @@ class App extends Component {
 		super();
 
 		this.state = {
-			page : PageEnum.HOME,
+			page: PageEnum.SIGNIN,
+			userID: null,
+			email: null,
 			printer_data: null,
 			printer_img: null,
 			selected_file_url: null,
@@ -65,6 +70,27 @@ class App extends Component {
 		window.onbeforeunload = () => {this.deleteSelectedFile();};
 	}
 
+	componentDidMount = () => {
+		firebase.auth().onAuthStateChanged(user => {
+			this.setState({
+				userID : user ? user.uid : ""
+			});
+
+			if (user) {
+				this.setState({
+					page: PageEnum.HOME,
+					email: user.email,
+				});
+			}
+			else {
+				this.setState({ 
+					page: PageEnum.SIGNIN,
+					email: null,
+				});
+			}
+		});
+    }
+
 	changePage = (newPage, new_printer_data, new_printer_img) => {
 		// purge file data from previous job, if any
 		if (newPage === PageEnum.HOME) {
@@ -82,10 +108,6 @@ class App extends Component {
 				self.setState({ selected_file_size: (metadata.size/1000) });
 			});
 		}
-
-		this.setState({
-			page: newPage,
-		});
 		
 		if (newPage === PageEnum.JOBINPROGRESS)
 		{
@@ -94,6 +116,10 @@ class App extends Component {
 				printer_img: new_printer_img
 			})
 		}
+
+		this.setState({
+			page: newPage,
+		});
 	}
 
 	updateCost = (new_cost, new_transfer) => {
@@ -160,9 +186,14 @@ class App extends Component {
 		let current_page = null;
 
 		switch (this.state.page) {
+			case PageEnum.SIGNIN:
+				current_page = <SignIn/>
+				break;
+
 			case PageEnum.HOME:
 				current_page = <Home
 									PageEnum={PageEnum}
+									email={this.state.email}
 									changePage={this.changePage}
 									chooseFile={this.chooseFile}
 									uploadDoc={this.uploadDoc}
@@ -173,6 +204,7 @@ class App extends Component {
 			case PageEnum.MATCHEDPRINTERS:
 				current_page = <MatchedPrinters
 									PageEnum={PageEnum}
+									email={this.state.email}
 									changePage={this.changePage}
 									updateCost={this.updateCost}
 									updatePrintOptions={this.updatePrintOptions}
@@ -186,6 +218,7 @@ class App extends Component {
 			case PageEnum.JOBINPROGRESS:
 				current_page = <JobInProgress
 									PageEnum={PageEnum}
+									email={this.state.email}
 									changePage={this.changePage}
 									printer_data={this.state.printer_data}
 									printer_img={this.state.printer_img}
