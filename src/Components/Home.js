@@ -31,18 +31,6 @@ class Home extends Component {
 				</div>
 				<Trackbar activeStep={0} />
 				<div className="navigation">
-					<Button
-					  variant="outlined"
-					  component="label"
-					  className={temp_center} //{classes.button}
-					>
-					  Upload File
-					   <input type="file" 
-					  style={{display: 'none'}}
-					  onChange={this.props.chooseFile}>
-						</input>
-					</Button>
-
 					<Button  variant="outlined" 
 						color="inherit" 
 						className={temp_right}//{classes.button}
@@ -52,7 +40,28 @@ class Home extends Component {
 				</Button>
 				</div>
 				{this.props.selected_file_url === null ?
-				<div className="homeInfo">HELLO!</div>
+				<div className="homeInfo">
+					<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo.png?alt=media&token=d339ba8b-b16f-4c4b-8fce-e56e2ddfdf29' className="logo" alt="logo"/>
+					<br/>
+					<br/>
+					Welcome to printly! It's Uber for your papers! 
+					<br/>
+					Select the button below to upload a file for printing! 
+					<br/>
+					<br/>
+					<br/>
+					<Button
+						variant="outlined"
+						component="label"
+						className={temp_center} //{classes.button}
+						>
+						Upload File
+						<input type="file" 
+							style={{display: 'none'}}
+							onChange={this.props.chooseFile}>
+						</input>
+					</Button>
+				</div>
 				:
 				<div id="file_preview">
 					<FilePreview file_url={this.props.selected_file_url}/>
