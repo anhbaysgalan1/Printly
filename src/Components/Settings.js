@@ -6,7 +6,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import TextField from '@material-ui/core/TextField';
 import HelpOutline from '@material-ui/icons/HelpOutline';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+//import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Tooltip from '@material-ui/core/Tooltip'
 import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 

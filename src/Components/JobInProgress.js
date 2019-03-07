@@ -50,7 +50,7 @@ class JobInProgress extends Component {
 			let rating_ref = printer_ref.child('Rating');
 			rating_ref.set(rating_total/rating_count);
 
-			if (comment != "")
+			if (comment !== "")
 			{
 				let comment_ref = firebase.database().ref(printer_path + "/comments");
 				comment_ref.push(comment);

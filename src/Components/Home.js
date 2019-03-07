@@ -5,7 +5,6 @@ import '../App.css';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import Input from '@material-ui/core/Input';
 
 const styles = theme => ({
 	button:{
@@ -23,7 +22,7 @@ class Home extends Component {
 		const { classes } = this.props;
 		let temp_center = classes.button + " buttoncenter";
 		let temp_right = classes.button + " buttonright";
-
+		
 		return (
 			<div>
 				<div className="title">
@@ -52,9 +51,13 @@ class Home extends Component {
 					Submit for Printing!
 				</Button>
 				</div>
+				{this.props.selected_file_url === null ?
+				<div className="homeInfo">HELLO!</div>
+				:
 				<div id="file_preview">
 					<FilePreview file_url={this.props.selected_file_url}/>
 				</div>
+				}
 			</div>
 		);
 	}

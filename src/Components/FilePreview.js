@@ -8,14 +8,14 @@ export default class FilePreview extends Component {
 		if(this.props.file_url) {
 			if(this.props.file_url.includes('.png') || this.props.file_url.includes('.jpg') || this.props.file_url.includes('.jpeg')) {
 				let y_val = window.innerHeight / 1.5;
-				let x_val = window.innerWidth;
+				//let x_val = window.innerWidth;
 				return (
-					<img src={this.props.file_url} height={y_val}></img>
+					<img src={this.props.file_url} height={y_val} alt="preview"></img>
 				)
 			}
 			else { 
 				return (
-					<iframe src={this.props.file_url} className="iframe" width='100%' height='100%' frameBorder='0'></iframe>
+					<iframe title="preview" src={this.props.file_url} className="iframe" width='100%' height='100%' frameBorder='0'></iframe>
 				);
 			}
 		}

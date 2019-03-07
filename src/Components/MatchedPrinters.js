@@ -1,24 +1,23 @@
 import React, { Component } from 'react';
 import firebase from "firebase";
 import Settings from './Settings.js';
-import Cart from './Cart.js'
 import Trackbar from './Trackbar';
 import Subtotals from './Subtotals'
 import Button from '@material-ui/core/Button';
 import SortDropDown from './SortDropDown.js';
 import PropTypes from 'prop-types';
-import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { withStyles} from '@material-ui/core/styles';//, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import '../App.css';
 
-const theme = createMuiTheme({
-	overrides: {
-		MuiButton: {
-			root: {
-				marginTop: '10px',
-			},
-		},
-	},
-})
+//const theme = createMuiTheme({
+//	overrides: {
+//		MuiButton: {
+//			root: {
+//				marginTop: '10px',
+//			},
+//		},
+//	},
+//})
 
 const styles = theme => ({
 	button:{
@@ -183,6 +182,8 @@ class MatchedPrinters extends Component {
 				option_price = option_price.toFixed(2);
 				new_prices[option] = option_price
 			}
+
+			return null;
 		})
 		//console.log('NEW PRICES : ' , new_prices)
 		this.setState({
@@ -287,20 +288,20 @@ class MatchedPrinters extends Component {
 		//console.log.log("printers before:", printers);
 		
 		let new_matched;
-		if (new_val == "Rating"){
+		if (new_val === "Rating"){
 			new_matched = this.sortDecreasing(printers, "Rating");
 			this.setState({
 				sort_by: new_val,
 				matching_printers : new_matched
 			});
-		} else if (new_val == "Distance"){
+		} else if (new_val === "Distance"){
 			new_matched = this.sortIncreasing(printers, "Distance");
 			this.setState({
 				sort_by: new_val,
 				matching_printers : new_matched
 			});
-		} else if (new_val == "Price"){
-			if (this.state.print_options["Transfer"] == 'Delivery'){
+		} else if (new_val === "Price"){
+			if (this.state.print_options["Transfer"] === 'Delivery'){
 				new_matched = this.sortIncreasing(printers, "Distance");
 				this.setState({
 					sort_by: new_val,
@@ -344,6 +345,8 @@ class MatchedPrinters extends Component {
 					i--;
 				}
 			}
+
+			return null;
 		});
 		
 		/// ---- Sort Printers will set the state
