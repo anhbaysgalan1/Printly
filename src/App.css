@@ -30,7 +30,52 @@ html, body {
 }
 
 .homeInfo{
-  margin: auto;
+  height: 100%;
+}
+
+.home_top_container{
+  background-color: white;
+  width: 100%;
+  position: absolute;
+  top: 9vh;
+  bottom: 50%;
+}
+
+.home_top_image{
+  justify-self: center;
+  margin-top: 2%;
+  height: 75%;
+  width: auto;
+}
+
+.home_bottom_container{
+  background-color: #D3D3D3;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  bottom: 100px;
+}
+
+.home_bottom_image{
+  margin-top: 100px;
+  height: 50%;
+  width: auto;
+}
+
+.home_upload_container{
+  justify-content: center;
+  background-color: #D3D3D3;  
+  position: absolute;
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
+  top: 47%;
+  left: 45%;
+  z-index: 5;
+  width: 10%;
+  border-radius: 10px;
 }
 
 .trackbar_container{
@@ -110,7 +155,7 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
   font-size: 25px;
   color: white;
   background-color: #3586c7;
-  border-bottom: 5px solid #09273f;
+  border-bottom: 1vh solid #09273f;
 }
 
 .App {
