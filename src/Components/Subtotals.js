@@ -3,6 +3,8 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import Tooltip from '@material-ui/core/Tooltip'
+import HelpOutline from '@material-ui/icons/HelpOutline';
 import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import '../App.css'
 
@@ -40,6 +42,17 @@ const theme = createMuiTheme({
 	},
 });
 
+const tooltipTheme = createMuiTheme({
+	overrides: {
+		MuiSvgIcon: {
+			root: {
+				fontSize: '18px',
+				marginLeft: '10px',
+			},
+		},
+	},
+});
+
 const styles = ({
 	root: {
 		height: '100%',
@@ -48,6 +61,8 @@ const styles = ({
 		borderRadius: '10px',
 	},
 });
+
+const calculation_explanation = "Grand Total = 4 + 0.05 * (Transfer + Sided + Quality + Color) * file_kB * Copies";
 
 class Subtotals extends React.Component {
 	prettyText = (input) => {
@@ -64,6 +79,11 @@ class Subtotals extends React.Component {
 						<ListItem>
 							<ListItemText primary="Grand Total" className = "flashit"
 											secondary={this.prettyText(parseFloat(this.props.price) + parseFloat(this.props.deliv_fee))}/>
+								<MuiThemeProvider theme={tooltipTheme}>
+									<Tooltip title={calculation_explanation} placement="top">
+										<HelpOutline style={{color: 'grey'}}/>
+									</Tooltip>
+								</MuiThemeProvider>
 						</ListItem>
 					</List>
 				</MuiThemeProvider>
