@@ -49,7 +49,7 @@ const tooltipTheme = createMuiTheme({
 	overrides: {
 		MuiSvgIcon: {
 			root: {
-				fontSize: '12px',
+				fontSize: '15px',
 				marginLeft: '5px',
 			},
 		},

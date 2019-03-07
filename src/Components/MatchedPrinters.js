@@ -566,9 +566,10 @@ class ConfirmPopup extends Component {
 			}
 
 		let job_description = null;
+		let delivery_cost = 0.0;
 		if (this.props.print_options.Transfer === 'Delivery')
 		{
-			let delivery_cost = this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.selected_printer_data["Distance"])
+			delivery_cost = this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.selected_printer_data["Distance"])
 			job_description = 
 				<div>
 					<div className="underline bold">ETA</div>
@@ -579,10 +580,6 @@ class ConfirmPopup extends Component {
 					Subtotal: ${this.props.subtotal.toFixed(2)}
 					<br/>
 					Delivery: ${delivery_cost.toFixed(2)}
-					<br/>
-					<br/>
-					<br/>
-					<div className="bold">Total Cost: ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
 				</div>
 		}
 		else
@@ -596,10 +593,6 @@ class ConfirmPopup extends Component {
 					<br/>
 					<div className="underline bold">Distance</div>
 					{this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"}
-					<br/>
-					<br/>
-					<br/>
-					<div className="bold">Total Cost: ${this.props.subtotal.toFixed(2)}</div>
 				</div>
 		}
 
@@ -631,6 +624,9 @@ class ConfirmPopup extends Component {
 						{job_description}
 					</div>
 					<br/>
+					<br/>
+					<br/>
+					<div className="bold" style={{fontSize: "18px"}}>Total Cost: ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
 					<br/>
 					<br/>
 					<Button variant="outlined"
