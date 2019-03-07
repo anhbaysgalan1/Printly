@@ -181,17 +181,19 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
 }
 
 .matches_bar {
-  display: grid;
-  grid-template-columns: 88% 12%;
-  margin: 0px 10px 0px 10px;
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
 .settings_div {
   display: inline-block;
+  margin-left: auto;
 }
 
 .subtotals_div {
   display: inline-block;
+  margin-right: auto;
 }
 
 .printer_header{

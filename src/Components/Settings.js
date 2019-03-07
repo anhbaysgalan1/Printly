@@ -100,11 +100,15 @@ class Settings extends React.Component{
 							<FormControl component="fieldset" className={classes.formControl}>	
 								<FormLabel component="legend">
 									{name}
-									<MuiThemeProvider theme={tooltipTheme}>
-										<Tooltip title={this.props.optionInfo[name]} placement="top">
-											<HelpOutline style={{color: 'grey'}}/>
-										</Tooltip>
-									</MuiThemeProvider>
+									{
+										this.props.optionInfo[name] != null ?
+										<MuiThemeProvider theme={tooltipTheme}>
+											<Tooltip title={this.props.optionInfo[name]} placement="top">
+												<HelpOutline style={{color: 'grey'}}/>
+											</Tooltip>
+										</MuiThemeProvider> :
+										null
+									}
 								</FormLabel>
 								<RadioGroup row
 														name={name}
@@ -131,11 +135,15 @@ class Settings extends React.Component{
 							<FormControl component="fieldset" className={classes.formControl}>	
 								<FormLabel component="legend">
 									{name}
-									<MuiThemeProvider theme={tooltipTheme}>
-										<Tooltip title={this.props.optionInfo[name]} placement="top">
-											<HelpOutline style={{color: 'grey'}}/>
-										</Tooltip>
-									</MuiThemeProvider>
+									{
+										this.props.optionInfo[name] != null ?
+										<MuiThemeProvider theme={tooltipTheme}>
+											<Tooltip title={this.props.optionInfo[name]} placement="top">
+												<HelpOutline style={{color: 'grey'}}/>
+											</Tooltip>
+										</MuiThemeProvider> :
+										null
+									}
 								</FormLabel>
 								<RadioGroup row
 														name={name}

@@ -29,10 +29,7 @@ const printOptions = {
 
 const optionInfo = {
 	Transfer: "Would you like to pick up your document, or have it delivered?",
-	Sided: "Would you like your document to be single- or double- sided?",
-	Orientation: "Is your document orientation landscape or portrait?",
 	Quality: "Select 'low' for everyday documents, 'medium' for important documents, and 'high' for photos.",
-	Color: "Would you like your documented to be printed in black & white or in color?"
 }
 
 const pricesPerPage = {
