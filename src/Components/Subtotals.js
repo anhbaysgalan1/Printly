@@ -16,24 +16,33 @@ const theme = createMuiTheme({
 		MuiTypography: {
 			subheading: {
 				fontWeight: 'bold',
+				fontSize: '1.2em',
+			},
+			body1: {
+				fontSize: '1.2em',
 			},
 		},
 		MuiListItem: {
 			root: {
-				paddingTop: '2px',
-				paddingBottom: '2px',
+				textAlign: 'center',
 			},
 			gutters: {
 				paddingLeft: '10px',
 				paddingRight: '10px',
-				paddingBottom: '5px'
-			}
+				paddingBottom: '10px',
+			},
+		},
+		MuiListItemText: {
+			root: {
+				paddingRight: '0',
+			},
 		},
 	},
 });
 
 const styles = ({
 	root: {
+		height: '100%',
 		backgroundColor: 'white',
 		border: '1px solid black',
 		borderRadius: '10px',
@@ -52,11 +61,6 @@ class Subtotals extends React.Component {
 			<div className={classes.root} >
 				<MuiThemeProvider theme={theme}>
 					<List>
-						<ListItem  key={"handling_fee"}>
-							<ListItemText primary={"Handling"} 
-										  secondary={this.prettyText(parseFloat(this.props.handling_fee))}/>
-						</ListItem>
-						<Divider />
 						<ListItem>
 							<ListItemText primary="Grand Total" className = "flashit"
 											secondary={this.prettyText(parseFloat(this.props.price) + parseFloat(this.props.deliv_fee))}/>
