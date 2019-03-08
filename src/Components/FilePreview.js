@@ -4,7 +4,6 @@ import "../App.css"
 
 export default class FilePreview extends Component {
 	render() {
-		console.log('FILE URL: ' , this.props.file_url);
 		if(this.props.file_url) {
 			if(this.props.file_url.includes('.png') || this.props.file_url.includes('.jpg') || this.props.file_url.includes('.jpeg')) {
 				let y_val = window.innerHeight / 1.5;
@@ -14,8 +13,10 @@ export default class FilePreview extends Component {
 				)
 			}
 			else { 
+				let encoded_url = encodeURIComponent(this.props.file_url);
+				let viewer_url = "https://docs.google.com/viewer?url=" + encoded_url + "&embedded=true";
 				return (
-					<iframe title="preview" src={this.props.file_url} className="iframe" width='100%' height='100%' frameBorder='0'></iframe>
+					<iframe title="preview" src={viewer_url} className="iframe" width='100%' height='100%' frameBorder='0'></iframe>
 				);
 			}
 		}
