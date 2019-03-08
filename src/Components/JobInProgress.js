@@ -106,6 +106,7 @@ class JobInProgress extends Component {
 		return (
 			<div>
 				<div className="title">
+					<div className="username">{this.props.email}</div>
 					<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo_new.png?alt=media&token=5b6207ee-4d0e-4a20-9e13-48933fe60432' className="logo" alt="logo"/>
 				</div>
 				{this.props.print_options['Transfer'] === 'Delivery' ? 
@@ -116,14 +117,14 @@ class JobInProgress extends Component {
 					<Trackbar activeStep={2} updateJobStatus={this.updateJobStatus}/>
 				</div>}
 				<div className="navigation">
-					<Button  variant="outlined" 
+					<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} variant="outlined" 
 							color="inherit" 
 							className={temp_left} 
 							onClick={() => this.setState({ showCancelPopup: true})}>
 						Cancel Job
 					</Button>
 
-					<Button  variant="outlined" 
+					<Button  style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} variant="outlined" 
 							color="inherit" 
 							className={temp_right} 
 							onClick={() => this.setState({ showDonePopup: true })}

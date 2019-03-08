@@ -420,6 +420,7 @@ class MatchedPrinters extends Component {
 		return (
 		<div>
 			<div className="title">
+				<div className="username">{this.props.email}</div>
 				<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo_new.png?alt=media&token=5b6207ee-4d0e-4a20-9e13-48933fe60432' className="logo" alt="logo"/>
 			</div>
 			<div>
@@ -431,14 +432,14 @@ class MatchedPrinters extends Component {
 					<Trackbar activeStep={1}/>
 				</div>}
 				<div className="navigation">
-				<Button className={temp_left}//{classes.button} 
+				<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_left}//{classes.button} 
 							variant="outlined"
 							color="inherit"
 							onClick={() => this.handlePageChange(
 								this.props.PageEnum.HOME)}>
 						Back to Home Page
 					</Button>
-					<Button className={temp_right}//{classes.button} 
+					<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_right}//{classes.button} 
 							variant="outlined"
 							color="inherit"
 							onClick={() => this.setState({ showConfirmPopup: true })}

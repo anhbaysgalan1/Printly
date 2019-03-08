@@ -148,11 +148,16 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
 .title {
   display: flex;
   align-items: center;
+  text-align: center;
   height: 8vh;
   font-size: 25px;
   color: white;
   background-color: #3586c7;
   border-bottom: 1vh solid #09273f;
+}
+
+.username {
+  margin-left: 20px;
 }
 
 .App {
