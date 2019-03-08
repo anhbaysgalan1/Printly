@@ -117,14 +117,14 @@ class JobInProgress extends Component {
 					<Trackbar activeStep={2} updateJobStatus={this.updateJobStatus}/>
 				</div>}
 				<div className="navigation">
-					<Button  variant="outlined" 
+					<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} variant="outlined" 
 							color="inherit" 
 							className={temp_left} 
 							onClick={() => this.setState({ showCancelPopup: true})}>
 						Cancel Job
 					</Button>
 
-					<Button  variant="outlined" 
+					<Button  style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} variant="outlined" 
 							color="inherit" 
 							className={temp_right} 
 							onClick={() => this.setState({ showDonePopup: true })}
