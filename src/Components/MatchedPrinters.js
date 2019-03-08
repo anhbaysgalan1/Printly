@@ -420,14 +420,14 @@ class MatchedPrinters extends Component {
 					<Trackbar activeStep={1}/>
 				</div>}
 				<div className="navigation">
-				<Button className={temp_left}//{classes.button} 
+				<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_left}//{classes.button} 
 							variant="outlined"
 							color="inherit"
 							onClick={() => this.handlePageChange(
 								this.props.PageEnum.HOME)}>
 						Back to Home Page
 					</Button>
-					<Button className={temp_right}//{classes.button} 
+					<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_right}//{classes.button} 
 							variant="outlined"
 							color="inherit"
 							onClick={() => this.setState({ showConfirmPopup: true })}
