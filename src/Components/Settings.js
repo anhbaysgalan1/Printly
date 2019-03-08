@@ -173,11 +173,11 @@ class Settings extends React.Component{
 						<TextField
 							id="outlined-number"
 							value={this.props.print_options_state.copies}
-							InputProps={{ inputProps: { min: 0, max: 10 } }}
 							onChange={(e) => this.props.handleChange('copies', e)}
 							type="number"
 							InputLabelProps={{
 								minvalue: 1,
+								maxvalue: 100
 							}}
 							margin="normal"
 							variant="outlined"

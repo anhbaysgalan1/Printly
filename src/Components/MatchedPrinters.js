@@ -127,6 +127,18 @@ class MatchedPrinters extends Component {
 		if (!event.target.value || event.target.value < 1) {
 			this.setState({ [name]: null });
 		}
+		if(name === 'copies') {
+			console.log('AAAAAAAAAAAAA')
+			let newState = this.state.print_options;
+			let numCopies = event.target.value;
+			if(numCopies> 100) {
+				numCopies = 100;
+			}
+			newState['copies'] = numCopies;
+			this.setState({
+				print_options: newState,
+			})
+		}
 		else {
 			let newState = this.state.print_options;
 			newState[name] = event.target.value;
