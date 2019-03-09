@@ -60,16 +60,18 @@ html, body {
   margin-top: 100px;
   height: 50%;
   width: auto;
+  justify-self: center;
 }
 
 .home_upload_container{
+  justify-self: center;
   justify-content: center;
   background-color: #D3D3D3;  
   position: absolute;
   display: flex;
   padding: 5px;
   top: 47%;
-  left: 45%;
+  left: 46%;
   z-index: 5;
   width: auto;
   border-radius: 10px;
