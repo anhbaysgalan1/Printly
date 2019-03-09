@@ -163,10 +163,6 @@ class JobInProgress extends Component {
 		                </div>
 	            	</div>
 	        	</div>
-	        	<div id="file_preview">
-					Preview
-					<FilePreview file_url={this.props.selected_file_url}/>
-				</div>
 	        	<br/>
 
 				{this.state.showDonePopup ? 

@@ -475,6 +475,14 @@ class MatchedPrinters extends Component {
 						{printer_data}
 					</div>
 				</div>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
+				<br/>
 			</div>
 			{this.state.showConfirmPopup ?
 				<ConfirmPopup
