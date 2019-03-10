@@ -30,7 +30,7 @@ html, body {
 }
 
 .homeInfo{
-  height: 100%;
+  display: flex;
 }
 
 .home_top_container{
@@ -64,17 +64,13 @@ html, body {
 }
 
 .home_upload_container{
-  justify-self: center;
-  justify-content: center;
   background-color: #D3D3D3;  
-  position: absolute;
-  display: flex;
   padding: 5px;
-  top: 47%;
-  left: 46%;
   z-index: 5;
-  width: auto;
   border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 38vh;
 }
 
 .trackbar_container{
