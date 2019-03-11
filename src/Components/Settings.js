@@ -58,12 +58,12 @@ const tooltipTheme = createMuiTheme({
 const styles = ({
 	root: {
 		backgroundColor: 'white',
-		border: '1px solid black',
-		borderRadius: '10px',
+		// border: '1px solid black',
+		// borderRadius: '10px',
 		display: 'inline-flex',
 		flexDirection: 'rows',
 		paddingTop: '1em',
-		marginRight: '5px',
+		// marginRight: '5px',
   },
   formControl: {
 		borderRight: '1px solid gray',

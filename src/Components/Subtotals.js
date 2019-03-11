@@ -18,10 +18,8 @@ const theme = createMuiTheme({
 		MuiTypography: {
 			subheading: {
 				fontWeight: 'bold',
-				fontSize: '1.2em',
-			},
-			body1: {
-				fontSize: '1.2em',
+				fontSize: '1.4em',
+				color: 'white',
 			},
 		},
 		MuiListItem: {
@@ -37,7 +35,11 @@ const theme = createMuiTheme({
 		MuiListItemText: {
 			root: {
 				paddingRight: '0',
+				color: 'white',
 			},
+			secondary: {
+				color: 'white',
+			}
 		},
 	},
 });
@@ -56,9 +58,11 @@ const tooltipTheme = createMuiTheme({
 const styles = ({
 	root: {
 		height: '100%',
-		backgroundColor: 'white',
-		border: '1px solid black',
-		borderRadius: '10px',
+		backgroundColor: '#04619f',
+		paddingTop: '10px',
+		paddingBottom: '20px',
+		// border: '1px solid black',
+		// borderRadius: '10px',
 	},
 });
 
