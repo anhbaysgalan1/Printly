@@ -80,7 +80,7 @@ class Home extends Component {
 						className={temp_right}//{classes.button}
 						onClick={() => this.props.changePage(this.props.PageEnum.MATCHEDPRINTERS)}
 						disabled={this.props.selected_file_url === null ? true : false}>
-					Submit for Printing!
+					Submit
 				</Button>
 				</div>
 				<div id="file_preview">
