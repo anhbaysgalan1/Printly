@@ -437,14 +437,14 @@ class MatchedPrinters extends Component {
 							color="inherit"
 							onClick={() => this.handlePageChange(
 								this.props.PageEnum.HOME)}>
-						Back to Home Page
+						Back
 					</Button>
 					<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_right}//{classes.button} 
 							variant="outlined"
 							color="inherit"
 							onClick={() => this.setState({ showConfirmPopup: true })}
 							disabled={this.state.selected_printer_data === null ? true : false}>
-						Send Job to Printer
+						Send to Printer
 					</Button>
 				</div>
 				<div id="matches_div">
