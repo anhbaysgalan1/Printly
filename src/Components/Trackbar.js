@@ -92,27 +92,9 @@ const STEPS_DELIV_DONE = [
 
 class Trackbar extends Component {
   state = {
-    activeStep: this.props.activeStep,
     numSteps: (this.props.deliver ? STEPS_DELIV.length : STEPS_PICKUP.length),
     intervalID: 0
   };
-
-  componentDidMount() {
-    // hacky updater for demo
-    if (this.state.activeStep >= 2) {
-      let id = setInterval(() => {
-        let newStep = this.state.activeStep + 1;
-        this.setState({ activeStep: newStep });
-  
-        if (newStep === this.state.numSteps) {
-          clearInterval(this.state.intervalID);
-          this.props.updateJobStatus();
-        }
-      }, 3000);
-  
-      this.setState({ intervalID : id});
-    }
-  }
 
   render() {
     const { classes } = this.props;
@@ -122,15 +104,15 @@ class Trackbar extends Component {
 
     return (
       <Grid container justify="center">
-      <MuiThemeProvider theme={theme}>
-          <Stepper activeStep={this.state.activeStep}>
+        <MuiThemeProvider theme={theme}>
+          <Stepper activeStep={this.props.activeStep}>
             {steps.map((label, index) => {
-              if (index < this.state.activeStep) {
+              if (index < this.props.activeStep) {
                 label = stepsDone[index];
               }
 
               let labelStyle = null;
-              if (index === this.state.activeStep) {
+              if (index === this.props.activeStep) {
                 // active step only flashes on JobInProgress
                 labelStyle = 
                   index < 2 ? labelStyle = classes.stepLabel : classes.stepLabelPulse;

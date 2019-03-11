@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Trackbar from './Trackbar.js';
-import FilePreview from './FilePreview.js';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import '../App.css';
@@ -17,15 +16,27 @@ const styles = theme => ({
 	},
 });
 
+const LAST_STEP_INDEX = 4; // index of final step on trackbar
+
 class JobInProgress extends Component {
 	state = {
-		jobComplete: false,
+		jobStep: 2,
 		showDonePopup: false,
 		showCancelPopup: false,
 	}
 
-	updateJobStatus = () => {
-		this.setState({ jobComplete: true });
+	componentDidMount() {
+		let self = this;
+		window.addEventListener('keydown', function(event) {
+			switch(event.key) {
+				case 'ArrowRight':
+					let currStep = self.state.jobStep + 1;
+					self.setState({ jobStep: currStep });
+					break;
+				default:
+					return;
+			}
+		})
 	}
 
 	closePopup = (rating, comment) => {
@@ -91,7 +102,6 @@ class JobInProgress extends Component {
 		
 		let temp_left = classes.button + " buttonleft";
 		let temp_right = classes.button + " buttonright";
-
 			
 		let imageRef = firebase.storage().ref().child('id_pictures/' + this.props.printer_data["name"] + ".png");
 		imageRef.getDownloadURL().then((url) => {
@@ -111,10 +121,10 @@ class JobInProgress extends Component {
 				</div>
 				{this.props.print_options['Transfer'] === 'Delivery' ? 
 				<div className="trackbar_container">
-					<Trackbar activeStep={2} deliver updateJobStatus={this.updateJobStatus}/>
+					<Trackbar activeStep={this.state.jobStep} deliver/>
 				</div> :
 				<div className="trackbar_container">
-					<Trackbar activeStep={2} updateJobStatus={this.updateJobStatus}/>
+					<Trackbar activeStep={this.state.jobStep}/>
 				</div>}
 				<div className="navigation">
 					<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} variant="outlined" 
@@ -128,7 +138,7 @@ class JobInProgress extends Component {
 							color="inherit" 
 							className={temp_right} 
 							onClick={() => this.setState({ showDonePopup: true })}
-							disabled={this.state.jobComplete ? false : true}>
+							disabled={this.state.jobStep > LAST_STEP_INDEX ? false : true}>
 						Finish
 					</Button>
 
@@ -220,7 +230,6 @@ class CancelPopup extends Component {
   }
 
 }
-
 
 class JobDonePopup extends Component {
 	state = {
