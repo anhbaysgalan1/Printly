@@ -29,10 +29,10 @@ class Home extends Component {
 			<div>
 				<div className="title">
 					{this.props.selected_file_url === null ?
-					 <div className="username">Hello {this.props.displayName}!</div>
+					 <div className="username">Hello {this.props.email}!</div>
 					 :
 					 <>
-					 	<div className="username">{this.props.displayName}</div>
+					 	<div className="username">{this.props.email}</div>
 					 	<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo_new.png?alt=media&token=5b6207ee-4d0e-4a20-9e13-48933fe60432' className="logo" alt="logo"/>
 					 </>
 					}
@@ -59,7 +59,14 @@ class Home extends Component {
 						</Button>
 					</div>
 					<div className="home_bottom_container">
-						<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/Printly%20Home%20-%20bottom.png?alt=media&token=f9f814cf-dfb5-4e71-88bc-b43799a9b943' alt="home_info" className="home_bottom_image"/>
+						<div className="home_bottom_text">
+							<span style={{fontWeight: 'bold'}}>Our Mission:</span>
+							<br/>
+							<br/>
+							<span>We connect your 24 / 7 printing needs</span>
+							<br/>
+							<span>with printlys in your neighborhood.</span>
+						</div>
 					</div>
 				</div>
 				:
