@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
 	button:{
 		color: '#04619f',
+
 		background: '#FFFFFF',
 	},
 });
