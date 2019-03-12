@@ -349,19 +349,25 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
   JobInProgress styling
 */
 
-.job_info{
-  background-color: white;
-  border: 1px solid black;
-  float: right;
-  width: 20%;
-  padding-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+.job_info_container{
+  width: 100%;
+  height: 600px;
+  display: flex;
 }
 
-.job_data{
+.job_id_image{
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 65%;
+  left: 30%;
+}
+
+.job_info{
+  position: absolute;
+  top: 70%;
+  left: 45%;
   text-align: left;
-  padding-left: 5px;
 }
 
 #file_preview {
@@ -371,6 +377,27 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
   height: 35em;
   background-color: white;
   border: 1px solid gray;
+}
+
+.ETA{
+  width: 100%;
+  height: 90%;
+  font-size: 50px;
+  color: #09273f;
+}
+
+.job_step{
+  color: #003d60;
+  font-size: 50px;
+  position: absolute;
+  justify-self: center;
+  vertical-align: middle;
+  justify-content: center;
+  top: 25%;
+  left: 30%;
+  width: 40%;
+  height: 40%;
+  padding-top: 10%;
 }
 
 @keyframes stepLabelPulse {

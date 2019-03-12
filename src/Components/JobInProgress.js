@@ -31,7 +31,12 @@ class JobInProgress extends Component {
 			switch(event.key) {
 				case 'ArrowRight':
 					let currStep = self.state.jobStep + 1;
-					self.setState({ jobStep: currStep });
+					if (currStep > 4){
+						self.setState({jobStep: currStep,
+										showDonePopup: true})
+					} else {
+						self.setState({ jobStep: currStep });
+					}
 					break;
 				default:
 					return;
@@ -82,6 +87,62 @@ class JobInProgress extends Component {
 		}
 	}
 
+	getETAString = () => {
+		var return_string;
+		var number = 0;
+		var first_time;
+		var second_time;
+		var isPM = false;
+		console.log(this.props.printer_data);
+		if (this.props.print_options["Transfer"] === "Delivery"){
+			return_string = "ETA: ";
+			number = Math.ceil((this.props.printer_data["Distance"] * 10)/5)*5;
+		} else {
+			return_string = "Pick Up: ";
+			number = 15;
+		}
+
+		var d = new Date();
+		var h = d.getHours();
+		var m = d.getMinutes();
+		console.log(h, m);
+		if (h > 12){
+			h = h - 12;
+			isPM = true;
+		}
+
+		// --- Format first time
+		m = m + number;
+		console.log("After", m);
+		if (m > 59){
+			m = m - 59;
+			h = h + 1;
+		}
+		
+		first_time = h.toString() + ":" + m.toString();
+		if (isPM){
+			first_time = first_time + " PM";
+		} else {
+			first_time = first_time + " AM";
+		}
+
+		// --- Format second time
+		m = m + 5;
+		if (m > 59){
+			m = m - 59;
+			h = h + 1;
+		}
+		
+		second_time = h.toString() + ":" + m.toString();
+		if (isPM){
+			second_time = second_time + " PM";
+		} else {
+			second_time = second_time + " AM";
+		}
+
+		return return_string + first_time + " - " + second_time;
+	}
+
 	render() {
 		const { classes } = this.props;
 
@@ -112,7 +173,7 @@ class JobInProgress extends Component {
 		});
 
 		let image = <img id={"progress" + this.props.printer_data["id"]} src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
-
+		console.log(this.props.print_options);
 		return (
 			<div>
 				<div className="title">
@@ -134,45 +195,47 @@ class JobInProgress extends Component {
 						Cancel Job
 					</Button>
 
-					<Button  style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} variant="outlined" 
-							color="inherit" 
-							className={temp_right} 
-							onClick={() => this.setState({ showDonePopup: true })}
-							disabled={this.state.jobStep > LAST_STEP_INDEX ? false : true}>
-						Finish
-					</Button>
-
 				</div>
-				<div className="job_info">
-	            	<div>
-	                	{image}
-	            	</div>
-	            	<div>
-	                	{this.props.printer_data["name"]} 
-	                	<br/>
-	                	{(this.props.print_options.Transfer === 'Delivery') ?
-							null
+				<div className="job_info_container">
+					<div className="ETA">
+						{this.getETAString()}
+					</div>
+					<br/>
+					<br/>
+					<br/>
+					<div className="job_step">
+						{(this.state.jobStep === 2) ?
+						<div>Connecting To Printer</div>
+						:
+						((this.state.jobStep === 3) ?
+							<div>Printing Document</div>
 							:
-	                		<div>Address: {this.props.printer_data["address"]}</div>
-	                	}
-	                	<br/>
-	                	Rating: {stars}
-	                	<br/>
-	                	<br/>
-	                	<div className="job_data">
-	                		Print Options:
-	                		<br/>
-	                		{selected_options}
-	                		<br/>
-		                	Total Cost: ${
-									(this.props.print_options.Transfer === 'Delivery') ?
-										(this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"])).toFixed(2)
-									:
-										(this.props.price).toFixed(2)
-							}
-		                </div>
-	            	</div>
-	        	</div>
+							((this.props.print_options['Transfer'] === 'Pickup') ? 
+								<div>Preparing For Pickup</div>
+								:
+								((this.state.jobStep === 4) ?
+								<div>Document On The Way</div> 
+								:
+								<div>Delivered</div>
+								)
+							)
+						)
+						}
+					</div>
+					<div className="job_id_image">
+						{image}
+					</div>
+					<div className="job_info">
+						{this.props.printer_data["name"]} 
+						<br/>
+						{(this.props.print_options.Transfer === 'Delivery') ?
+							<div>Address: We need to pass delivery address!</div>
+							:
+							<div>Address: {this.props.printer_data["address"]}</div>
+						}
+						<br/>
+					</div>
+				</div>
 	        	<br/>
 
 				{this.state.showDonePopup ? 
@@ -253,7 +316,7 @@ class JobDonePopup extends Component {
 					<br/>
 					Rate {this.props.printer_data["name"]}
 					{<Rating
-								value={this.state.rating}
+								value={(this.state.rating === 0) ? this.props.printer_data["Rating"] : this.state.rating}
 								max={5}
 								onChange={(value) => this.setState({ rating: value })}
 							/>}
