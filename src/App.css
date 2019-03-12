@@ -346,6 +346,23 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
 }
 
 /*
+  Address styling
+*/
+
+.address-div {
+  display: inline-block;
+}
+.address {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.address-button {
+  float: right;
+}
+
+/*
   JobInProgress styling
 */
 

@@ -48,7 +48,7 @@ class App extends Component {
 		super();
 
 		this.state = {
-			page: PageEnum.SIGNIN,
+			page: PageEnum.MATCHEDPRINTERS,
 			userID: null,
 			email: null,
 			printer_data: {name: "Molly", Distance:0.5, Rating:5, rating_count:2, Color:"both", Quality:"medium", Transfer:"Delivery",
@@ -71,26 +71,26 @@ class App extends Component {
 		window.onbeforeunload = () => {this.deleteSelectedFile();};
 	}
 
-	componentDidMount = () => {
-		firebase.auth().onAuthStateChanged(user => {
-			this.setState({
-				userID : user ? user.uid : ""
-			});
+	// componentDidMount = () => {
+	// 	firebase.auth().onAuthStateChanged(user => {
+	// 		this.setState({
+	// 			userID : user ? user.uid : ""
+	// 		});
 
-			if (user) {
-				this.setState({
-					page: PageEnum.HOME,
-					email: user.email,
-				});
-			}
-			else {
-				this.setState({ 
-					page: PageEnum.SIGNIN,
-					email: null,
-				});
-			}
-		});
-    }
+	// 		if (user) {
+	// 			this.setState({
+	// 				page: PageEnum.HOME,
+	// 				email: user.email,
+	// 			});
+	// 		}
+	// 		else {
+	// 			this.setState({ 
+	// 				page: PageEnum.SIGNIN,
+	// 				email: null,
+	// 			});
+	// 		}
+	// 	});
+ //    }
 
 	changePage = (newPage, new_printer_data, new_printer_img) => {
 		// purge file data from previous job, if any
@@ -181,6 +181,12 @@ class App extends Component {
 			let oldRef = firebase.storage().ref().child('printQueue/' + this.state.selected_file_name);
 			oldRef.delete();
 		}
+	};
+
+	changeAddress(new_addr) {
+		this.setState({
+			address: new_addr,
+		})
 	}
 
 	render() {
@@ -213,6 +219,7 @@ class App extends Component {
 									pricesPerPage={pricesPerPage}
 									optionInfo={optionInfo}
 									file_size={this.state.selected_file_size}
+									changeAddress={this.changeAddress}
 								/>
 				break;
 

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import firebase from "firebase";
 import Settings from './Settings.js';
 import Trackbar from './Trackbar';
-import Subtotals from './Subtotals'
+import Subtotals from './Subtotals';
+import AddressPopup from './AddressPopup';
 import Button from '@material-ui/core/Button';
 import SortDropDown from './SortDropDown.js';
 import PropTypes from 'prop-types';
@@ -27,10 +28,17 @@ const styles = theme => ({
 	buttonleft:{
 		color: '#04619f',
 		background: '#FFFFFF',
+		display: 'inline'
 	},
 	buttonright:{
 		color: '#04619f',
 		background: '#FFFFFF',
+		display: 'inline'
+	},
+	address:{
+		margin: '0',
+		paddingRight: '1em',
+		display: 'inline'
 	}
 
 });
@@ -77,6 +85,8 @@ class MatchedPrinters extends Component {
 				subtotal: 0.0,
 				sort_by: SortEnum.RATING,
 				showConfirmPopup: false,
+				showAddressPopup: false,
+				address: '2145 Sheridan Rd, Evanston, IL, 60208',
 			};
 	};
 
@@ -365,6 +375,19 @@ class MatchedPrinters extends Component {
 		return (num)  + "-" + (num + 5) + " min";
 	};
 
+	showHideAddrPopup = (value) => {
+		this.setState({
+			showAddrPopup: value,
+		});//FUCK
+	}
+
+	updateAddress= (new_addr) => {
+		this.setState({
+			address: new_addr,
+		});
+		this.showHideAddrPopup(false);
+	}
+
 	closePopup = (confirmed) => {
 		this.setState({ showConfirmPopup: false });
 		if (confirmed)
@@ -439,13 +462,17 @@ class MatchedPrinters extends Component {
 								this.props.PageEnum.HOME)}>
 						Back
 					</Button>
-					<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_right}//{classes.button} 
-							variant="outlined"
-							color="inherit"
-							onClick={() => this.setState({ showConfirmPopup: true })}
-							disabled={this.state.selected_printer_data === null ? true : false}>
-						Send to Printer
-					</Button>
+				<p id="FUCKFUCK" className={classes.address}>Deliver to: {this.state.address}</p>
+				<Button className={classes.button} onClick={this.showHideAddrPopup}>
+				Change
+				</Button>
+				<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_right}//{classes.button} 
+						variant="outlined"
+						color="inherit"
+						onClick={() => this.setState({ showConfirmPopup: true })}
+						disabled={this.state.selected_printer_data === null ? true : false}>
+					Send to Printer
+				</Button>
 				</div>
 				<div id="matches_div">
 					<div className="matches_bar">
@@ -493,6 +520,11 @@ class MatchedPrinters extends Component {
 					pricesPerPage={this.props.pricesPerPage}
 					calcETA={this.calcETA}
 					subtotal={this.state.subtotal}/>
+				:
+				null
+			}
+			{this.state.showAddrPopup ?
+				<AddressPopup confirm={this.updateAddress} cancel={this.showHideAddrPopup} oldAddr={this.state.address}/>
 				:
 				null
 			}
