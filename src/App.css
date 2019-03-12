@@ -128,14 +128,6 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
 }
 */
 
-.bold {
-  font-weight: bold;
-}
-
-.underline {
-  text-decoration: underline;
-}
-
 .cancelled {
   text-align: center;
 }
@@ -295,7 +287,7 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
 
 .printer_preview{
   width: 50%;
-  float: right;
+  margin: auto;
 }
 
 .id_image{

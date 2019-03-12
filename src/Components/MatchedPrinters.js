@@ -620,27 +620,25 @@ class ConfirmPopup extends Component {
 			delivery_cost = this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.selected_printer_data["Distance"])
 			job_description = 
 				<div>
-					<div className="underline bold">ETA</div>
-					{this.props.calcETA(this.props.selected_printer_data["Distance"])}
+					<div style={{ fontWeight: "bold", fontSize: "20px" }}>ETA</div>
+					<div style={{ fontWeight: "bold", fontSize: "20px", fontStyle: "italic" }}>{this.props.calcETA(this.props.selected_printer_data["Distance"])}</div>
 					<br/>
 					<br/>
-					<br/>
-					Subtotal: ${this.props.subtotal.toFixed(2)}
-					<br/>
-					Delivery: ${delivery_cost.toFixed(2)}
+					<div style={{ color: "grey" }}>
+						Subtotal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${this.props.subtotal.toFixed(2)}
+						<br/>
+						Delivery: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${delivery_cost.toFixed(2)}
+					</div>
 				</div>
 		}
 		else
 		{
 			job_description = 
 				<div>
-					<div className="underline bold">Printer Address</div>
-					{this.props.selected_printer_data["address"]}
+					<div style={{ fontWeight: "bold", fontSize: "20px" }}>Pick-up:</div>
+					<div>{this.props.selected_printer_data["address"]} ({this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"})</div>
 					<br/>
 					<br/>
-					<br/>
-					<div className="underline bold">Distance</div>
-					{this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"}
 				</div>
 		}
 
@@ -662,19 +660,15 @@ class ConfirmPopup extends Component {
 					<br/>
 					<div>
 						<div className="printer_preview">
-							{image}
+							<div style={{ fontWeight: "bold" }}>{this.props.selected_printer_data["name"]}</div>
+							<div>{image}</div>
+							<div style={{ fontWeight: "bold" }}>Rating: {stars}</div>
 							<br/>
-							{this.props.selected_printer_data["name"]}
-							<br/>
-							{stars}
 						</div>
 						<br/>
 						{job_description}
 					</div>
-					<br/>
-					<br/>
-					<br/>
-					<div className="bold" style={{fontSize: "18px"}}>Total Cost: ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
+					<div style={{padding: "10px", background: "#ededed", fontWeight: "bold", fontSize: "20px"}}>Total Price | ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
 					<br/>
 					<br/>
 					<Button variant="outlined"
