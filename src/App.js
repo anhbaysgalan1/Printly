@@ -50,7 +50,7 @@ class App extends Component {
 		this.state = {
 			page: PageEnum.SIGNIN,
 			userID: null,
-			email: null,
+			displayName: null,
 			printer_data: {name: "Molly", Distance:0.5, Rating:5, rating_count:2, Color:"both", Quality:"medium", Transfer:"Delivery",
 			 address:"If you see this, something's wrong", id:200, rating_total:6},
 			printer_img: null,
@@ -80,13 +80,13 @@ class App extends Component {
 			if (user) {
 				this.setState({
 					page: PageEnum.HOME,
-					email: user.email,
+					displayName: user.displayName,
 				});
 			}
 			else {
 				this.setState({ 
 					page: PageEnum.SIGNIN,
-					email: null,
+					displayName: null,
 				});
 			}
 		});
@@ -200,7 +200,7 @@ class App extends Component {
 			case PageEnum.HOME:
 				current_page = <Home
 									PageEnum={PageEnum}
-									email={this.state.email}
+									displayName={this.state.displayName}
 									changePage={this.changePage}
 									chooseFile={this.chooseFile}
 									uploadDoc={this.uploadDoc}
@@ -211,7 +211,7 @@ class App extends Component {
 			case PageEnum.MATCHEDPRINTERS:
 				current_page = <MatchedPrinters
 									PageEnum={PageEnum}
-									email={this.state.email}
+									displayName={this.state.displayName}
 									changePage={this.changePage}
 									updateCost={this.updateCost}
 									updatePrintOptions={this.updatePrintOptions}
@@ -226,7 +226,7 @@ class App extends Component {
 			case PageEnum.JOBINPROGRESS:
 				current_page = <JobInProgress
 									PageEnum={PageEnum}
-									email={this.state.email}
+									displayName={this.state.displayName}
 									changePage={this.changePage}
 									printer_data={this.state.printer_data}
 									printer_img={this.state.printer_img}
