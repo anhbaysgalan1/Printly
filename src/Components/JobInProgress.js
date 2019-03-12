@@ -119,7 +119,12 @@ class JobInProgress extends Component {
 			h = h + 1;
 		}
 		
-		first_time = h.toString() + ":" + m.toString();
+		if (m < 10){
+			first_time = h.toString() + ":0" + m.toString();
+		} else {
+			first_time = h.toString() + ":" + m.toString();
+		}
+		
 		if (isPM){
 			first_time = first_time + " PM";
 		} else {
@@ -133,7 +138,12 @@ class JobInProgress extends Component {
 			h = h + 1;
 		}
 		
-		second_time = h.toString() + ":" + m.toString();
+		if (m < 10){
+			second_time = h.toString() + ":0" + m.toString();
+		} else {
+			second_time = h.toString() + ":" + m.toString();
+		}
+		
 		if (isPM){
 			second_time = second_time + " PM";
 		} else {
@@ -192,7 +202,7 @@ class JobInProgress extends Component {
 							color="inherit" 
 							className={temp_left} 
 							onClick={() => this.setState({ showCancelPopup: true})}>
-						Cancel Job
+						Cancel
 					</Button>
 
 				</div>
@@ -205,18 +215,18 @@ class JobInProgress extends Component {
 					<br/>
 					<div className="job_step">
 						{(this.state.jobStep === 2) ?
-						<div>Connecting To Printer</div>
+						<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/Printly-connecting-v2.gif?alt=media&token=4fb88ddb-cc0c-4e1b-9435-871d26b76fb7' className="gif" alt="connecting_to_printer"/>
 						:
 						((this.state.jobStep === 3) ?
-							<div>Printing Document</div>
+							<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/Printly-printing_v2.gif?alt=media&token=bce15c8e-33b5-4068-9f54-533ed6d081c7' className="gif" alt="printing"/>
 							:
 							((this.props.print_options['Transfer'] === 'Pickup') ? 
-								<div>Preparing For Pickup</div>
+								<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/Printly-pickup-v2.gif?alt=media&token=9785febe-2324-4164-b882-874548f28ce0' className="gif" alt="pickup"/>
 								:
 								((this.state.jobStep === 4) ?
-								<div>Document On The Way</div> 
+								<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/Printly-delivery-v2.gif?alt=media&token=48dfdf85-e8b2-4544-bb96-70d3da868579' className="gif" alt="on_to_way"/>
 								:
-								<div>Delivered</div>
+								null
 								)
 							)
 						)

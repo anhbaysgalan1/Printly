@@ -378,6 +378,7 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
   position: absolute;
   top: 65%;
   left: 30%;
+  z-index: 3;
 }
 
 .job_info{
@@ -385,6 +386,7 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
   top: 70%;
   left: 45%;
   text-align: left;
+  z-index: 3;
 }
 
 #file_preview {
@@ -396,25 +398,25 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
   border: 1px solid gray;
 }
 
+.gif {
+  width: 80%;
+}
+
 .ETA{
   width: 100%;
   height: 90%;
   font-size: 50px;
   color: #09273f;
+  z-index: 2;
 }
 
 .job_step{
-  color: #003d60;
-  font-size: 50px;
   position: absolute;
   justify-self: center;
-  vertical-align: middle;
-  justify-content: center;
-  top: 25%;
+  top: 20%;
   left: 30%;
   width: 40%;
   height: 40%;
-  padding-top: 10%;
 }
 
 @keyframes stepLabelPulse {
