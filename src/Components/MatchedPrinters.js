@@ -461,11 +461,17 @@ class MatchedPrinters extends Component {
 							onClick={() => this.handlePageChange(
 								this.props.PageEnum.HOME)}>
 						Back
-					</Button>
-				<p id="FUCKFUCK" className={classes.address}>Deliver to: {this.state.address}</p>
-				<Button className={classes.button} onClick={this.showHideAddrPopup}>
-				Change
 				</Button>
+				{this.state.print_options.Transfer === 'Delivery' ?
+					<>
+						<p id="FUCKFUCK" className={classes.address}>Deliver to: {this.state.address}</p>
+						<Button className={classes.button} onClick={this.showHideAddrPopup}>
+						Change
+						</Button>
+					</>
+					:
+					null
+				}
 				<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_right}//{classes.button} 
 						variant="outlined"
 						color="inherit"
