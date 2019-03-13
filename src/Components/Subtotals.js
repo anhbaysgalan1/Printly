@@ -8,56 +8,6 @@ import HelpOutline from '@material-ui/icons/HelpOutline';
 import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import '../App.css'
 
-const theme = createMuiTheme({
-	overrides: {
-		MuiList: {
-			padding: {
-				paddingBottom: '0px',
-			},
-		},
-		MuiTypography: {
-			subheading: {
-				fontWeight: 'bold',
-				fontSize: '1.8em',
-				color: 'white',
-			},
-		},
-		MuiListItem: {
-			root: {
-				textAlign: 'center',
-			},
-			gutters: {
-				paddingLeft: '10px',
-				paddingRight: '10px',
-				paddingBottom: '10px',
-			},
-		},
-		MuiListItemText: {
-			root: {
-				paddingRight: '0',
-				color: 'white',
-			},
-			secondary: {
-				color: 'white',
-				fontSize: '1.5em'
-			}
-		},
-	},
-});
-
-const styles = ({
-	root: {
-		height: '6em',
-		// minHeight: '100%',
-		backgroundColor: '#04619f',
-		float: 'right',
-		width: '15vw',
-		paddingTop: '0.5em',
-		paddingBottom: '1.5em',
-		// border: '1px solid black',
-		// borderRadius: '10px',
-	},
-});
 
 class Subtotals extends React.Component {
 	render() {
