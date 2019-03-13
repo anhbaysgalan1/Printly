@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
 	button:{
 		color: '#04619f',
-
 		background: '#FFFFFF',
 	},
 });
@@ -28,19 +27,18 @@ class Home extends Component {
 		return (
 			<div>
 				<div className="title">
-					{this.props.selected_file_url === null ?
-					 <div className="username">Hello {this.props.email}!</div>
-					 :
-					 <>
-					 	<div className="username">{this.props.email}</div>
-					 	<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo_new.png?alt=media&token=5b6207ee-4d0e-4a20-9e13-48933fe60432' className="logo" alt="logo"/>
-					 </>
+					{this.props.selected_file_url === null
+					?
+					<div className="username">Hello {this.props.displayName}!</div>
+					:
+					<><img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo_new.png?alt=media&token=5b6207ee-4d0e-4a20-9e13-48933fe60432' className="logo" alt="logo"/></>
 					}
 				</div>
 				<div className="trackbar_container">
 					<Trackbar activeStep={0} />
 				</div>
-				{this.props.selected_file_url === null ?
+				{this.props.selected_file_url === null
+				?
 				<div className="homeInfo">
 					<div className="home_top_container">
 						<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/Printly%20Home%20-%20top.png?alt=media&token=1981989b-0e64-45e1-94fb-9a5d5e21a3d5' alt="home_info" className="home_top_image"/>

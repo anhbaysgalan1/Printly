@@ -49,7 +49,6 @@ class App extends Component {
 
 		this.state = {
 			page: PageEnum.SIGNIN,
-			userID: null,
 			displayName: null,
 			printer_data: {name: "Molly", Distance:0.5, Rating:5, rating_count:2, Color:"both", Quality:"medium", Transfer:"Delivery",
 			 address:'2145 Sheridan Rd, Evanston, IL, 60208', id:200, rating_total:6},
@@ -74,10 +73,6 @@ class App extends Component {
 
 	componentDidMount = () => {
 		firebase.auth().onAuthStateChanged(user => {
-			this.setState({
-				userID : user ? user.uid : ""
-			});
-
 			if (user) {
 				this.setState({
 					page: PageEnum.HOME,
@@ -156,7 +151,7 @@ class App extends Component {
 	chooseFile = (event) => {
 		this.deleteSelectedFile();
 		let file = event.target.files[0]
-
+		
 		if(file) {
 			let self = this;
 			let fileRef = firebase.storage().ref().child('printQueue/' + file.name);

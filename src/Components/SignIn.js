@@ -2,15 +2,7 @@ import React from 'react';
 import firebase from "firebase";
 import StyleFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
-
 export default class SignIn extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			userID: null,
-		};
-
-	}
 	uiConfig = {
 		signInFlow: "popup",
 		signInOptions: [
@@ -20,13 +12,6 @@ export default class SignIn extends React.Component {
 			signInSuccessWithAuthResults: () => false
 		}
 	};
-	componentDidMount = () => {
-		firebase.auth().onAuthStateChanged(user => {
-			this.setState({
-				userID : user ? user.uid : ""
-			})
-		});
-	}
 
 	render() {
 		return (
