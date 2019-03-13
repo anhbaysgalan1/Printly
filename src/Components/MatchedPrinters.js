@@ -458,8 +458,8 @@ class MatchedPrinters extends Component {
 				<div className="trackbar_container">
 					<Trackbar activeStep={1}/>
 				</div>}
-				<div className="navigation">
-				<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_left}//{classes.button} 
+				<div className="navigation" style={{display: 'flex', marginBottom: '5px'}}>
+				<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px', marginRight: 'auto'}} className={temp_left}//{classes.button} 
 							variant="outlined"
 							color="inherit"
 							onClick={() => this.handlePageChange(
@@ -467,16 +467,16 @@ class MatchedPrinters extends Component {
 						Back
 				</Button>
 				{this.state.print_options.Transfer === 'Delivery' ?
-					<>
+					<div style={{height: '42px', marginTop: '8px'}}> 
 						<p className={classes.address}>Deliver to: {this.props.deliveryAddress}</p>
 						<Button className={classes.button} onClick={this.showHideAddrPopup}>
 						Change
 						</Button>
-					</>
+					</div>
 					:
 					null
 				}
-				<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} className={temp_right}//{classes.button} 
+				<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px', marginLeft: 'auto'}} className={temp_right}//{classes.button} 
 						variant="outlined"
 						color="inherit"
 						onClick={() => this.setState({ showConfirmPopup: true })}
