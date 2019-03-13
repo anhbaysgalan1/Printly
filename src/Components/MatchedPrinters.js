@@ -635,9 +635,11 @@ class ConfirmPopup extends Component {
 					<br/>
 					<br/>
 					<div style={{ color: "grey" }}>
-						Subtotal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${this.props.subtotal.toFixed(2)}
+						Subtotal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${this.props.subtotal.toFixed(2)}
 						<br/>
-						Delivery: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${delivery_cost.toFixed(2)}
+						Delivery: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${delivery_cost.toFixed(2)}
+						<br/>
+						Student Discount: -$2.56
 					</div>
 				</div>
 		}
@@ -645,10 +647,16 @@ class ConfirmPopup extends Component {
 		{
 			job_description = 
 				<div>
+					<br/>
 					<div style={{ fontWeight: "bold", fontSize: "20px" }}>Pick-up:</div>
 					<div>{this.props.selected_printer_data["address"]} ({this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"})</div>
 					<br/>
 					<br/>
+					<div style={{ color: "grey" }}>
+						Subtotal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${this.props.subtotal.toFixed(2)}
+						<br/>
+						Student Discount: -$2.56
+					</div>
 				</div>
 		}
 
@@ -679,7 +687,7 @@ class ConfirmPopup extends Component {
 							<br/>
 							{job_description}
 						</div>
-						<div style={{padding: "10px", background: "#ededed", fontWeight: "bold", fontSize: "20px"}}>Total Price | ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
+						<div style={{padding: "10px", background: "#ededed", fontWeight: "bold", fontSize: "20px"}}>Total Price &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
 						<br/>
 						<br/>
 						<Button variant="outlined"

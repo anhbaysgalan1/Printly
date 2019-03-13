@@ -13,7 +13,7 @@ var config = {
     storageBucket: "printly.appspot.com",
 };
 firebase.initializeApp(config);
-firebase.auth().signOut();
+//firebase.auth().signOut();
 
 const PageEnum = {
 	SIGNIN : 0,
