@@ -18,7 +18,7 @@ const theme = createMuiTheme({
 		MuiTypography: {
 			subheading: {
 				fontWeight: 'bold',
-				fontSize: '1.4em',
+				fontSize: '1.8em',
 				color: 'white',
 			},
 		},
@@ -39,6 +39,7 @@ const theme = createMuiTheme({
 			},
 			secondary: {
 				color: 'white',
+				fontSize: '1.5em'
 			}
 		},
 	},
@@ -60,7 +61,6 @@ const styles = ({
 
 class Subtotals extends React.Component {
 	render() {
-		console.log(this.props.deliv_fee);
 		const { classes } = this.props;
 		return (
 			<div className={classes.root} >
