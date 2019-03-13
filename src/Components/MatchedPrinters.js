@@ -378,7 +378,7 @@ class MatchedPrinters extends Component {
 	showHideAddrPopup = (value) => {
 		this.setState({
 			showAddrPopup: value,
-		});//FUCK
+		});
 	}
 
 	updateAddress= (new_addr) => {
@@ -464,7 +464,7 @@ class MatchedPrinters extends Component {
 				</Button>
 				{this.state.print_options.Transfer === 'Delivery' ?
 					<>
-						<p id="FUCKFUCK" className={classes.address}>Deliver to: {this.state.address}</p>
+						<p className={classes.address}>Deliver to: {this.state.address}</p>
 						<Button className={classes.button} onClick={this.showHideAddrPopup}>
 						Change
 						</Button>
