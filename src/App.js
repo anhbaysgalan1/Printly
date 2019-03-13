@@ -98,14 +98,6 @@ class App extends Component {
 				selected_file_size: null
 			})
 		}
-
-		if (newPage === PageEnum.MATCHEDPRINTERS) {
-			let self = this;
-			let fileRef = firebase.storage().ref().child('printQueue/' + this.state.selected_file_name);
-			fileRef.getMetadata().then(function(metadata) {
-				self.setState({ selected_file_size: (metadata.size/1000) });
-			});
-		}
 		
 		if (newPage === PageEnum.JOBINPROGRESS)
 		{
@@ -163,6 +155,12 @@ class App extends Component {
 						self.setState({
 							selected_file_url: url,
 							selected_file_name: file.name
+						});
+					});
+
+					fileRef.getMetadata().then(function(metadata) {
+						self.setState({ 
+							selected_file_size: (metadata.size/1000) 
 						});
 					});
 				});
