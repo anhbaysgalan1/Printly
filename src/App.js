@@ -52,12 +52,13 @@ class App extends Component {
 			userID: null,
 			displayName: null,
 			printer_data: {name: "Molly", Distance:0.5, Rating:5, rating_count:2, Color:"both", Quality:"medium", Transfer:"Delivery",
-			 address:"If you see this, something's wrong", id:200, rating_total:6},
+			 address:'2145 Sheridan Rd, Evanston, IL, 60208', id:200, rating_total:6},
 			printer_img: null,
 			selected_file_url: null,
 			selected_file_name: null,
 			selected_file_size: null,
 			price: 0.0,
+			delivery_address: '2145 Sheridan Rd, Evanston, IL, 60208',
 			print_options: {
 				Transfer: "Delivery",
 				Sided: "Single",
@@ -185,7 +186,7 @@ class App extends Component {
 
 	changeAddress(new_addr) {
 		this.setState({
-			address: new_addr,
+			delivery_address: new_addr,
 		})
 	}
 
@@ -234,6 +235,7 @@ class App extends Component {
 									price={this.state.price}
 									pricesPerPage={pricesPerPage}
 									print_options={this.state.print_options}
+									address={this.state.delivery_address}
 								/>
 				break;
 			

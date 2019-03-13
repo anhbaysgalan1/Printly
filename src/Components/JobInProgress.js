@@ -266,7 +266,7 @@ class JobInProgress extends Component {
 								|
 							</div>
 							{(this.props.print_options.Transfer === 'Delivery') ?
-								<div className="word big" style={{display: 'flex'}}>1014 Noyes St. Apt 3E</div>
+								<div className="word big" style={{display: 'flex'}}>{this.props.address}</div>
 								:
 								<div className="word big" style={{display: 'flex'}}>{this.props.printer_data["address"]}</div>
 							}
