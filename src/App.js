@@ -90,11 +90,12 @@ class App extends Component {
 
 	changePage = (newPage, new_printer_data, new_printer_img) => {
 		// purge file data from previous job, if any
-		if (newPage === PageEnum.HOME) {
+		if (this.page !== PageEnum.SIGNIN && newPage === PageEnum.HOME) {
 			this.deleteSelectedFile();
 			this.setState({
 				selected_file_url: null,
-				selected_file_name: null
+				selected_file_name: null,
+				selected_file_size: null
 			})
 		}
 
@@ -152,7 +153,7 @@ class App extends Component {
 		let file = event.target.files[0]
 		
 		if(file) {
-			if (this.state.selected_file_name != file.name) {
+			if (this.state.selected_file_name !== file.name) {
 				this.deleteSelectedFile();
 
 				let self = this;
@@ -165,16 +166,6 @@ class App extends Component {
 						});
 					});
 				});
-			}
-		}
-		else {
-			if (this.state.selected_file_name != null) {
-				this.deleteSelectedFile();
-
-				this.setState({
-					selected_file_url: null,
-					selected_file_name: null
-				})
 			}
 		}
 	};

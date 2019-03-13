@@ -23,7 +23,7 @@ export default class FilePreview extends Component {
 		else {
 			return (
 				<div>
-					Please select a file.
+					Oh no, something broke!
 				</div>
 			);
 		}
