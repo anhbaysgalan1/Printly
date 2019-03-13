@@ -56,6 +56,7 @@ class App extends Component {
 			selected_file_url: null,
 			selected_file_name: null,
 			selected_file_size: null,
+			discount_rate: 0.25,
 			price: 0.0,
 			delivery_address: '2145 Sheridan Rd, Evanston, IL, 60208',
 			print_options: {
@@ -222,6 +223,7 @@ class App extends Component {
 									file_size={this.state.selected_file_size}
 									changeAddress={this.changeAddress}
 									deliveryAddress={this.state.delivery_address}
+									discount_rate={this.state.discount_rate}
 								/>
 				break;
 
@@ -237,6 +239,7 @@ class App extends Component {
 									pricesPerPage={pricesPerPage}
 									print_options={this.state.print_options}
 									address={this.state.delivery_address}
+									discount_rate={this.state.discount_rate}
 								/>
 				break;
 			

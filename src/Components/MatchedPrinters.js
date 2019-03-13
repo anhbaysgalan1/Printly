@@ -529,7 +529,8 @@ class MatchedPrinters extends Component {
 					selected_printer_data={this.state.selected_printer_data}
 					pricesPerPage={this.props.pricesPerPage}
 					calcETA={this.calcETA}
-					subtotal={this.state.subtotal}/>
+					subtotal={this.state.subtotal}
+					discount_rate={this.props.discount_rate}/>
 				:
 				null
 			}
@@ -639,7 +640,7 @@ class ConfirmPopup extends Component {
 						<br/>
 						Delivery: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${delivery_cost.toFixed(2)}
 						<br/>
-						Student Discount: -$2.56
+						Student Discount: -${(this.props.subtotal * this.props.discount_rate).toFixed(2)}
 					</div>
 				</div>
 		}
@@ -655,7 +656,7 @@ class ConfirmPopup extends Component {
 					<div style={{ color: "grey" }}>
 						Subtotal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${this.props.subtotal.toFixed(2)}
 						<br/>
-						Student Discount: -$2.56
+						Student Discount: -${(this.props.subtotal * this.props.discount_rate).toFixed(2)}
 					</div>
 				</div>
 		}
@@ -687,7 +688,7 @@ class ConfirmPopup extends Component {
 							<br/>
 							{job_description}
 						</div>
-						<div style={{padding: "10px", background: "#ededed", fontWeight: "bold", fontSize: "20px"}}>Total Price &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
+						<div style={{padding: "10px", background: "#ededed", fontWeight: "bold", fontSize: "20px"}}>Total Price &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ${(this.props.subtotal + delivery_cost - this.props.discount_rate*(this.props.subtotal + delivery_cost)).toFixed(2)}</div>
 						<br/>
 						<br/>
 						<Button variant="outlined"
