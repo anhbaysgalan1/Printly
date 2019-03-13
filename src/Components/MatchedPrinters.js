@@ -384,9 +384,9 @@ class MatchedPrinters extends Component {
 	updateAddress= (new_addr) => {
 		console.log("new address", new_addr);
 		this.props.changeAddress(new_addr);
-		// this.setState({
-		// 	address: new_addr,
-		// });
+		this.setState({
+			address: new_addr,
+		});
 		
 		this.showHideAddrPopup(false);
 	}
