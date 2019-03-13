@@ -59,12 +59,12 @@ class App extends Component {
 			selected_file_size: null,
 			price: 0.0,
 			print_options: {
-				Transfer: null,
-				Sided: null,
-				Orientation: null,
-				Quality: null,
-				Color: null,
-				copies: null,
+				Transfer: "Delivery",
+				Sided: "Single",
+				Orientation: "Portrait",
+				Quality: "Medium",
+				Color: "Black & White",
+				copies: 1,
 			},
 		};
 

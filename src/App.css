@@ -299,10 +299,10 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
 }
 
 .id_image{
-  padding: 5px;
   width: 75%;
   height: 75%;
-  border-radius: 60px;
+  border-radius: 100px;
+  border: 2px solid #09273f;
 }
 
 .printer_container{
@@ -368,24 +368,77 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
 .job_info_container{
   width: 100%;
   height: 600px;
-  display: flex;
+  display: inline-flex;
 }
 
 .job_id_image{
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  top: 65%;
-  left: 30%;
-  z-index: 3;
+  width: 30%;
+  height: 30%;
+  z-index: 4;
+  margin-right: -75px;
+  margin-bottom: -5px;
 }
 
 .job_info{
-  position: absolute;
-  top: 70%;
-  left: 45%;
+  margin-left: auto;
+  margin-right: auto;
+  display: inline-flex;
   text-align: left;
   z-index: 3;
+}
+
+.job_info_text{
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  background-color: white;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 80%;
+  height: 100%;
+  z-index: 3;
+}
+
+.word{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.big{
+  font-size: 25px;
+}
+
+.small{
+  font-size: 15px;
+  padding: 10px;
+}
+
+.gif {
+  width: 80%;
+}
+
+.ETA_title {
+  font-weight: lighter;
+}
+
+.ETA{
+  justify-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  height: 25%;
+  font-size: 30px;
+  font-weight: bold;
+  color: #09273f;
+  z-index: 2;
+}
+
+.job_step{
+  position: absolute;
+  justify-items: center;
+  top: 27%;
+  left: 35%;
+  width: 30%;
+  height: 30%;
 }
 
 #file_preview {
@@ -395,27 +448,6 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
   height: 35em;
   background-color: white;
   border: 1px solid gray;
-}
-
-.gif {
-  width: 80%;
-}
-
-.ETA{
-  width: 100%;
-  height: 90%;
-  font-size: 50px;
-  color: #09273f;
-  z-index: 2;
-}
-
-.job_step{
-  position: absolute;
-  justify-self: center;
-  top: 20%;
-  left: 30%;
-  width: 40%;
-  height: 40%;
 }
 
 @keyframes stepLabelPulse {

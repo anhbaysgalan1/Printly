@@ -87,18 +87,33 @@ class JobInProgress extends Component {
 		}
 	}
 
+	getSettingsString = () => {
+		var return_string = this.props.print_options["Sided"] + "-sided, ";
+		return_string = return_string + this.props.print_options["Orientation"] + ", ";
+		return_string = return_string + this.props.print_options["Color"] + ", ";
+		var temp;
+		console.log(this.props.print_options["copies"]);
+		if (this.props.print_options["copies"] === 1){
+			temp = this.props.print_options["copies"];
+			return_string = return_string + temp.toString() + " copy";
+		} else {
+			temp = this.props.print_options["copies"];
+			return_string = return_string + temp.toString() + " copies";
+		}
+		
+		return return_string;
+	}
+
 	getETAString = () => {
-		var return_string;
+		var return_string = "";
 		var number = 0;
 		var first_time;
 		var second_time;
 		var isPM = false;
 		console.log(this.props.printer_data);
 		if (this.props.print_options["Transfer"] === "Delivery"){
-			return_string = "ETA: ";
 			number = Math.ceil((this.props.printer_data["Distance"] * 10)/5)*5;
 		} else {
-			return_string = "Pick Up: ";
 			number = 15;
 		}
 
@@ -208,6 +223,11 @@ class JobInProgress extends Component {
 				</div>
 				<div className="job_info_container">
 					<div className="ETA">
+						{(this.props.print_options["Transfer"] === "Delivery") ?
+								<div className="ETA_title">ETA:</div>
+							:
+								<div className="ETA_title">Ready for pick-up:</div>
+						}
 						{this.getETAString()}
 					</div>
 					<br/>
@@ -232,18 +252,33 @@ class JobInProgress extends Component {
 						)
 						}
 					</div>
-					<div className="job_id_image">
-						{image}
-					</div>
+					<div style={{position: 'absolute', top: '65%', width: '100%'}}>
 					<div className="job_info">
-						{this.props.printer_data["name"]} 
+						<div className="job_id_image">
+							{image}
+						</div>
+						<div className="job_info_text">
+						<div style={{display: 'inline-flex'}}>
+							<div className="word big" style={{display: 'flex', color: 'black', fontWeight: 'bold'}}>
+								{this.props.printer_data["name"]} 
+							</div>
+							<div className="word big" style={{display: 'flex'}}>
+								|
+							</div>
+							{(this.props.print_options.Transfer === 'Delivery') ?
+								<div className="word big" style={{display: 'flex'}}>1014 Noyes St. Apt 3E</div>
+								:
+								<div className="word big" style={{display: 'flex'}}>{this.props.printer_data["address"]}</div>
+							}
+						</div>
 						<br/>
-						{(this.props.print_options.Transfer === 'Delivery') ?
-							<div>Address: We need to pass delivery address!</div>
-							:
-							<div>Address: {this.props.printer_data["address"]}</div>
-						}
+						<span className="word small" style={{fontWeight: 'bold', color: 'black'}}>
+						Rating: {stars}
+						</span>
 						<br/>
+						<span className="word small" style={{fontWeight: 'bold', color: 'black'}}>Settings:</span> {this.getSettingsString()}
+						</div>
+					</div>
 					</div>
 				</div>
 	        	<br/>
