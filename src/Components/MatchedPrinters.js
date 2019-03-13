@@ -638,12 +638,13 @@ class ConfirmPopup extends Component {
 					<div style={{ fontWeight: "bold", fontSize: "20px", fontStyle: "italic" }}>{this.props.calcETA(this.props.selected_printer_data["Distance"])}</div>
 					<br/>
 					<br/>
-					<div style={{ color: "grey" }}>
-						Subtotal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${this.props.subtotal.toFixed(2)}
+					<div style={{ color: "grey", "width": "55%", marginLeft: "auto", marginRight: "auto" }}>
+						<span style={{float: "left"}}>Subtotal:</span><span style={{float: "right"}}>${this.props.subtotal.toFixed(2)}</span>
 						<br/>
-						Delivery: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${delivery_cost.toFixed(2)}
+						<span style={{float: "left"}}>Delivery:</span><span style={{float: "right"}}>${delivery_cost.toFixed(2)}</span>
 						<br/>
-						Student Discount: -${(this.props.subtotal * this.props.discount_rate).toFixed(2)}
+						<span style={{float: "left"}}>Student Discount:</span><span style={{float: "right"}}>-${(this.props.subtotal * this.props.discount_rate).toFixed(2)}</span>
+						<br/>
 					</div>
 				</div>
 		}
@@ -656,10 +657,11 @@ class ConfirmPopup extends Component {
 					<div>{this.props.selected_printer_data["address"]} ({this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"})</div>
 					<br/>
 					<br/>
-					<div style={{ color: "grey" }}>
-						Subtotal: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${this.props.subtotal.toFixed(2)}
+					<div style={{ color: "grey", "width": "55%", marginLeft: "auto", marginRight: "auto" }}>
+						<span style={{float: "left"}}>Subtotal:</span><span style={{float: "right"}}>${this.props.subtotal.toFixed(2)}</span>
 						<br/>
-						Student Discount: -${(this.props.subtotal * this.props.discount_rate).toFixed(2)}
+						<span style={{float: "left"}}>Student Discount:</span><span style={{float: "right"}}>-${(this.props.subtotal * this.props.discount_rate).toFixed(2)}</span>
+						<br/>
 					</div>
 				</div>
 		}

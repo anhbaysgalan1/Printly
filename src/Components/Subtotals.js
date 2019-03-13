@@ -50,7 +50,7 @@ const styles = ({
 		// minHeight: '100%',
 		backgroundColor: '#04619f',
 		float: 'right',
-		width: '10vw',
+		width: '15vw',
 		paddingTop: '0.5em',
 		paddingBottom: '1.5em',
 		// border: '1px solid black',
