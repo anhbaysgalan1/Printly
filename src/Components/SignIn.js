@@ -43,7 +43,14 @@ export default class SignIn extends React.Component {
 						/>
 					</div>
 					<div className="home_bottom_container">
-						<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/Printly%20Home%20-%20bottom.png?alt=media&token=f9f814cf-dfb5-4e71-88bc-b43799a9b943' alt="home_info" className="home_bottom_image"/>
+						<div className="home_bottom_text">
+								<span style={{fontWeight: 'bold'}}>Our Mission:</span>
+								<br/>
+								<br/>	
+								<span>We connect your 24 / 7 printing needs</span>
+								<br/>
+								<span>with printlys in your neighborhood.</span>
+						</div>
 					</div>
 				</div>
            </div>
