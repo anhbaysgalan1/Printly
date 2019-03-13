@@ -149,26 +149,33 @@ class App extends Component {
 	};
 
 	chooseFile = (event) => {
-		this.deleteSelectedFile();
 		let file = event.target.files[0]
 		
 		if(file) {
-			let self = this;
-			let fileRef = firebase.storage().ref().child('printQueue/' + file.name);
-			fileRef.put(file).then(function() {
-				fileRef.getDownloadURL().then(function(url) {
-					self.setState({
-						selected_file_url: url,
-						selected_file_name: file.name
+			if (this.state.selected_file_name != file.name) {
+				this.deleteSelectedFile();
+
+				let self = this;
+				let fileRef = firebase.storage().ref().child('printQueue/' + file.name);
+				fileRef.put(file).then(function() {
+					fileRef.getDownloadURL().then(function(url) {
+						self.setState({
+							selected_file_url: url,
+							selected_file_name: file.name
+						});
 					});
 				});
-			});
+			}
 		}
 		else {
-			this.setState({
-				selected_file_url: null,
-				selected_file_name: null
-			})
+			if (this.state.selected_file_name != null) {
+				this.deleteSelectedFile();
+
+				this.setState({
+					selected_file_url: null,
+					selected_file_name: null
+				})
+			}
 		}
 	};
 
