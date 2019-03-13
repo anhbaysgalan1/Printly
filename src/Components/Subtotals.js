@@ -84,7 +84,7 @@ class Subtotals extends React.Component {
 				<MuiThemeProvider theme={theme}>
 					<List>
 						<ListItem>
-							<ListItemText primary="Grand Total" className = "flashit"
+							<ListItemText	primary="Grand Total"
 											secondary={this.prettyText(parseFloat(this.props.price) + parseFloat(this.props.deliv_fee))}/>
 								<MuiThemeProvider theme={tooltipTheme}>
 									<Tooltip title={calculation_explanation} placement="top">

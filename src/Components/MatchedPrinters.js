@@ -481,7 +481,7 @@ class MatchedPrinters extends Component {
 				</Button>
 				</div>
 				<div id="matches_div">
-					<div className="matches_bar" style={{backgroundColor: 'green', width: '100%',}}>
+					<div className="matches_bar">
 						<div className="settings_div">
 							<Settings
 									pricesPerPage={this.props.pricesPerPage}
