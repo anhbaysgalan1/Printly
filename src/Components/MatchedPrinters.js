@@ -447,7 +447,7 @@ class MatchedPrinters extends Component {
 		return (
 		<div>
 			<div className="title">
-				<div className="username">{this.props.displayName}</div>
+				<div className="username">Hello {this.props.displayName}!</div>
 				<img src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/logo_new.png?alt=media&token=5b6207ee-4d0e-4a20-9e13-48933fe60432' className="logo" alt="logo"/>
 			</div>
 			<div>
