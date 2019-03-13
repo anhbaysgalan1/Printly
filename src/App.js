@@ -69,7 +69,7 @@ class App extends Component {
 		};
 
 		window.onbeforeunload = () => {this.deleteSelectedFile();};
-	}
+	};
 
 	componentDidMount = () => {
 		firebase.auth().onAuthStateChanged(user => {
@@ -86,7 +86,7 @@ class App extends Component {
 				});
 			}
 		});
-    }
+  };
 
 	changePage = (newPage, new_printer_data, new_printer_img) => {
 		// purge file data from previous job, if any
@@ -118,14 +118,14 @@ class App extends Component {
 		this.setState({
 			page: newPage,
 		});
-	}
+	};
 
 	updateCost = (new_cost, new_transfer) => {
 		this.setState({
 			price: new_cost,
 			Transfer: new_transfer
 		});
-	}
+	};
 
 	updatePrintOptions = (new_print_options) => {
 		let temp_print_options = {
@@ -177,11 +177,11 @@ class App extends Component {
 		}
 	};
 
-	changeAddress(new_addr) {
+	changeAddress = (new_addr) => {
 		this.setState({
 			delivery_address: new_addr,
-		})
-	}
+		});
+	};
 
 	render() {
 		let current_page = null;
@@ -214,6 +214,7 @@ class App extends Component {
 									optionInfo={optionInfo}
 									file_size={this.state.selected_file_size}
 									changeAddress={this.changeAddress}
+									deliveryAddress={this.state.delivery_address}
 								/>
 				break;
 
@@ -242,7 +243,7 @@ class App extends Component {
 				{current_page}
 			</div>
 		);
-	}
+	};
 }
 
 export default App;

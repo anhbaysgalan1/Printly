@@ -382,9 +382,12 @@ class MatchedPrinters extends Component {
 	}
 
 	updateAddress= (new_addr) => {
-		this.setState({
-			address: new_addr,
-		});
+		console.log("new address", new_addr);
+		this.props.changeAddress(new_addr);
+		// this.setState({
+		// 	address: new_addr,
+		// });
+		
 		this.showHideAddrPopup(false);
 	}
 
@@ -403,6 +406,7 @@ class MatchedPrinters extends Component {
 
 	render() {
 		const { classes } = this.props;
+		
 
 		let printer_data = Object.entries(this.state.matching_printers).map(([id, data]) => {
 				let selected = false;
@@ -464,7 +468,7 @@ class MatchedPrinters extends Component {
 				</Button>
 				{this.state.print_options.Transfer === 'Delivery' ?
 					<>
-						<p className={classes.address}>Deliver to: {this.state.address}</p>
+						<p className={classes.address}>Deliver to: {this.props.deliveryAddress}</p>
 						<Button className={classes.button} onClick={this.showHideAddrPopup}>
 						Change
 						</Button>
