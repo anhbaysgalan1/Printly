@@ -638,7 +638,7 @@ class ConfirmPopup extends Component {
 					<div style={{ fontWeight: "bold", fontSize: "20px", fontStyle: "italic" }}>{this.props.calcETA(this.props.selected_printer_data["Distance"])}</div>
 					<br/>
 					<br/>
-					<div style={{ color: "grey", "width": "40%", marginLeft: "auto", marginRight: "auto" }}>
+					<div style={{ color: "grey", "width": "55%", marginLeft: "auto", marginRight: "auto" }}>
 						<span style={{float: "left"}}>Subtotal:</span><span style={{float: "right"}}>${this.props.subtotal.toFixed(2)}</span>
 						<br/>
 						<span style={{float: "left"}}>Delivery:</span><span style={{float: "right"}}>${delivery_cost.toFixed(2)}</span>
@@ -657,7 +657,7 @@ class ConfirmPopup extends Component {
 					<div>{this.props.selected_printer_data["address"]} ({this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"})</div>
 					<br/>
 					<br/>
-					<div style={{ color: "grey", "width": "40%", marginLeft: "auto", marginRight: "auto" }}>
+					<div style={{ color: "grey", "width": "55%", marginLeft: "auto", marginRight: "auto" }}>
 						<span style={{float: "left"}}>Subtotal:</span><span style={{float: "right"}}>${this.props.subtotal.toFixed(2)}</span>
 						<br/>
 						<span style={{float: "left"}}>Student Discount:</span><span style={{float: "right"}}>-${(this.props.subtotal * this.props.discount_rate).toFixed(2)}</span>
