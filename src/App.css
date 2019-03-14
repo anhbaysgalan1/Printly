@@ -216,7 +216,7 @@ THIS IS SCALING THE ENTIRE IFRAME DOWN....
 }
 
 .popup_inner {
-  width: fit-content;
+  width: 33%;
   height: auto;
   margin: 5% auto;
   padding-bottom: 2em;
