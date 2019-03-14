@@ -42,6 +42,7 @@ class Home extends Component {
 					<div className="home_upload_container">
 						<Button
 							variant="outlined"
+							color="inherit"
 							component="label"
 							className={temp_center} //{classes.button}
 							>
@@ -68,6 +69,7 @@ class Home extends Component {
 				<div className="navigation">
 					<Button style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}}
 						variant="outlined"
+						color="inherit"
 						component="label"
 						className={temp_left} //{classes.button}
 						>

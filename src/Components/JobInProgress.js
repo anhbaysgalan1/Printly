@@ -292,7 +292,8 @@ class JobInProgress extends Component {
 						print_options={this.props.print_options}
 						printer_data={this.props.printer_data}
 						price={this.props.price}
-						pricesPerPage={this.props.pricesPerPage}/>
+						pricesPerPage={this.props.pricesPerPage}
+						discount_rate={this.props.discount_rate}/>
 					: null
 				}
 
@@ -359,9 +360,9 @@ class JobDonePopup extends Component {
 						<br/>
 						<div style={{ fontWeight: "bold", fontSize: "20px" }}> Total Cost: ${
 							(this.props.print_options.Transfer === 'Delivery') ?
-								(this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"])).toFixed(2)
+								((this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"]) - this.props.discount_rate*(this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"])))).toFixed(2)
 							:
-								(this.props.price).toFixed(2)
+								(this.props.price - this.props.discount_rate*(this.props.price)).toFixed(2)
 						}</div>
 						<br/>
 						<br/>
