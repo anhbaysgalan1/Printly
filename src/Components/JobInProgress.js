@@ -42,6 +42,9 @@ class JobInProgress extends Component {
 					return;
 			}
 		})
+
+		let eta_string = this.getETAString();
+		this.setState({ eta: eta_string });
 	}
 
 	closePopup = (rating, comment) => {
@@ -228,7 +231,7 @@ class JobInProgress extends Component {
 							:
 								<div className="ETA_title">Ready for pick-up:</div>
 						}
-						{this.getETAString()}
+						{this.state.eta}
 					</div>
 					<br/>
 					<br/>
