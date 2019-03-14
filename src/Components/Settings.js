@@ -59,7 +59,7 @@ const styles = ({
 	root: {
 		backgroundColor: 'white',
 		height: '7em',
-		width: '90vw',
+		width: '85vw',
 		display: 'inline-flex',
 		paddingTop: '1em',
 		justifyContent: 'center',
@@ -73,6 +73,7 @@ const styles = ({
 	},
 	formControlCopies: {
 		padding: '0 1em 0 1em',
+		width: '10vw',
 		marginBottom: '5px',
   },
   group: {
