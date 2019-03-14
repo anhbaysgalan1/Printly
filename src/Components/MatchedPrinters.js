@@ -469,7 +469,10 @@ class MatchedPrinters extends Component {
 				{this.state.print_options.Transfer === 'Delivery' ?
 					<div style={{height: '42px', marginTop: '8px'}}> 
 						<p className={classes.address}>Deliver to: {this.props.deliveryAddress}</p>
-						<Button className={classes.button} onClick={this.showHideAddrPopup}>
+						<Button	className={classes.button} 
+								onClick={this.showHideAddrPopup}
+								variant="outlined"
+								color="inherit">
 						Change
 						</Button>
 					</div>
