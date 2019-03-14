@@ -139,6 +139,9 @@ class JobInProgress extends Component {
 
 		if (h > 12){
 			h = h - 12;
+		}
+
+		if (h >= 12){
 			isPM = true;
 		}
 		
@@ -157,6 +160,10 @@ class JobInProgress extends Component {
 
 		while (h > 24){
 			h = h - 24;
+		}
+
+		if (h >= 12){
+			isPM = true;
 		}
 
 		if (isPM){
