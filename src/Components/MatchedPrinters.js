@@ -666,7 +666,7 @@ class ConfirmPopup extends Component {
 		return (
 			<div className="popup">
 				<div className="popup_inner">
-					<div className="popup_title">Print Confirmation</div>
+					<div className="popup_title">Review Order</div>
 					<br/>
 					<div className="popup_content">
 						<div>
