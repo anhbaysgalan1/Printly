@@ -44,17 +44,6 @@ const theme = createMuiTheme({
 	},
 });
 
-const tooltipTheme = createMuiTheme({
-	overrides: {
-		MuiSvgIcon: {
-			root: {
-				fontSize: '18px',
-				marginLeft: '10px',
-			},
-		},
-	},
-});
-
 const styles = ({
 	root: {
 		height: '6em',
@@ -72,11 +61,6 @@ const styles = ({
 const calculation_explanation = "Grand Total = 4 + 0.05 * (Transfer + Sided + Quality + Color) * file_kB * Copies";
 
 class Subtotals extends React.Component {
-	prettyText = (input) => {
-		return "$" + parseFloat(input).toFixed(2)
-	}
-
-
 	render() {
 		const { classes } = this.props;
 		return (
@@ -85,12 +69,7 @@ class Subtotals extends React.Component {
 					<List>
 						<ListItem>
 							<ListItemText	primary="Grand Total"
-											secondary={this.prettyText(parseFloat(this.props.price) + parseFloat(this.props.deliv_fee))}/>
-								<MuiThemeProvider theme={tooltipTheme}>
-									<Tooltip title={calculation_explanation} placement="top">
-										<HelpOutline style={{color: 'white'}}/>
-									</Tooltip>
-								</MuiThemeProvider>
+											secondary={'$' + ((this.props.price + this.props.deliv_fee) - this.props.discount_rate*(this.props.price + this.props.deliv_fee)).toFixed(2)}/>
 						</ListItem>
 					</List>
 				</MuiThemeProvider>

@@ -356,13 +356,13 @@ class JobDonePopup extends Component {
 					<div className="popup_title">Summary & Review</div>
 					<br/>
 					<div className="popup_content">
-						Total Cost: ${
+						<br/>
+						<div style={{ fontWeight: "bold", fontSize: "20px" }}> Total Cost: ${
 							(this.props.print_options.Transfer === 'Delivery') ?
 								(this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"])).toFixed(2)
 							:
 								(this.props.price).toFixed(2)
-						}
-						<br/>
+						}</div>
 						<br/>
 						<br/>
 						Rate {this.props.printer_data["name"]}

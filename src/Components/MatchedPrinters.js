@@ -505,7 +505,7 @@ class MatchedPrinters extends Component {
 							<Subtotals
 								price={this.state.subtotal}
 								deliv_fee={deliv_cost}
-								handling_fee={this.state.handling_fee}
+								discount_rate={this.props.discount_rate}
 							/>
 						</div>
 					</div>
