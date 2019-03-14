@@ -124,17 +124,22 @@ class JobInProgress extends Component {
 		var h = d.getHours();
 		var m = d.getMinutes();
 		console.log(h, m);
-		if (h > 12){
-			h = h - 12;
-			isPM = true;
-		}
 
 		// --- Format first time
 		m = m + number;
 		console.log("After", m);
-		if (m > 59){
-			m = m - 59;
+		while(m > 59){
+			m = m - 60;
 			h = h + 1;
+		}
+
+		while (h > 24){
+			h = h - 24;
+		}
+
+		if (h > 12){
+			h = h - 12;
+			isPM = true;
 		}
 		
 		if (m < 10){
@@ -143,17 +148,21 @@ class JobInProgress extends Component {
 			first_time = h.toString() + ":" + m.toString();
 		}
 		
+		// --- Format second time
+		m = m + 5;
+		while (m > 59){
+			m = m - 60;
+			h = h + 1;
+		}
+
+		while (h > 24){
+			h = h - 24;
+		}
+
 		if (isPM){
 			first_time = first_time + " PM";
 		} else {
 			first_time = first_time + " AM";
-		}
-
-		// --- Format second time
-		m = m + 5;
-		if (m > 59){
-			m = m - 59;
-			h = h + 1;
 		}
 		
 		if (m < 10){
