@@ -481,7 +481,7 @@ class MatchedPrinters extends Component {
 						color="inherit"
 						onClick={() => this.setState({ showConfirmPopup: true })}
 						disabled={this.state.selected_printer_data === null ? true : false}>
-					Send to Printer
+					Review Order
 				</Button>
 				</div>
 				<div id="matches_div">
