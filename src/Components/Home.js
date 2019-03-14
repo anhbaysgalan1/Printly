@@ -15,7 +15,7 @@ const styles = theme => ({
 
 class Home extends Component {
 	state = {
-		submitDisabled: true
+		submitDisabled: true,
 	}
 
 	render() {
@@ -90,8 +90,34 @@ class Home extends Component {
 				</div>
 				</>
 				}
+				{(this.props.showDiscount) ?
+				<DiscountPopup show={this.props.firstLogin}></DiscountPopup>
+				:
+				null
+				}
 			</div>
 		);
+	}
+}
+
+class DiscountPopup extends Component {
+	render() {
+		return (
+		<div className="popup">
+		  <div className="popup_inner">
+			  <div className="popup_title">Welcome</div>
+			  <br/>
+			  <div className="popup_content">
+				<p>We noticed you logged in with an email associated with a university, you get 25% off your order!</p>
+				<Button variant="outlined"
+						color="blue"
+						onClick={() => this.props.show(false)}>
+					Great!
+				</Button>
+			  </div>
+		  </div>
+	  </div>
+		)
 	}
 }
 

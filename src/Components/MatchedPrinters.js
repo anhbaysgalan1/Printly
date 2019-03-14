@@ -668,34 +668,36 @@ class ConfirmPopup extends Component {
 				<div className="popup_inner">
 					<div className="popup_title">Print Confirmation</div>
 					<br/>
-					<div>
-						<div className="printer_preview">
-							<div style={{ fontWeight: "bold" }}>{this.props.selected_printer_data["name"]}</div>
-							<div>{image}</div>
-							<div style={{ fontWeight: "bold" }}>Rating: {stars}</div>
+					<div className="popup_content">
+						<div>
+							<div className="printer_preview">
+								<div style={{ fontWeight: "bold" }}>{this.props.selected_printer_data["name"]}</div>
+								<div>{image}</div>
+								<div style={{ fontWeight: "bold" }}>Rating: {stars}</div>
+								<br/>
+							</div>
 							<br/>
+							{job_description}
 						</div>
+						<div style={{padding: "10px", background: "#ededed", fontWeight: "bold", fontSize: "20px"}}>Total Price | ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
 						<br/>
-						{job_description}
+						<br/>
+						<Button variant="outlined"
+								color="blue"
+								onClick={() => this.props.closePopup(false)}>
+							Cancel
+						</Button>
+
+						&nbsp;
+						&nbsp;
+						&nbsp;
+
+						<Button variant="outlined"
+								color="blue"
+								onClick={() => this.props.closePopup(true)}>
+							Confirm & Submit!
+						</Button>
 					</div>
-					<div style={{padding: "10px", background: "#ededed", fontWeight: "bold", fontSize: "20px"}}>Total Price | ${(this.props.subtotal + delivery_cost).toFixed(2)}</div>
-					<br/>
-					<br/>
-					<Button variant="outlined"
-							color="blue"
-							onClick={() => this.props.closePopup(false)}>
-						Cancel
-					</Button>
-
-					&nbsp;
-					&nbsp;
-					&nbsp;
-
-					<Button variant="outlined"
-							color="blue"
-							onClick={() => this.props.closePopup(true)}>
-						Confirm & Submit!
-					</Button>
 				</div>
 			</div>
 		);

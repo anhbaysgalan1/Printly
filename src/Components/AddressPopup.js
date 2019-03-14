@@ -71,8 +71,6 @@ class AddressPopup extends React.Component{
 		this.props.confirm(new_addr);
 	}
 
-
-
   	render() {
 		const { classes } = this.props;
 		return (
@@ -80,85 +78,87 @@ class AddressPopup extends React.Component{
 				<div className="popup_inner">
 					<div className="popup_title">Update Delivery Address</div>
 					<br/>
-					<div>
-						<TextField
-							id="standard-name"
-							label="Street Address"
-							value={this.state.street}
-							onChange={this.handleChange("street")}
-							error={this.state.street === ""}
-							margin="normal"
-							variant="outlined"
-						/>
-						&nbsp;
-						<TextField
-							id="standard-name"
-							label="Apt (optional)"
-							value={this.state.apt}
-							onChange={this.handleChange("apt")}
-							margin="normal"
-							variant="outlined"
-						/>
+					<div className="popup_content">
+						<div>
+							<TextField
+								id="standard-name"
+								label="Street Address"
+								value={this.state.street}
+								onChange={this.handleChange("street")}
+								error={this.state.street === ""}
+								margin="normal"
+								variant="outlined"
+							/>
+							&nbsp;
+							<TextField
+								id="standard-name"
+								label="Apt (optional)"
+								value={this.state.apt}
+								onChange={this.handleChange("apt")}
+								margin="normal"
+								variant="outlined"
+							/>
+							<br />
+							<TextField
+								id="standard-name"
+								label="City"
+								value={this.state.city}
+								onChange={this.handleChange("city")}
+								error={this.state.city === ""}
+								margin="normal"
+								variant="outlined"
+							/>
+							&nbsp;
+							<TextField
+								id="standard-name"
+								select
+								label="State"
+								value={this.state.state}
+								onChange={this.handleChange("state")}
+								error={this.state.state === ""}
+								margin="normal"
+								variant="outlined"
+							>
+								{addresses.map(option => (
+									<MenuItem key={option} value={option}>
+										{option}
+									</MenuItem>
+								))}
+							</TextField>
+							<br />
+							<TextField
+								id="standard-name"
+								label="Zip Code"
+								className={classes.textField}
+								value={this.state.zip}
+								onChange={this.handleChange("zip")}
+								error={this.state.zip === ""}
+								margin="normal"
+								variant="outlined"
+							/>
+						</div>
 						<br />
-						<TextField
-							id="standard-name"
-							label="City"
-							value={this.state.city}
-							onChange={this.handleChange("city")}
-							error={this.state.city === ""}
-							margin="normal"
-							variant="outlined"
-						/>
-						&nbsp;
-						<TextField
-							id="standard-name"
-							select
-							label="State"
-							value={this.state.state}
-							onChange={this.handleChange("state")}
-							error={this.state.state === ""}
-							margin="normal"
-							variant="outlined"
-						>
-							{addresses.map(option => (
-								<MenuItem key={option} value={option}>
-									{option}
-								</MenuItem>
-							))}
-						</TextField>
 						<br />
-						<TextField
-							id="standard-name"
-							label="Zip Code"
-							className={classes.textField}
-							value={this.state.zip}
-							onChange={this.handleChange("zip")}
-							error={this.state.zip === ""}
-							margin="normal"
-							variant="outlined"
-						/>
+						<br />
+						<br />
+
+						<Button variant="outlined"
+								color="blue"
+								onClick={() => this.props.cancel(false)}>
+							Cancel
+						</Button>
+
+						&nbsp;
+						&nbsp;
+						&nbsp;
+
+						<Button variant="outlined"
+								color="blue"
+								disabled={this.state.street === "" || this.state.city === "" || this.state.state === "" || this.state.zip === ""}
+								onClick={() => this.updateFullAddress()}>
+							Save Changes
+						</Button>
 					</div>
-					<br />
-					<br />
-					<br />
-					<br />
-
-					<Button variant="outlined"
-							color="blue"
-							onClick={() => this.props.cancel(false)}>
-						Cancel
-					</Button>
-
-					&nbsp;
-					&nbsp;
-					&nbsp;
-
-					<Button variant="outlined"
-							color="blue"
-							disabled={this.state.street === "" || this.state.city === "" || this.state.state === "" || this.state.zip === ""}
-							onClick={() => this.updateFullAddress()}>
-						Save Changes
-					</Button>
 				</div>
 			</div>
 

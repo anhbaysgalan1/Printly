@@ -66,6 +66,7 @@ class App extends Component {
 				Color: "Black & White",
 				copies: 1,
 			},
+			first_login: true,
 		};
 
 		window.onbeforeunload = () => {this.deleteSelectedFile();};
@@ -181,6 +182,12 @@ class App extends Component {
 		});
 	};
 
+	toggleFirstLogin = (new_bool) => {
+		this.setState({
+			first_login: new_bool
+		})
+	};
+
 	render() {
 		let current_page = null;
 
@@ -197,6 +204,8 @@ class App extends Component {
 									chooseFile={this.chooseFile}
 									uploadDoc={this.uploadDoc}
 									selected_file_url={this.state.selected_file_url}
+									firstLogin={this.toggleFirstLogin}
+									showDiscount={this.state.first_login}
 								/>
 				break;
 

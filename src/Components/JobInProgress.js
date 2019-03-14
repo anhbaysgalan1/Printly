@@ -321,20 +321,22 @@ class CancelPopup extends Component {
 		<div className="popup_inner">
 			<div className="popup_title">Cancel Print Job</div>
 			<br/>
-			<p> You will still be charged for this print job. Are you sure you want to cancel?</p>
-			<Button variant="outlined"
-					color="blue"
-					onClick={() => this.props.closeCancelPopup(false)}>
-				No
-			</Button>
-			&nbsp;
-			&nbsp;
-			&nbsp;
-			<Button variant="outlined"
-					color="blue"
-					onClick={() => this.props.closeCancelPopup(true)}>
-				Yes
-			</Button>
+			<div className="popup_content">
+				<p> You will still be charged for this print job. Are you sure you want to cancel?</p>
+				<Button variant="outlined"
+						color="blue"
+						onClick={() => this.props.closeCancelPopup(false)}>
+					No
+				</Button>
+				&nbsp;
+				&nbsp;
+				&nbsp;
+				<Button variant="outlined"
+						color="blue"
+						onClick={() => this.props.closeCancelPopup(true)}>
+					Yes
+				</Button>
+			</div>
 		</div>
 	</div>
   	)
@@ -353,32 +355,34 @@ class JobDonePopup extends Component {
 				<div className="popup_inner">
 					<div className="popup_title">Summary & Review</div>
 					<br/>
-					Total Cost: ${
-						(this.props.print_options.Transfer === 'Delivery') ?
-							(this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"])).toFixed(2)
-						:
-							(this.props.price).toFixed(2)
-					}
-					<br/>
-					<br/>
-					<br/>
-					Rate {this.props.printer_data["name"]}
-					{<Rating
-								value={(this.state.rating === 0) ? this.props.printer_data["Rating"] : this.state.rating}
-								max={5}
-								onChange={(value) => this.setState({ rating: value })}
-							/>}
-					<br/>
-					Leave a comment!
-					<br/>
-					<textarea id="comment" rows="4" cols="50"/>
-					<br/>
-					<br/>
-					<Button variant="outlined"
-							color="blue"
-							onClick={() => this.props.closePopup(this.state.rating, document.getElementById("comment").value)}>
-						Confirm & Submit
-					</Button>
+					<div className="popup_content">
+						Total Cost: ${
+							(this.props.print_options.Transfer === 'Delivery') ?
+								(this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"])).toFixed(2)
+							:
+								(this.props.price).toFixed(2)
+						}
+						<br/>
+						<br/>
+						<br/>
+						Rate {this.props.printer_data["name"]}
+						{<Rating
+									value={(this.state.rating === 0) ? this.props.printer_data["Rating"] : this.state.rating}
+									max={5}
+									onChange={(value) => this.setState({ rating: value })}
+								/>}
+						<br/>
+						Leave a comment!
+						<br/>
+						<textarea id="comment" rows="4" cols="50"/>
+						<br/>
+						<br/>
+						<Button variant="outlined"
+								color="blue"
+								onClick={() => this.props.closePopup(this.state.rating, document.getElementById("comment").value)}>
+							Confirm & Submit
+						</Button>
+					</div>
 				</div>
 			</div>
 		)
