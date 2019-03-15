@@ -5,6 +5,7 @@
 html, body {
   margin: 0px;
   height: 100%;
+  width: 100vw;
   background-color: #ededed;
 }
 
@@ -85,9 +86,8 @@ html, body {
   border-bottom: 10px solid #3586c7;
   border-top: 5px solid #09273f;
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+  top: 92vh;
+  width: 100vw;
 }
 
 /*.wrap {
