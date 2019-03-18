@@ -77,7 +77,6 @@ const styles = ({
 		marginBottom: '5px',
   },
   group: {
-		//margin: `${theme.spacing.unit}px 0`,
 		margin: '0.1em',
 		marginBottom: '1em'
   },

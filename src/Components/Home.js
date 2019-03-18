@@ -5,6 +5,7 @@ import '../App.css';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
+import DiscountPopup from './DiscountPopup.js';
 
 const styles = theme => ({
 	button:{
@@ -44,7 +45,7 @@ class Home extends Component {
 							variant="outlined"
 							color="inherit"
 							component="label"
-							className={temp_center} //{classes.button}
+							className={temp_center} 
 							>
 							Upload File
 							<input type="file" 
@@ -71,7 +72,7 @@ class Home extends Component {
 						variant="outlined"
 						color="inherit"
 						component="label"
-						className={temp_left} //{classes.button}
+						className={temp_left}
 						>
 						Upload File
 						<input type="file" 
@@ -81,7 +82,7 @@ class Home extends Component {
 					</Button>
 					<Button  style={{maxWidth: '160px', maxHeight: '50px', minWidth: '160px', minHeight: '50px'}} variant="outlined" 
 						color="inherit" 
-						className={temp_right}//{classes.button}
+						className={temp_right}
 						onClick={() => this.props.changePage(this.props.PageEnum.MATCHEDPRINTERS)}
 						disabled={this.props.selected_file_url === null ? true : false}>
 					Submit
@@ -99,27 +100,6 @@ class Home extends Component {
 				}
 			</div>
 		);
-	}
-}
-
-class DiscountPopup extends Component {
-	render() {
-		return (
-		<div className="popup">
-		  <div className="popup_inner">
-			  <div className="popup_title">Welcome</div>
-			  <br/>
-			  <div className="popup_content">
-				<p>We noticed you logged in with an email associated with a university, you get 25% off your order!</p>
-				<Button variant="outlined"
-						color="blue"
-						onClick={() => this.props.show(false)}>
-					Great!
-				</Button>
-			  </div>
-		  </div>
-	  </div>
-		)
 	}
 }
 

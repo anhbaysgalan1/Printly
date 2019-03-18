@@ -1,13 +1,5 @@
 import React from 'react';
-//import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Tooltip from '@material-ui/core/Tooltip'
-import HelpOutline from '@material-ui/icons/HelpOutline';
-import { withStyles, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import '../App.css'
-
 
 class Subtotals extends React.Component {
 	render() {

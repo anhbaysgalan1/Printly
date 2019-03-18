@@ -9,16 +9,8 @@ import SortDropDown from './SortDropDown.js';
 import PropTypes from 'prop-types';
 import { withStyles} from '@material-ui/core/styles';//, createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import '../App.css';
-
-//const theme = createMuiTheme({
-//	overrides: {
-//		MuiButton: {
-//			root: {
-//				marginTop: '10px',
-//			},
-//		},
-//	},
-//})
+import ConfirmPopup from './ConfirmPopup.js';
+import PrinterInfo from './PrinterInfo.js';
 
 const styles = theme => ({
 	button:{
@@ -138,7 +130,6 @@ class MatchedPrinters extends Component {
 			this.setState({ [name]: null });
 		}
 		if(name === 'copies') {
-			console.log('AAAAAAAAAAAAA')
 			let newState = this.state.print_options;
 			let numCopies = event.target.value;
 			if(numCopies> 100) {
@@ -181,10 +172,8 @@ class MatchedPrinters extends Component {
 	}
 
 	calcIndivPrices = () => {
-		//console.log('data : ' ,this.state.selected_pricing)
 		let new_prices = {}
 		Object.keys(this.state.selected_pricing).map(option => {
-			//console.log("OPTION SELECTION " , this.state.print_options[option])
 			let option_selection = this.state.print_options[option]; //this is what we picked for each option. ex: i picked delivery for the Transfer option
 			if(option_selection === null) {
 				new_prices[option] = '0.00'
@@ -207,7 +196,7 @@ class MatchedPrinters extends Component {
 
 			return null;
 		})
-		//console.log('NEW PRICES : ' , new_prices)
+
 		this.setState({
 			selected_pricing: new_prices,
 		})
@@ -250,13 +239,9 @@ class MatchedPrinters extends Component {
 
 	sortIncreasing = (printers, key) => {
 		let new_order = [];
-		//console.log("key in increasing", key);
 		let helper_array = [];
 
 		for (var index = 0; index < printers.length; index++){
-			//console.log("index", index);
-			//console.log("printers[index]", printers[index]);
-			//console.log("printers[index][key]", printers[index][key], key);
 			helper_array.push([printers[index][key], index]);
 		}
 		
@@ -264,27 +249,18 @@ class MatchedPrinters extends Component {
 			return first[0] - second[0];
 		});
 		
-		//console.log.log(helper_array);
-		
 		for (var new_index = 0; new_index < helper_array.length; new_index++){
 			new_order.push(printers[helper_array[new_index][1]]);
-			////console.log.log(helper_array[new_index], new_index);
 		}
-		//console.log.log("after sorting", new_order);
-		//console.log.log("returning", new_order);
 		
 		return new_order;
 	};
 
 	sortDecreasing = (printers, key) => {
 		let new_order = [];
-		//console.log.log("key in decreasing", key);
 		let helper_array = [];
 
 		for (var index = 0; index < printers.length; index++){
-			//console.log("index", index);
-			//console.log("printers[index]", printers[index]);
-			//console.log("printers[index][key]", printers[index][key], key);
 			helper_array.push([printers[index][key], index]);
 		}
 		
@@ -292,22 +268,14 @@ class MatchedPrinters extends Component {
 			return second[0] - first[0];
 		});
 		
-		//console.log.log(helper_array);
-		
 		for (var new_index = 0; new_index < helper_array.length; new_index++){
 			new_order.push(printers[helper_array[new_index][1]]);
-			////console.log.log(helper_array[new_index], new_index);
 		}
-		//console.log.log("after sorting", new_order);
-		//console.log.log("returning", new_order);
 		
 		return new_order;
 	};
 
 	sortPrinters = (printers, new_val) => {
-		//console.log.log("inside sort printers", new_val);
-		//console.log.log("printers before:", printers);
-		
 		let new_matched;
 		if (new_val === "Rating"){
 			new_matched = this.sortDecreasing(printers, "Rating");
@@ -334,7 +302,6 @@ class MatchedPrinters extends Component {
 				});
 			}
 		} else {
-			//console.log("Unkown sort key given to sortPrinters, returning original");
 			new_matched = printers;
 			this.setState({
 				sort_by: new_val
@@ -344,7 +311,7 @@ class MatchedPrinters extends Component {
 	};
 
 	filterPrinters = () => {
-		var filterOptions = ['Transfer', 'Quality', 'Color']; //THESE ARE THE OPTIONS I AM USING TO FILTER
+		var filterOptions = ['Transfer', 'Quality', 'Color']; 
 		let new_matches = Array.from(this.state.active_printers); //deep copy so i don't affect the actual active_printers state
 		
 		//for each option that we're filtering by, do this:
@@ -353,11 +320,10 @@ class MatchedPrinters extends Component {
 
 			for(var i = 0; i < new_matches.length; i++) { //for each printer, if the option offered doesn't match my option selection, remove it from the list
 				let cur_printer = new_matches[i]
-				//console.log("printer : ", cur_printer, " has: " , cur_printer[option] , "i want: ",  option_selection)
+	
 				if(option_selection !== null && cur_printer[option] !== "both" && cur_printer[option] !==  option_selection) { 
 					//ex: this printer only has black & white, but i picked color
 					//null means i didn't make a selection for the option yet, so i should only check if i made a selection
-					//console.log("this one failed")
 					new_matches.splice(i, 1);
 					i--;
 				}
@@ -382,7 +348,6 @@ class MatchedPrinters extends Component {
 	}
 
 	updateAddress= (new_addr) => {
-		console.log("new address", new_addr);
 		this.props.changeAddress(new_addr);
 		this.setState({
 			address: new_addr,
@@ -435,15 +400,9 @@ class MatchedPrinters extends Component {
 				(this.props.pricesPerPage.Transfer[1] * this.state.selected_printer_data["Distance"]).toFixed(2);
 		}
 		
-
-		//<MuiThemeProvider theme={theme}>
-		// THIS WAS WRAPPING NAVIGATION BUTTONS			
-		//		</MuiThemeProvider>
-
 		let temp_left = classes.button + " buttonleft";
 		let temp_right = classes.button + " buttonright";
 
-		console.log("passing to cart", this.state.selected_pricing, this.state.print_options);
 		return (
 		<div>
 			<div className="title">
@@ -547,177 +506,6 @@ class MatchedPrinters extends Component {
 		);
 	}
 }
-
-
-// <div className="MatchedPrintersSidebar">
-// 				<div id="cart">
-// 					<Cart
-// 						data={this.state.selected_pricing}
-// 						price={this.state.subtotal}
-// 						copies={this.state.print_options.copies}
-// 						handling_fee={this.state.handling_fee}
-// 						deliv_fee={deliv_cost}
-// 					/>
-// 				</div>
-				
-// 			</div>
-
-class PrinterInfo extends Component {
-		constructor(){
-				super(); 
-
-				this.state = {
-						images : []
-				};
-		}
-
-		render(){
-				let stars = [];
-				for (let i = 0; i < Math.round(this.props.data["Rating"]); i++){
-						stars.push(<span className="fa fa-star checked" key={i}></span>)
-				}
-				let imageRef = firebase.storage().ref().child('id_pictures/' + this.props.data["name"] + ".png");
-				imageRef.getDownloadURL().then((url) => {
-					document.getElementById(this.props.data["id"]).src = url;
-					//console.log("got url chaning id", this.props.data["id"], this.props.data["name"]);
-				}).catch(function (error) {
-					//console.log(error);
-				});
-				
-				let image = <img id={this.props.data["id"]} src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
-				
-				let classname = this.props.isSelected === true ? "selected_printer_info" : "printer_info";
-
-				return (
-				<div className={classname} onClick={() => this.props.choose(image, this.props.data)}>
-						<div className="printer_data printer_title">
-						{this.props.data["name"]} 
-						</div>
-						<div className="printer_image">
-								{image}
-						</div>
-						<div className="printer_data">
-								<br/>
-								Rating: {stars}
-								<br/>
-								{(this.props.Transfer === 'Delivery') ?
-									<>
-										ETA: {this.props.calcETA(this.props.data["Distance"])}
-										<br/>
-										Delivery Cost: ${(this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.data["Distance"])).toFixed(2)}
-									</>
-									:
-									<>
-										Distance: {this.props.data["Distance"]} mile{(this.props.data["Distance"] === 1) ? 
-										"" : "s"}
-										<br/>
-									</>
-								}
-						</div>
-				</div>
-				);
-		}
-}
-
-
-class ConfirmPopup extends Component {
-	render() {
-		let stars = [];
-			for (let i = 0; i < Math.round(this.props.selected_printer_data["Rating"]); i++){
-					stars.push(<span className="fa fa-star checked" key={i}></span>)
-			}
-
-		let job_description = null;
-		let delivery_cost = 0.0;
-		if (this.props.print_options.Transfer === 'Delivery')
-		{
-			delivery_cost = this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.selected_printer_data["Distance"])
-			job_description = 
-				<div>
-					<div style={{ fontWeight: "bold", fontSize: "20px" }}>ETA</div>
-					<div style={{ fontWeight: "bold", fontSize: "20px", fontStyle: "italic" }}>{this.props.calcETA(this.props.selected_printer_data["Distance"])}</div>
-					<br/>
-					<br/>
-					<div style={{ color: "grey", "width": "55%", marginLeft: "auto", marginRight: "auto" }}>
-						<span style={{float: "left"}}>Subtotal:</span><span style={{float: "right"}}>${this.props.subtotal.toFixed(2)}</span>
-						<br/>
-						<span style={{float: "left"}}>Delivery:</span><span style={{float: "right"}}>${delivery_cost.toFixed(2)}</span>
-						<br/>
-						<span style={{float: "left"}}>Student Discount:</span><span style={{float: "right"}}>-${(this.props.subtotal * this.props.discount_rate).toFixed(2)}</span>
-						<br/>
-					</div>
-				</div>
-		}
-		else
-		{
-			job_description = 
-				<div>
-					<br/>
-					<div style={{ fontWeight: "bold", fontSize: "20px" }}>Pick-up:</div>
-					<div>{this.props.selected_printer_data["address"]} ({this.props.selected_printer_data["Distance"]} mile{(this.props.selected_printer_data["Distance"] === 1) ? "" : "s"})</div>
-					<br/>
-					<br/>
-					<div style={{ color: "grey", "width": "55%", marginLeft: "auto", marginRight: "auto" }}>
-						<span style={{float: "left"}}>Subtotal:</span><span style={{float: "right"}}>${this.props.subtotal.toFixed(2)}</span>
-						<br/>
-						<span style={{float: "left"}}>Student Discount:</span><span style={{float: "right"}}>-${(this.props.subtotal * this.props.discount_rate).toFixed(2)}</span>
-						<br/>
-					</div>
-				</div>
-		}
-
-
-		let imageRef = firebase.storage().ref().child('id_pictures/' + this.props.selected_printer_data["name"] + ".png");
-		imageRef.getDownloadURL().then((url) => {
-			document.getElementById("confirm" + this.props.selected_printer_data["id"]).src = url;
-			//console.log("got url chaning id", this.props.selected_printer_data["id"], this.props.selected_printer_data["name"]);
-		}).catch(function (error) {
-			//console.log(error);
-		});
-
-		let image = <img id={"confirm" + this.props.selected_printer_data["id"]} src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
-
-		return (
-			<div className="popup">
-				<div className="popup_inner">
-					<div className="popup_title">Review Order</div>
-					<br/>
-					<div className="popup_content">
-						<div>
-							<div className="printer_preview">
-								<div style={{ fontWeight: "bold" }}>{this.props.selected_printer_data["name"]}</div>
-								<div>{image}</div>
-								<div style={{ fontWeight: "bold" }}>Rating: {stars}</div>
-								<br/>
-							</div>
-							<br/>
-							{job_description}
-						</div>
-						<div style={{padding: "10px", background: "#ededed", fontWeight: "bold", fontSize: "20px"}}>Total Price &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; ${(this.props.subtotal + delivery_cost - this.props.discount_rate*(this.props.subtotal + delivery_cost)).toFixed(2)}</div>
-						<br/>
-						<br/>
-						<Button variant="outlined"
-								color="blue"
-								onClick={() => this.props.closePopup(false)}>
-							Cancel
-						</Button>
-
-						&nbsp;
-						&nbsp;
-						&nbsp;
-
-						<Button variant="outlined"
-								color="blue"
-								onClick={() => this.props.closePopup(true)}>
-							Confirm & Submit!
-						</Button>
-					</div>
-				</div>
-			</div>
-		);
-	}
-}
-
 
 MatchedPrinters.propTypes = {
 	classes: PropTypes.object.isRequired

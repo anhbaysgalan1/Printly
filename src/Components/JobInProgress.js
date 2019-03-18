@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Trackbar from './Trackbar.js';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import '../App.css';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import Rating from 'material-ui-rating'
+import JobDonePopup from './JobDonePopup.js';
 import firebase from "firebase";
+import CancelPopup from './CancelPopup.js';
 
 const styles = theme => ({
 	button:{
@@ -15,8 +14,6 @@ const styles = theme => ({
 		background: '#FFFFFF',
 	},
 });
-
-const LAST_STEP_INDEX = 4; // index of final step on trackbar
 
 class JobInProgress extends Component {
 	state = {
@@ -196,24 +193,13 @@ class JobInProgress extends Component {
             stars.push(<span className="fa fa-star checked" key={i}></span>)
 		}
 
-		const selected_options = Object.keys(this.props.print_options).map(option => (
-				<div>
-					<ListItem key={option}>
-						<ListItemText primary={option + ': ' + this.props.print_options[option]}/>
-					</ListItem>
-				</div>
-			)
-		);
-		
 		let temp_left = classes.button + " buttonleft";
-		let temp_right = classes.button + " buttonright";
 			
 		let imageRef = firebase.storage().ref().child('id_pictures/' + this.props.printer_data["name"] + ".png");
 		imageRef.getDownloadURL().then((url) => {
 			document.getElementById("progress" + this.props.printer_data["id"]).src = url;
-			//console.log("got url chaning id", this.props.printer_data["id"], this.props.printer_data["name"]);
 		}).catch(function (error) {
-			//console.log(error);
+			console.log(error);
 		});
 
 		let image = <img id={"progress" + this.props.printer_data["id"]} src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
@@ -331,77 +317,4 @@ JobInProgress.propTypes = {
 
 export default withStyles(styles)(JobInProgress);
 
-class CancelPopup extends Component {
-  render() {
-  	return (
-  	<div className="popup">
-		<div className="popup_inner">
-			<div className="popup_title">Cancel Print Job</div>
-			<br/>
-			<div className="popup_content">
-				<p> You will still be charged for this print job. Are you sure you want to cancel?</p>
-				<Button variant="outlined"
-						color="blue"
-						onClick={() => this.props.closeCancelPopup(false)}>
-					No
-				</Button>
-				&nbsp;
-				&nbsp;
-				&nbsp;
-				<Button variant="outlined"
-						color="blue"
-						onClick={() => this.props.closeCancelPopup(true)}>
-					Yes
-				</Button>
-			</div>
-		</div>
-	</div>
-  	)
-  }
 
-}
-
-class JobDonePopup extends Component {
-	state = {
-		rating: 0,
-	}
-
-	render() {
-		return (
-			<div className="popup">
-				<div className="popup_inner">
-					<div className="popup_title">Summary & Review</div>
-					<br/>
-					<div className="popup_content">
-						<br/>
-						<div style={{ fontWeight: "bold", fontSize: "20px" }}> Total Cost: ${
-							(this.props.print_options.Transfer === 'Delivery') ?
-								((this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"]) - this.props.discount_rate*(this.props.price + this.props.pricesPerPage.Transfer[1] * parseFloat(this.props.printer_data["Distance"])))).toFixed(2)
-							:
-								(this.props.price - this.props.discount_rate*(this.props.price)).toFixed(2)
-						}</div>
-						<br/>
-						<br/>
-						Rate {this.props.printer_data["name"]}
-						{<Rating
-									value={(this.state.rating === 0) ? this.props.printer_data["Rating"] : this.state.rating}
-									max={5}
-									onChange={(value) => this.setState({ rating: value })}
-								/>}
-						<br/>
-						Leave a comment!
-						<br/>
-						<textarea id="comment" rows="4" cols="50"/>
-						<br/>
-						<br/>
-						<Button variant="outlined"
-								color="blue"
-								onClick={() => this.props.closePopup(this.state.rating, document.getElementById("comment").value)}>
-							Confirm & Submit
-						</Button>
-					</div>
-				</div>
-			</div>
-		)
-	}
-}
