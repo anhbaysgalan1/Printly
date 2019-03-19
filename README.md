@@ -40,6 +40,7 @@ A web appication for crowdsourcing your printing needs. Think Postmates, but for
       - printly
         - active_printers
           - 0
+          
               Color: 'both'
 
               Distance: 1
