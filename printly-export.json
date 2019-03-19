@@ -1,0 +1,351 @@
+{
+  "active_printers" : {
+    "0" : {
+      "Color" : "both",
+      "Distance" : 1,
+      "Quality" : "Medium",
+      "Rating" : 3.3076923076923075,
+      "Transfer" : "Delivery",
+      "address" : "101 Elm St",
+      "comments" : {
+        "-L_ta7R_EMPm4UMnnaha" : "Great job Bob!"
+      },
+      "id" : 0,
+      "name" : "Bob",
+      "rating_count" : 13,
+      "rating_total" : 43
+    },
+    "1" : {
+      "Color" : "both",
+      "Distance" : 3,
+      "Quality" : "Low",
+      "Rating" : 5,
+      "Transfer" : "Delivery",
+      "address" : "546 Sheridan",
+      "id" : 1,
+      "name" : "Phil",
+      "rating_count" : 1,
+      "rating_total" : 5
+    },
+    "2" : {
+      "Color" : "both",
+      "Distance" : 15,
+      "Quality" : "High",
+      "Rating" : 3.2222222222222223,
+      "Transfer" : "both",
+      "address" : "2325 Tech Dr",
+      "comments" : {
+        "-L_AqNj4dPpm0ew7HaNP" : "atereawe",
+        "-L_KfxHU1T_-ZmmZHozk" : "test"
+      },
+      "id" : 2,
+      "name" : "Mary",
+      "rating_count" : 9,
+      "rating_total" : 29
+    },
+    "3" : {
+      "Color" : "Color",
+      "Distance" : 0.5,
+      "Quality" : "High",
+      "Rating" : 1,
+      "Transfer" : "Pickup",
+      "address" : "200 Home Lane",
+      "id" : 3,
+      "name" : "Paul",
+      "rating_count" : 1,
+      "rating_total" : 1
+    },
+    "4" : {
+      "Color" : "both",
+      "Distance" : 0.75,
+      "Quality" : "High",
+      "Rating" : 2.25,
+      "Transfer" : "Pickup",
+      "address" : "123 Something St.",
+      "id" : 4,
+      "name" : "Doris",
+      "rating_count" : 4,
+      "rating_total" : 9
+    },
+    "5" : {
+      "Color" : "Color",
+      "Distance" : 0.15,
+      "Quality" : "High",
+      "Rating" : 2.8181818181818183,
+      "Transfer" : "both",
+      "address" : "555 Haha Ct.",
+      "comments" : {
+        "-LZrOFd4rMCQ_n3SgYe5" : "Good print!",
+        "-L_z2C28eaPIkSrEjqhd" : "much wow"
+      },
+      "id" : 5,
+      "name" : "Sparky",
+      "rating_count" : 11,
+      "rating_total" : 31
+    },
+    "6" : {
+      "Color" : "both",
+      "Distance" : 0.7,
+      "Quality" : "Medium",
+      "Rating" : 2.9166666666666665,
+      "Transfer" : "both",
+      "address" : "111 Dalmation Ave",
+      "id" : 6,
+      "name" : "Vincent",
+      "rating_count" : 24,
+      "rating_total" : 70
+    },
+    "7" : {
+      "Color" : "Color",
+      "Distance" : 8,
+      "Quality" : "Low",
+      "Rating" : 4,
+      "Transfer" : "Pickup",
+      "address" : "783 Pepper St.",
+      "id" : 7,
+      "name" : "Patricia",
+      "rating_count" : 1,
+      "rating_total" : 4
+    },
+    "8" : {
+      "Color" : "both",
+      "Distance" : 0.1,
+      "Quality" : "Medium",
+      "Rating" : 2.310344827586207,
+      "Transfer" : "both",
+      "address" : "432 A Street",
+      "id" : 8,
+      "name" : "Gretchen",
+      "rating" : 2.875,
+      "rating_count" : 29,
+      "rating_total" : 67
+    },
+    "9" : {
+      "Color" : "Black & White",
+      "Distance" : 0.36,
+      "Quality" : "High",
+      "Rating" : 5,
+      "Transfer" : "Delivery",
+      "address" : "4322 Clark St.",
+      "id" : 9,
+      "name" : "Robbie",
+      "rating_count" : 1,
+      "rating_total" : 5
+    },
+    "10" : {
+      "Color" : "both",
+      "Distance" : 0.9,
+      "Quality" : "Low",
+      "Rating" : 5,
+      "Transfer" : "Delivery",
+      "address" : "9873 Orrington Ave",
+      "comments" : {
+        "-L_jFW3pQ9eIM1UoOijX" : "Fantastic!"
+      },
+      "id" : 10,
+      "name" : "Braden",
+      "rating_count" : 2,
+      "rating_total" : 10
+    },
+    "11" : {
+      "Color" : "Black & White",
+      "Distance" : 6,
+      "Quality" : "High",
+      "Rating" : 2.25,
+      "Transfer" : "both",
+      "address" : "756 Developers Ct",
+      "id" : 11,
+      "name" : "Hannah",
+      "rating_count" : 4,
+      "rating_total" : 9
+    },
+    "12" : {
+      "Color" : "both",
+      "Distance" : 0.45,
+      "Quality" : "Low",
+      "Rating" : 3.2222222222222223,
+      "Transfer" : "both",
+      "address" : "4322 Vista View Dr.",
+      "comments" : {
+        "-LZqh_kvWI7vp0TUm6Q8" : "yay!",
+        "-L_U_l4ws8Zh8gbPVs2n" : "ijj"
+      },
+      "id" : 12,
+      "name" : "Chloe",
+      "rating_count" : 9,
+      "rating_total" : 29
+    },
+    "13" : {
+      "Color" : "both",
+      "Distance" : 4,
+      "Quality" : "Medium",
+      "Rating" : 2.75,
+      "Transfer" : "Pickup",
+      "address" : "432 Chicago Ave.",
+      "id" : 13,
+      "name" : "David",
+      "rating_count" : 16,
+      "rating_total" : 44
+    },
+    "14" : {
+      "Color" : "Black & White",
+      "Distance" : 0.05,
+      "Quality" : "Medium",
+      "Rating" : 2.090909090909091,
+      "Transfer" : "Pickup",
+      "address" : "5434 Wrigley St.",
+      "comments" : {
+        "-LZr1CC7-IRtBDq6zaYX" : "",
+        "-L_x1onVdYltSWiFEnDt" : "good"
+      },
+      "id" : 14,
+      "name" : "Donald",
+      "rating" : 2.6,
+      "rating_count" : 11,
+      "rating_total" : 23
+    },
+    "15" : {
+      "Color" : "both",
+      "Distance" : 0.65,
+      "Quality" : "Low",
+      "Rating" : 3.5,
+      "Transfer" : "Pickup",
+      "address" : "777 Heaven Ave",
+      "comments" : {
+        "-L_QXpLI8mlZjxfKxCnu" : "n"
+      },
+      "id" : 15,
+      "name" : "Steve",
+      "rating_count" : 2,
+      "rating_total" : 7
+    },
+    "16" : {
+      "Color" : "Black & White",
+      "Distance" : 3,
+      "Quality" : "High",
+      "Rating" : 4.5,
+      "Transfer" : "both",
+      "address" : "897 Howard St.",
+      "comments" : {
+        "-LZldhq6nQy0cUxthfTV" : "HI"
+      },
+      "id" : 16,
+      "name" : "Rebecca",
+      "rating_count" : 2,
+      "rating_total" : 9
+    },
+    "17" : {
+      "Color" : "Color",
+      "Distance" : 1,
+      "Quality" : "Low",
+      "Rating" : 2,
+      "Transfer" : "Delivery",
+      "address" : "4879 California Street",
+      "id" : 17,
+      "name" : "Fran",
+      "rating_count" : 1,
+      "rating_total" : 2
+    },
+    "18" : {
+      "Color" : "both",
+      "Distance" : 5,
+      "Quality" : "Medium",
+      "Rating" : 1.5714285714285714,
+      "Transfer" : "Delivery",
+      "address" : "321 Math Ave.",
+      "id" : 18,
+      "name" : "Carla",
+      "rating_count" : 7,
+      "rating_total" : 11
+    },
+    "19" : {
+      "Color" : "both",
+      "Distance" : 0.5,
+      "Quality" : "Medium",
+      "Rating" : 3.7222222222222223,
+      "Transfer" : "Pickup",
+      "address" : "444 Concrete Dr.",
+      "comments" : {
+        "-LZqzgxvMyly3gqjie1g" : "My dude Charlie has the freshest ink"
+      },
+      "id" : 19,
+      "name" : "Charlie",
+      "rating_count" : 18,
+      "rating_total" : 67
+    },
+    "20" : {
+      "Color" : "Color",
+      "Distance" : 16,
+      "Quality" : "Low",
+      "Rating" : 1,
+      "Transfer" : "Pickup",
+      "address" : "505 Far Street",
+      "id" : 20,
+      "name" : "Travis",
+      "rating_count" : 2,
+      "rating_total" : 2
+    },
+    "21" : {
+      "Color" : "both",
+      "Distance" : 3.14,
+      "Quality" : "High",
+      "Rating" : 2.3333333333333335,
+      "Transfer" : "both",
+      "address" : "1234 Diameter Ave",
+      "comments" : {
+        "-LZqpE4Cwc9cpiLXQoyI" : "Great printing "
+      },
+      "id" : 21,
+      "name" : "Sir Cumference",
+      "rating_count" : 6,
+      "rating_total" : 14
+    },
+    "22" : {
+      "Color" : "Color",
+      "Distance" : 0.25,
+      "Quality" : "Low",
+      "Rating" : 3,
+      "Transfer" : "both",
+      "address" : "22 Swift St.",
+      "id" : 22,
+      "name" : "Taylor",
+      "rating_count" : 1,
+      "rating_total" : 3
+    },
+    "23" : {
+      "Color" : "both",
+      "Distance" : 0.5,
+      "Quality" : "Medium",
+      "Rating" : 3.7,
+      "Transfer" : "both",
+      "address" : "651 Sheridan St",
+      "comments" : {
+        "-LZlhm8JBCiKmHRmSSy1" : "More Comments!",
+        "-LZpPofb78V1qr9pU-1p" : "carrots are orange",
+        "-LZrf1ukw5FOXbIwJIe-" : "d",
+        "-L_uRDk8oln8X4iB9Mm0" : "Awesome!",
+        "-La0rKUTAORTqpgXe8Gv" : "Great job, delivered fast!"
+      },
+      "id" : 23,
+      "name" : "Emily",
+      "rating_count" : 30,
+      "rating_total" : 111
+    },
+    "24" : {
+      "Color" : "Black & White",
+      "Distance" : 0.3,
+      "Quality" : "Medium",
+      "Rating" : 3.3181818181818183,
+      "Transfer" : "Pickup",
+      "address" : "432 Chicago Ave",
+      "id" : 24,
+      "name" : "Christopher",
+      "rating_count" : 22,
+      "rating_total" : 73
+    },
+    "200" : {
+      "rating_count" : 1,
+      "rating_total" : 0
+    }
+  }
+}
