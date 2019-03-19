@@ -37,10 +37,10 @@ A web appication for crowdsourcing your printing needs. Think Postmates, but for
     For each printer, it should include information about color, distance, quality, rating, transfer, address, comments, id, name, rating count, and total rating. For example:
 
 
-      `printly  
+      printly  
         active_printers  
           0  
-            Color: 'both'  
+            Color: 'both'
             Distance: 1  
             Quality: 'Medium'  
             Rating: 3.3  
@@ -53,7 +53,7 @@ A web appication for crowdsourcing your printing needs. Think Postmates, but for
             rating_count: 13  
             rating_total: 43  
           1
-            ...`
+            ...
 
 
 5. The logo and other gifs and images for the application should be stored in Firebase Storage.
