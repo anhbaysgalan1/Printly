@@ -31,7 +31,6 @@ class AddressPopup extends React.Component{
 
 	componentWillMount = () => {
 		let addr_arr = this.props.oldAddr.split(", ")
-		console.log("addr_arr: ", addr_arr)
 		if(addr_arr.length === 5) {
 			this.setState({
 				street: addr_arr[0],
@@ -55,7 +54,6 @@ class AddressPopup extends React.Component{
 	};
 
 	handleChange = name => event => {
-		console.log("changing " + name + " to " + event.target.value);
 		this.setState({ [name]: event.target.value });
 	};
 
@@ -64,7 +62,6 @@ class AddressPopup extends React.Component{
 		if(this.state.apt !== "") {
 			new_addr = [this.state.street, this.state.apt, this.state.city, this.state.state, this.state.zip].join(", ");
 		}
-		console.log("new address: " + new_addr)
 		this.setState({
 			full_address: new_addr
 		});
@@ -143,7 +140,6 @@ class AddressPopup extends React.Component{
 						<br />
 
 						<Button variant="outlined"
-								color="blue"
 								onClick={() => this.props.cancel(false)}>
 							Cancel
 						</Button>
@@ -153,7 +149,6 @@ class AddressPopup extends React.Component{
 						&nbsp;
 
 						<Button variant="outlined"
-								color="blue"
 								disabled={this.state.street === "" || this.state.city === "" || this.state.state === "" || this.state.zip === ""}
 								onClick={() => this.updateFullAddress()}>
 							Save Changes
