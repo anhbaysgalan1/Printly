@@ -13,8 +13,6 @@ const styles = theme => ({
 
 class DiscountPopup extends Component {
 	render() {
-        const { classes } = styles;
-
 		return (
 		<div className="popup">
 		  <div className="popup_inner">
@@ -23,7 +21,6 @@ class DiscountPopup extends Component {
 			  <div className="popup_content">
 				<p>We noticed you logged in with an email associated with a university, you get 25% off your order!</p>
 				<Button variant="outlined"
-						color="blue"
 						onClick={() => this.props.show(false)}>
 					Great!
 				</Button>

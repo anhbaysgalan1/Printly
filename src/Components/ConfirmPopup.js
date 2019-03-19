@@ -79,7 +79,6 @@ class ConfirmPopup extends Component {
 						<br/>
 						<br/>
 						<Button variant="outlined"
-								color="blue"
 								onClick={() => this.props.closePopup(false)}>
 							Cancel
 						</Button>
@@ -89,7 +88,6 @@ class ConfirmPopup extends Component {
 						&nbsp;
 
 						<Button variant="outlined"
-								color="blue"
 								onClick={() => this.props.closePopup(true)}>
 							Confirm & Submit!
 						</Button>

@@ -92,7 +92,6 @@ class JobInProgress extends Component {
 		return_string = return_string + this.props.print_options["Orientation"] + ", ";
 		return_string = return_string + this.props.print_options["Color"] + ", ";
 		var temp;
-		console.log(this.props.print_options["copies"]);
 		if (this.props.print_options["copies"] === 1){
 			temp = this.props.print_options["copies"];
 			return_string = return_string + temp.toString() + " copy";
@@ -110,7 +109,6 @@ class JobInProgress extends Component {
 		var first_time;
 		var second_time;
 		var isPM = false;
-		console.log(this.props.printer_data);
 		if (this.props.print_options["Transfer"] === "Delivery"){
 			number = Math.ceil((this.props.printer_data["Distance"] * 10)/5)*5;
 		} else {
@@ -120,11 +118,9 @@ class JobInProgress extends Component {
 		var d = new Date();
 		var h = d.getHours();
 		var m = d.getMinutes();
-		console.log(h, m);
 
 		// --- Format first time
 		m = m + number;
-		console.log("After", m);
 		while(m > 59){
 			m = m - 60;
 			h = h + 1;
@@ -203,7 +199,6 @@ class JobInProgress extends Component {
 		});
 
 		let image = <img id={"progress" + this.props.printer_data["id"]} src='https://firebasestorage.googleapis.com/v0/b/printly.appspot.com/o/id_pictures%2Fprofile-icon-blue.png?alt=media&token=281ccc96-a3b3-4669-bb8b-7c1d17f07713' className="id_image" alt="logo" />
-		console.log(this.props.print_options);
 		return (
 			<div>
 				<div className="title">
