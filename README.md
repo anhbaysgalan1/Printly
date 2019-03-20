@@ -20,7 +20,7 @@ A web appication for crowdsourcing your printing needs. Think Postmates, but for
     - `firebase-storage` for uploaded documents
     - `firebase-database` for maintaining active printers
     
-3. Add your project's config info to the beginning of App.js file.
+3. Add your project's config info to the beginning of [App.js](../master/src/App.js).
 
         var config = {
           apiKey: "YOUR",
@@ -31,55 +31,15 @@ A web appication for crowdsourcing your printing needs. Think Postmates, but for
         firebase.initializeApp(config);
         
 
-4. Upload printer profiles into the Firebase Database using the proper data structure.
-    Create a category "printly", then a category "active printers". 
+4. Add printer profiles to Firebase Realtime Database, following the format in [printly-export.json](../master/printly-export.json).
 
-    For each printer, it should include information about color, distance, quality, rating, transfer, address, comments, id, name, rating count, and total rating. For example:
+5. Add corresponding profile pictures to Firebase Storage, following the format in [id_pictures](../master/id_pictures).
 
+6. Add content of [Assets](../master/Assets) folder to Firebase Storage.
 
-      `printly  
-      
-        active_printers  
+7. Deploy the project with `firebase deploy` in the command line.
 
-          0  
-
-            Color: 'both'
-
-            Distance: 1  
-
-            Quality: 'Medium'  
-
-            Rating: 3.3  
-
-            Transfer: 'Delivery'  
-
-            address: '101 Elm St'  
-
-            comments  
-
-              L_ta7R: 'Great job Bob!' 
-
-            id: 0  
-
-            name: 'Bob'  
-
-            rating_count: 13  
-
-            rating_total: 43  
-
-          1
-
-            ...`
-
-
-5. The logo and other gifs and images for the application should be stored in Firebase Storage.
-    The names should be 'logo.png', 'Printly Home - bottom.png', 'Printly Home - top.png', 'Printly-connecting-v2.gif', 'Printly-delivery-v2.gif', 'Printly-pickup-v2.gif', and 'Printly-printing_v2.gif'.
-
-
-6. Deploy the project with `firebase deploy` in the command line.
-
-
-7. Alternately, start the app on your local machine with `npm start`.
+8. Alternatively, start the app on your local machine with `npm start`.
 
 
 
