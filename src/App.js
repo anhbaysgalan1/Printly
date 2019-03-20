@@ -7,10 +7,10 @@ import firebase from 'firebase';
 import './App.css';
 
 var config = {
-    apiKey: "AIzaSyD0ZMlZ0JCrCqsCxDx1MK1HO0taGmXZkXY",
-    authDomain: "printly.firebaseapp.com",
-    databaseURL: "https://printly.firebaseio.com",
-    storageBucket: "printly.appspot.com",
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    storageBucket: "",
 };
 firebase.initializeApp(config);
 firebase.auth().signOut();
