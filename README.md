@@ -31,11 +31,11 @@ A web appication for crowdsourcing your printing needs. Think Postmates, but for
         firebase.initializeApp(config);
         
 
-4. Add printer profiles to Firebase Realtime Database, following the format in [printly-export.json](../master/printly-export.json).
+4. Add printer profiles to Firebase Realtime Database, following the format in [printly-export.json](../master/setup/printly-export.json).
 
-5. Add corresponding profile pictures to Firebase Storage, following the format in [id_pictures](../master/id_pictures).
+5. Add corresponding profile pictures to Firebase Storage, following the format in [id_pictures](../master/setup/id_pictures).
 
-6. Add content of [Assets](../master/Assets) folder to Firebase Storage.
+6. Add content of [Assets](../master/setup/Assets) folder to Firebase Storage.
 
 7. Deploy the project with `firebase deploy` in the command line.
 
