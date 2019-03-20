@@ -49,21 +49,19 @@ A web appication for crowdsourcing your printing needs. Think Postmates, but for
 
 8. Alternatively, start the app on your local machine with `npm start`.
 
-
-
 ## Known Issues
 
-- Firebase undefined object 404s in the Matched Printers page.
-- (possibly related) state update for unmounted component in Matched Printers page.
-- MaterialUI typography will be deprecated in the next update.
+- Firebase undefined object 404s on printer selection page.
+- Unmounted component state update on printer selection page (possibly related to first issue).
+- Material-UI typography will be deprecated in the next update.
 
 ## Limitations and Future Work
 
 - Printee side
-    - Ability to detect student users by email.
+    - Detect student users by email.
     - Have a separate print queue for each unqiue user.
     - Dynamically search for printers based on address.
-    - Use real printer addresses, implement dynamic ETA and Google Maps integration.
+    - Dynamically calculate ETA and track delivery on map.
     
 - Printer side
-    - all of it
+    - All of it
