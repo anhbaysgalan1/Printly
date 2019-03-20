@@ -2,6 +2,8 @@
 
 A web appication for crowdsourcing your printing needs. Think Postmates, but for documents.
 
+<img src="../master/examples/home.png">
+
 ## System Requirements
 
 - Node.js (10.15.0+)
@@ -33,9 +35,15 @@ A web appication for crowdsourcing your printing needs. Think Postmates, but for
 
 4. Add printer profiles to Firebase Realtime Database, following the format in [printly-export.json](../master/setup/printly-export.json).
 
+<p align="center"><img src="../master/examples/database.png" height=700></p>
+
 5. Add corresponding profile pictures to Firebase Storage, following the format in [id_pictures](../master/setup/id_pictures).
 
+<p align="center"><img src="../master/examples/id_pics.png" height=700></p>
+
 6. Add content of [Assets](../master/setup/Assets) folder to Firebase Storage.
+
+<p align="center"><img src="../master/examples/storage.png" height=700></p>
 
 7. Deploy the project with `firebase deploy` in the command line.
 
